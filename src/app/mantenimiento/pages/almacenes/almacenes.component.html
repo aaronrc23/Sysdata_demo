@@ -1,0 +1,59 @@
+<!-- app.component.html -->
+<div class="container mt-3">
+    <h2>Lista de Almacenes</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Número</th>
+          <th>Dirección</th>
+          <th>Activo</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let almacen of almacenes">
+          <td>{{ almacen.id }}</td>
+          <td>{{ almacen.nombreAlmacen }}</td>
+          <td>{{ almacen.numeroAlmacen }}</td>
+          <td>{{ almacen.direccion }}</td>
+          <td>{{ almacen.activo ? 'Sí' : 'No' }}</td>
+          <td>
+            <button class="btn btn-primary" (click)="editarAlmacen(almacen)">Editar</button>
+            <button class="btn btn-danger" (click)="eliminarAlmacen(almacen?.id)">Eliminar</button>
+            <button class="btn btn-danger" (click)="eliminarAlmacenPorId(almacen?.id)">Desactivar</button>
+
+
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <div class="mt-3">
+        <h2>{{ selectedAlmacen.id ? 'Editar Almacén' : 'Registrar Nuevo Almacén' }}</h2>
+        <form>
+          <label>ID: </label>
+          <input type="text" [(ngModel)]="selectedAlmacen.id" disabled class="form-control" name="id" />
+    
+          <label>Nombre: </label>
+          <input type="text" [(ngModel)]="selectedAlmacen.nombreAlmacen" name="nombreAlmacen" class="form-control" />
+    
+          <label>Número: </label>
+          <input type="number" [(ngModel)]="selectedAlmacen.numeroAlmacen" name="numeroAlmacen" class="form-control" />
+    
+          <label>Dirección: </label>
+          <input type="text" [(ngModel)]="selectedAlmacen.direccion" name="direccion" class="form-control" />
+    
+          <label>Activo: </label>
+          <input type="checkbox" [(ngModel)]="selectedAlmacen.activo" name="activo" />
+    
+          <button class="btn btn-success mt-3" (click)="guardarCambios()">
+            {{ selectedAlmacen.id ? 'Guardar Cambios' : 'Registrar' }}
+          </button>
+    
+          <button class="btn btn-secondary mt-3" (click)="registrarNuevo()">Nuevo Registro</button>
+        </form>
+      </div>
+  </div>
+  

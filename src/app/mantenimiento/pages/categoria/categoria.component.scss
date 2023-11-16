@@ -1,0 +1,24 @@
+:root {
+    --tu-color-de-fondo: #764134;
+    --tu-color-de-texto: #ad8350;
+  }
+
+// .ui-table-header th {
+//     background-color: #057edb;
+//     color: white;
+//     text-align: center;
+//   }
+
+
+/* styles.css (o styles.scss) */
+::ng-deep .custom-button {
+  background-color: #00c288;
+  border-color: #00c288;
+  color: white; 
+}
+
+::ng-deep .btn-edit{
+  background-color: #f9a71a;
+  border-color: #f9a71a;
+}
+

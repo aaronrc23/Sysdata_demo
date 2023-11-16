@@ -1,0 +1,29 @@
+<div class="dashboard-container">
+
+  <!-- Sidebar -->
+  <div class="sidebar h-full overflow-y-auto">
+    <app-sidebar></app-sidebar>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content ">
+    <!-- Navbar -->
+    <header class="navbar p-d-flex p-ai-center p-jc-end p-bg-gray-900 p-text-white p-p-2">
+      <app-navbar></app-navbar>
+
+    </header>
+
+    <!-- Body -->
+    <main class="body  h-full " style="flex: 1; overflow: hidden;">
+      <div class="h-full bg-[#EBF3FF]">
+        <div class="p-col h-full" style="overflow-x: hidden; overflow-y: auto; background-color: #EBF3FF; padding: 1rem;">
+          <div class="bg-white p-4">
+            <router-outlet></router-outlet>
+          </div>
+          
+        </div>
+      </div>
+      
+    </main>
+  </div>
+</div>

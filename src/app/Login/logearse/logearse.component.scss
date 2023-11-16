@@ -1,0 +1,19 @@
+.fondo{
+    background: linear-gradient(to right, #00d1b2, #00a4e6);
+}
+.login{
+    height: 100vh;
+}
+section{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.logo {
+    font-size: 3rem;
+    font-family: 'Black Ops One', sans-serif;
+    background: linear-gradient(to right, #00d1b2, #00a4e6);
+    -webkit-background-clip: text;
+    color: transparent;
+}

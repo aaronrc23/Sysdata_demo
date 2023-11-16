@@ -1,0 +1,116 @@
+  <div class="sidebar-container h-full w-full overflow-y-auto" *ngIf="isActive">
+    <!-- Logo Section -->
+    <div class="logo-section pb-0 ">
+      <div class="flex flex-column justify-content-center text-center">
+        <img src="../../../assets/virtual (1).png" alt="Logo" class="w-16 h-16 object-cover rounded-full mx-auto">
+        <h2 >SysData</h2>
+      </div>
+    </div>
+
+    <!-- Links Section -->
+    <nav class="links-section p-3">
+      <ul>
+        <p class="ml-2">Mantenimiento</p>
+        <li class=" ctn_op mb-2">
+          <div class="flex items-center">
+            <fa-icon [icon]="faGauge" class="text-xl"></fa-icon>
+            <a routerLink="dashboard" routerLinkActive="active">dashboard</a>
+          </div>
+        </li>
+        <li class="mb-2" [class.active]="isSubmenuOpen('marcas')">
+          <div class="ctn_op flex items-center" (click)="toggleSubmenu('marcas')">
+            <fa-icon [icon]="faBoxesStacked" class="text-xl"></fa-icon>
+            <a>Administrar Productos</a>
+            <i class="pi pi-chevron-down ml-4 arrow-icon "></i>
+          </div>
+          <!-- Submenu para "Marcas" -->
+          <ul class="submenu" *ngIf="isSubmenuOpen('marcas')">
+            <li>
+              <div class=" flex w-full ">
+                <fa-icon [icon]="faArchive" class=""></fa-icon>
+                <a routerLink="categoria" routerLinkActive="active">Categorias</a>
+              </div>
+            </li>
+            <li>
+              <div class=" flex w-full ">
+                <fa-icon [icon]="faBox" class="text-xl"></fa-icon>
+                <a routerLink="productos" routerLinkActive="active">Productos</a>
+              </div>
+            </li>
+            <li>
+              <div class=" flex w-full ">
+                <i class="pi pi-bookmark-fill text-xl"></i>
+                <a routerLink="marcas" routerLinkActive="active">Marcas</a>
+              </div>
+            </li>
+            <li>
+              <div class=" flex w-full ">
+                <fa-icon [icon]="faBoxesStacked" class="text-xl"></fa-icon>
+                <a routerLink="almacenes" routerLinkActive="active">Registrar Almacen</a>
+              </div>
+            </li>
+
+            
+          </ul>
+        </li>
+        <li class="mb-2" [class.active]="isSubmenuOpen('almacen')">
+          <div class="ctn_op flex items-center" (click)="toggleSubmenu('almacen')">
+            <fa-icon [icon]="faDollyBox" class="text-xl"></fa-icon>
+            <a routerLink="categoria" routerLinkActive="active">Gestión de Almacenes</a>
+            <i class="pi pi-chevron-down  ml-3 arrow-icon icon"></i>
+          </div>
+                    <!-- Submenu para "Marcas" -->
+                    <ul class="submenu" *ngIf="isSubmenuOpen('almacen')">
+                      <li>
+                        <div class=" flex w-full ">
+                          <fa-icon [icon]="faBoxesPacking" class=""></fa-icon>
+                          <a routerLink="moviento-almacen" routerLinkActive="active">Entrada de Productos</a>
+                        </div>
+                      </li>
+                      <li>
+                        <div class=" flex w-full ">
+                          <fa-icon [icon]="faBox" class="text-xl"></fa-icon>
+                          <a routerLink="productos" routerLinkActive="active">Salida de Productos</a>
+                        </div>
+                      </li>
+                      <li>
+                        <div class=" flex w-full ">
+                          <fa-icon [icon]="faPeopleCarryBox" class="text-xl"></fa-icon>
+                          <a routerLink="moviento-almacen" routerLinkActive="active">Abastacimiento de Almacen</a>
+                        </div>
+                      </li>
+                      <li>
+                        <div class=" flex w-full ">
+                          <fa-icon [icon]="faBoxesStacked" class="text-xl"></fa-icon>
+                          <a routerLink="almacenes" routerLinkActive="active">Registrar Almacen</a>
+                        </div>
+                      </li>
+          
+                      
+                    </ul>
+        </li>
+
+
+
+
+        <li class=" ctn_op mb-2">
+          <div class="flex items-center">
+            <fa-icon [icon]="faBox" class="text-xl"></fa-icon>
+            <a routerLink="productos" routerLinkActive="active">Productos</a>
+          </div>
+        </li>
+        <li>
+          <div class=" ctn_op flex items-center">
+            <i class="pi pi-bookmark-fill text-xl"></i>
+            <a routerLink="marcas" routerLinkActive="active">Marcas</a>
+          </div>
+        </li>
+        
+      </ul>
+    </nav>
+
+    <!-- Company Name Section -->
+    <div class="company-name-section p-4">
+      Nombre de la Empresa
+    </div>
+  </div>

@@ -1,1 +1,30 @@
 /* You can add global styles to this file, and also import other style files */
+// @import "https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap";
+// body {
+//     margin: 0;
+//     padding: 0;
+//     font-family: 'Poppins', sans-serif;
+//   }
+
+
+
+  @import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Fuggles&family=Inclusive+Sans:ital@0;1&family=Mooli&family=Open+Sans:wght@500&family=Poppins:wght@300;400&display=swap');
+
+
+  @import "primeng/resources/themes/lara-light-blue/theme.css";
+  @import "primeng/resources/primeng.css";
+  @import "primeicons/primeicons.css";
+  @import 'primeflex/primeflex.scss';
+  
+
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.ui-table-header th {
+  background-color: #545c64;
+  color: white;
+  text-align: center;
+}

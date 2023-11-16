@@ -1,0 +1,13 @@
+<div class="inputgroup">
+    <div class="card flex flex-column">
+        <p>{{ title }}</p>
+        <input pInputText type="text" [placeholder]="placeholder" [formControl]="control" name="nombre" required #nombreInput />
+    </div>
+    <!-- Checkbox -->
+    <div class="contd">
+        <input type="checkbox" name="activo" [formControl]="control2" required hidden />
+    </div>
+    <div class="mt-3 flex justify-content-center">
+        <button type="submit" pButton pRipple class="p-button-success" [disabled]="control.invalid">{{ txtbtn }}</button>
+    </div>
+</div>

@@ -1,0 +1,60 @@
+/* dashboard.component.scss */
+.active{
+
+}
+.dashboard-container {
+  display: grid;
+  grid-template-columns: auto 2fr; /* Sidebar de 200px y el resto del espacio para el contenido principal */
+  height: 100vh; /* Altura completa de la ventana */
+}
+
+.main-content {
+  display: grid;
+  grid-template-rows: auto 1fr; /* Altura automática para el encabezado y el resto para el cuerpo */
+  grid-gap: 1rem;
+  overflow: hidden;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: 1fr; /* Una sola columna para el contenido principal */
+  gap: 1rem;
+}
+
+.sidebar-content {
+  overflow-x: hidden;
+  overflow-y: auto;
+  background-color: #eee;
+  padding: 1rem;
+}
+
+ 
+
+  
+
+
+  @media screen and (max-width: 875px) {
+    .sidebar{
+      display: none;
+    }
+    .dashboard-container{
+      grid-template-columns: auto;
+    }
+    // .sidebar{
+    //   position: fixed;
+    //   top: 0;
+    //   left: 0;
+    //   height: 100%;
+    //   width: 300px; // Ancho inicial del sidebar
+    //   background: linear-gradient(to right, #2d305c, #4e4f8d);
+    //   color: #fff;
+    //   transition: width 0.3s;
+    //   z-index: 1000;
+    //   }
+    //   .dashboard-container{
+    //     grid-template-columns: auto;
+    //   }
+      
+  }
+

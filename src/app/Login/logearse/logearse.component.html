@@ -1,0 +1,29 @@
+<div class="w-full login overflow-y-auto fondo">
+
+
+
+  <section class="flex align-items-center justify-content-center ">
+    
+    <form class="surface-card p-4 shadow-2 border-round w-full lg:w-4  overflow-y-auto"(ngSubmit)="login(form)" #form="ngForm">
+      <div class="text-center mb-5">
+        <img src="../../../assets/virtual (1).png" alt="Image" height="100" class="mb-3">
+        <div class="  font-medium mb-3 logo">SysData </div>
+        <span class="text-600 font-medium line-height-5">Donde la Eficiencia Encuentra la Innovación."</span>
+
+      </div>
+  
+      <div>
+        <label class="block text-900 font-medium mb-2">Usuario</label>
+        <input id="email" name="email" type="text"  placeholder="Ingrese un Usuario" pInputText class="w-full mb-3" [(ngModel)]="creds.username" >
+  
+        <label class="block text-900 font-medium mb-2">Contraseña</label>
+        <input id="password" name="password" type="password" placeholder="Ingrese una Contraseña" pInputText class="w-full mb-3" [(ngModel)]="creds.password">
+        <div class="d-grid">
+          <button pButton pRipple label="Ingresar"  class="w-full mb-3 mt-3" ></button>
+       </div>
+      </div>
+    </form>
+  </section> 
+
+
+</div>

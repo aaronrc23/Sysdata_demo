@@ -1,0 +1,39 @@
+<!-- app-navbar.component.html -->
+<div class="navbar">
+    <!-- Icono de hamburguesa en el lado izquierdo -->
+    <div class="nav-item">
+        <i class="pi pi-bars" (click)="toggleSidebar()"></i>
+    </div>
+
+    
+
+    <!-- Dropdown con imagen en el lado derecho -->
+    <div class="profile-dropdown">
+        <div class="profile-dropdown-btn" (click)="toggleOptions()">
+            <div class="profile-img">
+                <i class="pi pi-user"></i>
+            </div>
+            <span>Name</span>
+            <i class="pi pi-chevron-down"></i>
+        </div>
+        <ul class="profile-dropdown-list">
+            <li class="profile-dropdown-list-item ">
+                <a href="#">
+                    <i class="pi pi-user"></i>
+                    Mi Perfil</a>
+            </li>
+            <li class="profile-dropdown-list-item ">
+                <a href="#">
+                    <i class="pi pi-cog"></i>
+                    Ajustes
+                </a>
+            </li>
+            <hr/>
+            <li class="profile-dropdown-list-item ">
+
+                <a href="#">
+                    <i class="pi pi-power-off"></i>Salir</a>
+            </li>  
+        </ul>
+    </div>
+</div>

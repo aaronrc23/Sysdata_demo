@@ -11,7 +11,7 @@ export interface Productos {
     imagen: string;
     activo: boolean;
     categoria: Categoria;
-    marca: Marcas;
+    // marca: Marcas;
 
   }
   
@@ -19,6 +19,6 @@ export interface Categoria {
     idcategoria: number;
 }
 
-export interface Marcas {
-  idmarca: number;
-}
+// export interface Marcas {
+//   idmarca: number;
+// }

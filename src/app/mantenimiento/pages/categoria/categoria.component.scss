@@ -17,8 +17,27 @@
   color: white; 
 }
 
-::ng-deep .btn-edit{
-  background-color: #f9a71a;
-  border-color: #f9a71a;
+
+.titulo{
+  font-weight: bold;
+  font-size: 1.5rem;
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  color: #333335;
 }
 
+
+.card-table{
+  padding: 1.5rem;
+}
+
+@media (max-width: 640px) {
+    .headereditar{
+        display: flex;
+        flex-direction: column;
+      }
+      .card-table{
+        padding: 0;
+      }
+      
+  }

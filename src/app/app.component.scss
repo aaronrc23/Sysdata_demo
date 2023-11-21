@@ -1,2 +1,45 @@
 
- 
+:root {
+    --main-bg-color: brown;
+}
+::ng-deep .btn-edit{
+    background-color: #f9a71a;
+    border-color: #f9a71a;
+  }
+  
+::ng-deep .btn-delete{
+    margin-left: 1rem;
+    background-color: #FF5E5E;
+    border-color: #FF5E5E;
+}
+
+::ng-deep .custom-button {
+    background-color: #00c288;
+    border-color: #00c288;
+    color: white; 
+  }
+
+  .card-table{
+    padding: 1.5rem;
+  }
+
+
+  
+  
+  @media (max-width: 640px) {
+  
+      .card-table{
+        padding: 0;
+      }
+      
+  }
+
+  @media (max-width: 390px) {
+  
+    .card-table{
+      padding: 0;
+    }
+    
+}
+  
+  

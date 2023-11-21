@@ -50,4 +50,17 @@ export class CategoriaServiceService {
       });
     }));
   }
+
+
+
+  editarCategoria(categoria: Categoria): Observable<Categoria> {
+    return this.http.put<Categoria>(
+      `${this.rutaGlobal}/actualizar/${categoria.idcategoria}`,
+      categoria
+    );
+  }
+
+  eliminarCategoria(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.rutaGlobal}/delete/${id}`);
+  }
 }

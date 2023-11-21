@@ -8,7 +8,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './Login/helpers/auth.interceptor';
-
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ButtonModule } from 'primeng/button';
 
 
@@ -24,7 +24,8 @@ import { ButtonModule } from 'primeng/button';
     FontAwesomeModule,
     LoginModule ,
     BrowserAnimationsModule,
-    ButtonModule
+    ButtonModule,
+    ConfirmDialogModule 
   ],
   providers: [
     {

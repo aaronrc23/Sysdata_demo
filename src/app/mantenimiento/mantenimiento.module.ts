@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { MantenimientoRoutingModule } from './mantenimiento-routing.module';
 import { CategoriaComponent } from './pages/categoria/categoria.component';
-import { ProductosComponent } from './pages/productos/productos.component';
+import { ProductosComponent } from './pages/Products/productos/productos.component';
 import { MarcasComponent } from './pages/marcas/marcas.component';
 
 import { AlmacenesComponent } from './pages/almacenes/almacenes.component';
@@ -27,7 +27,11 @@ import { MovimientoAlmacenComponent } from './pages/Almacen/movimiento-almacen/m
 import { CardModule } from 'primeng/card';
 import { TreeTableModule } from 'primeng/treetable';
 import { CalendarModule } from 'primeng/calendar';
+import { AddproductsComponent } from './pages/Products/addproducts/addproducts.component';
+import { ImageModule } from 'primeng/image';
+import { AddunidadmedidaComponent } from './pages/UnidadMedida/addunidadmedida/addunidadmedida.component';
 
+import { InputSwitchModule } from 'primeng/inputswitch';
 
 @NgModule({
   declarations: [
@@ -38,7 +42,9 @@ import { CalendarModule } from 'primeng/calendar';
     PlantillasComponent,
     AddEditCatMarComponent,
     DashboardComponent,
-    MovimientoAlmacenComponent
+    MovimientoAlmacenComponent,
+    AddproductsComponent,
+    AddunidadmedidaComponent
   ],
   imports: [
     CommonModule,
@@ -57,7 +63,9 @@ import { CalendarModule } from 'primeng/calendar';
     FileUploadModule,
     CardModule,
     TreeTableModule,
-    CalendarModule
+    CalendarModule,
+    ImageModule,
+    InputSwitchModule
 
   ]
 })

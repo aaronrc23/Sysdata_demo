@@ -1,23 +1,28 @@
-import { Component, OnInit } from '@angular/core';
-import { Productos } from '../../Interface/Productos';
-import { ProductoService } from '../../service/producto.service';
-import { CategoriaServiceService } from '../../service/categoria-service.service';
-import { MarcasService } from '../../service/marcas.service';
-import { Categoria } from '../../Interface/Categorias';
-import { Marcas } from '../../Interface/Marcas';
+import { ChangeDetectorRef, Component, EventEmitter, Output } from '@angular/core';
 import * as JsBarcode from 'jsbarcode';
 import jsPDF from 'jspdf';
+import { Productos } from 'src/app/mantenimiento/Interface/Productos';
 import Swal from 'sweetalert2';
+import { CategoriaServiceService } from '../../../service/categoria-service.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { ProductoService } from 'src/app/mantenimiento/service/producto.service';
+
 
 
 @Component({
-  selector: 'app-productos',
-  templateUrl: './productos.component.html',
-  styleUrls: ['./productos.component.scss'],
+  selector: 'app-addproducts',
+  templateUrl: './addproducts.component.html',
+  styleUrls: ['./addproducts.component.scss']
 })
-export class ProductosComponent implements OnInit {
+export class AddproductsComponent {
+  visible: boolean = false;
 
+  showDialog() {
+      this.visible = true;
+  }
+
+
+  
   formGroup: FormGroup;
   products: Productos[] = [];
   displayAddModal = false;
@@ -44,14 +49,15 @@ export class ProductosComponent implements OnInit {
     imagen: '',
     activo: false,
     categoria: { idcategoria: 0 },
-    marca: { idmarca: 0 },
+    // marca: { idmarca: 0 },
   };
 
   constructor(
     private fb: FormBuilder,
     private productService: ProductoService,
     private categoriaService: CategoriaServiceService,
-    private marcaService: MarcasService
+    private cdRef: ChangeDetectorRef,
+
   ) {
     this.formGroup = this.fb.group({
       categoria: ['']  // Puedes establecer un valor inicial si es necesario
@@ -63,7 +69,7 @@ export class ProductosComponent implements OnInit {
   ngOnInit(): void {
     this.getProductList();
     this.getCategorias();
-    this.obtenerMarcas();
+
 
     this.formGroup = this.fb.group({  // Cambia formBuilder a fb
       categoria: ['']  // Puedes establecer un valor inicial si es necesario
@@ -88,25 +94,22 @@ export class ProductosComponent implements OnInit {
     });
   }
 
-  marcas: Marcas[] = [];
-  obtenerMarcas(): void {
-    this.marcaService.getMarcas().subscribe(marcas => {
-      this.marcas = marcas;
-    });
-  }
+
 
   /*-----------------Registro de Productos------------------ */
+
+  @Output() productoRegistrado = new EventEmitter<void>();
+
   registrarProducto(event: Event) {
     event.preventDefault();
-
+  
     this.productService.registrarProducto(this.selectProducto).subscribe(
       (response) => {
-        console.log('Producto registrado:', response);
-
+        // Resto del código...
+  
         if (response === '¡Producto creado!') {
-          this.showSuccessNotification('Producto creado exitosamente');
-        } else {
-          // Manejar otros posibles casos de respuesta del servidor
+          // Emitir evento de producto registrado
+          this.productoRegistrado.emit();
         }
       },
       (error) => {
@@ -114,7 +117,32 @@ export class ProductosComponent implements OnInit {
       }
     );
   }
-
+  
+  private mostrarExitoRegistroProducto(): void {
+    Swal.fire({
+      position: 'top-end',
+      icon: 'success',
+      title: 'Producto creado con éxito',
+      showConfirmButton: false,
+      timer: 1500,
+    });
+  }
+  
+  private limpiarFormulario(): void {
+    // Limpiar los campos del formulario o restablecer el objeto selectProducto
+    this.selectProducto = {
+      codigo_barra: '',
+      nombre: '',
+      precio_venta: 0,
+      precio_pormayor: 0,
+      stock: 0,
+      descripcion: '',
+      imagen: '',
+      activo: false,
+      categoria: { idcategoria: 0 },
+      // marca: { idmarca: 0 },
+    };
+  }
   /*---------Metodo para seleccionar imagen en el formulario--------*/
   onImageSelected(event: any) {
     const file = event.target.files[0];
@@ -173,5 +201,6 @@ export class ProductosComponent implements OnInit {
     // Aquí puedes mostrar notificaciones de error si es necesario
   }
 
-  
+
+
 }

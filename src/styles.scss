@@ -1,5 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
-// @import "https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap";
+@import "https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap";
 // body {
 //     margin: 0;
 //     padding: 0;
@@ -8,7 +8,7 @@
 
 
 
-  @import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Fuggles&family=Inclusive+Sans:ital@0;1&family=Mooli&family=Open+Sans:wght@500&family=Poppins:wght@300;400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Inclusive+Sans:ital@0;1&family=Inter:wght@300;400;500;600&family=Mooli&family=Open+Sans:wght@500&family=Poppins:wght@300;400&display=swap');
 
 
   @import "primeng/resources/themes/lara-light-blue/theme.css";
@@ -21,10 +21,20 @@
 body {
   margin: 0;
   padding: 0;
+  font-size: 14px;
 }
 
 .ui-table-header th {
-  background-color: #545c64;
-  color: white;
+
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
   text-align: center;
+  font-size: 0.85rem;
+  padding: 10px 26px 10px 18px;
 }
+
+td{
+  text-align: center;
+  padding: 0.6rem;
+}
+

@@ -1,5 +1,5 @@
 import { Component ,OnInit,OnDestroy } from '@angular/core';
-import { faBox,faBoxesStacked,faDolly,faArchive,faGauge,faDollyBox,faBoxesPacking,faPeopleCarryBox} from '@fortawesome/free-solid-svg-icons';
+import { faBox,faBoxesStacked,faDolly,faArchive,faGauge,faDollyBox,faBoxesPacking,faPeopleCarryBox,faUnderline} from '@fortawesome/free-solid-svg-icons';
 import { CommunicationService } from '../service/communication.service';
 import { Subscription } from 'rxjs';
 import { TreeNode } from 'primeng/api';
@@ -19,6 +19,7 @@ export class SidebarComponent implements OnInit,OnDestroy{
   faDollyBox = faDollyBox
   faBoxesPacking=faBoxesPacking
   faPeopleCarryBox=faPeopleCarryBox
+  faUnderline=faUnderline
 
 
 

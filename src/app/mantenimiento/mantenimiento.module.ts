@@ -31,7 +31,11 @@ import { AddproductsComponent } from './pages/Products/addproducts/addproducts.c
 import { ImageModule } from 'primeng/image';
 import { AddunidadmedidaComponent } from './pages/UnidadMedida/addunidadmedida/addunidadmedida.component';
 
+
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
 import { InputSwitchModule } from 'primeng/inputswitch';
+import { ProveedoresComponent } from './pages/proveedores/proveedores.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +48,8 @@ import { InputSwitchModule } from 'primeng/inputswitch';
     DashboardComponent,
     MovimientoAlmacenComponent,
     AddproductsComponent,
-    AddunidadmedidaComponent
+    AddunidadmedidaComponent,
+    ProveedoresComponent
   ],
   imports: [
     CommonModule,
@@ -65,7 +70,8 @@ import { InputSwitchModule } from 'primeng/inputswitch';
     TreeTableModule,
     CalendarModule,
     ImageModule,
-    InputSwitchModule
+    InputSwitchModule,
+    FontAwesomeModule
 
   ]
 })

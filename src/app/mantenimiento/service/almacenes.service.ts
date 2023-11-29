@@ -18,12 +18,12 @@ export class AlmacenesService {
     return this.http.post<Almacenes>(`${this.apiUrl}/registrar`, almacen);
   }
 
-  editarAlmacen(almacen: Almacenes): Observable<Almacenes> {
-    return this.http.put<Almacenes>(
-      `${this.apiUrl}/editar/${almacen.id}`,
-      almacen
-    );
-  }
+
+
+  editarAlmacen(id: number, almacen: Almacenes): Observable<Almacenes> {
+    return this.http.put<Almacenes>(`${this.apiUrl}/actualizar/${id}`, almacen);
+}
+
 
   eliminarAlmacen(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/delete/${id}`);

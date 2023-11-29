@@ -1,81 +1,6 @@
 <h1>Productos</h1>
 <app-addproducts (productoRegistrado)="productoRegistrado()"></app-addproducts>
 
-<!-- <form (submit)="registrarProducto($event)" class="w-full">
-    <div class="grid cnt">
-
-        <div class=" field col-12 md:col-6 ">
-            <div>
-                <p>CodigoBarra</p>
-                <input name="codigo_barra" pInputText type="text" class="p-inputtext-sm w-full" placeholder="Small"
-                    placeholder="CodigoBarra" [(ngModel)]="selectProducto.codigo_barra" />
-            </div>
-            <div>
-                <p>Nombre de Productos</p>
-                <input name="nombre" pInputText type="text" class="p-inputtext-sm w-full" placeholder="Small"
-                    placeholder="Nombre" [(ngModel)]="selectProducto.nombre" />
-            </div>
-            <div>
-                <p>Descripcion de Productos</p>
-                <input name="descripcion" pInputText type="text" class="p-inputtext-sm w-full" placeholder="Small"
-                    placeholder="descripcion" [(ngModel)]="selectProducto.descripcion" />
-            </div>
-
-            <div class="card flex justify-content-center">
-                <!-- Vista previa de la imagen -->
-<!-- <input name="imagen" type="file" (change)="onImageSelected($event)">
-            </div>
-
-            <div>
-                <img [src]="selectProducto.imagen" *ngIf="selectProducto.imagen" alt="Imagen seleccionada">
-            </div>
-            <button type="submit" class="custom-button">Registrar</button>
-            <img id="barCode" src="" alt="bar code">
-            <button (click)="generateBarcode()">Generar codigo pdf</button>
-            <button (click)="downloadPDF()">Descargar pdf</button>
-
-
-        </div>
-        <div class="field col-12 md:col-6   ">
-            <div>
-                <p>Precio Venta</p>
-                <input name="precio_venta" pInputText type="text" class="p-inputtext-sm w-full" placeholder="Small"
-                    placeholder="precio_venta" [(ngModel)]="selectProducto.precio_venta" />
-            </div>
-
-            <div>
-                <p>Precio por Mayor</p>
-                <input name="precio_pormayor" pInputText type="text" class="p-inputtext-sm w-full" placeholder="Small"
-                    placeholder="precio_pormayor" [(ngModel)]="selectProducto.precio_pormayor" />
-            </div>
-
-            <div>
-                <p>Stock de Productos</p>
-                <input name="stock" pInputText type="text" class="p-inputtext-sm w-full" placeholder="Small"
-                    placeholder="stock" [(ngModel)]="selectProducto.stock" />
-            </div>
-            <!-- En tu archivo HTML -->
-
-<!-- <div>
-                <p for="categoria">Elige una Categoría</p>
-                <select name="categoria" [(ngModel)]="selectProducto.categoria" class="custom-select-card w-full">
-                    <option *ngFor="let categoria of categorias" [ngValue]="categoria">
-                        {{ categoria.nombre }}
-                    </option>
-                </select>
-
-            </div> -->
-<!-- <div>
-                <p for="categoria">Elige una Marca</p>
-                <select [(ngModel)]="selectProducto.marca" name="marca" class="custom-select-card w-full">
-                    <option *ngFor="let marca of marcas" [value]="marca">{{ marca.nombre }}</option>
-                </select>
-
-            </div> -->
-<!-- </div>
-
-    </div> 
-</form> -->
 
 <div class="card  gap-3 ">
     <div class="card-table">
@@ -91,6 +16,7 @@
                     <th>precio</th>
                     <th>stock</th>
                     <th>descripcion</th>
+                    <th>Categoria</th>
                     <th>imagen</th>
                     <th>Opciones</th>
 
@@ -104,6 +30,7 @@
                     <td>{{ productos.precio_venta }}</td>
                     <td>{{ productos.stock }}</td>
                     <td>{{ productos.descripcion }}</td>
+                    <td>{{ productos.categoria }}</td>
                     <td><img src="{{ productos.imagen }}" width="50px"></td>
                     <td>
                         <div class="flex justify-content-center">

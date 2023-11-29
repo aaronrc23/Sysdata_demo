@@ -52,7 +52,7 @@ export class ProductosComponent implements OnInit {
     descripcion: '',
     imagen: '',
     activo: false,
-    categoria: { idcategoria: 0 },
+    categoria: { idcategoria: 1 },
     // marca: { idmarca: 0 },
   };
 
@@ -134,7 +134,7 @@ export class ProductosComponent implements OnInit {
       descripcion: '',
       imagen: '',
       activo: false,
-      categoria: { idcategoria: 0 },
+      categoria: { idcategoria: 1 },
       // marca: { idmarca: 0 },
     };
   }
@@ -242,20 +242,6 @@ export class ProductosComponent implements OnInit {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   
   // marcas: Marcas[] = [];
   // obtenerMarcas(): void {
@@ -264,25 +250,6 @@ export class ProductosComponent implements OnInit {
   //   });
   // }
 
-  /*-----------------Registro de Productos------------------ */
-  // registrarProducto(event: Event) {
-  //   event.preventDefault();
-
-  //   this.productService.registrarProducto(this.selectProducto).subscribe(
-  //     (response) => {
-  //       console.log('Producto registrado:', response);
-
-  //       if (response === '¡Producto creado!') {
-  //         this.showSuccessNotification('Producto creado exitosamente');
-  //       } else {
-  //         // Manejar otros posibles casos de respuesta del servidor
-  //       }
-  //     },
-  //     (error) => {
-  //       this.handleError('Error al registrar el producto:', error);
-  //     }
-  //   );
-  // }
 
   // /*---------Metodo para seleccionar imagen en el formulario--------*/
   // onImageSelected(event: any) {

@@ -18,6 +18,7 @@ export class CategoriaComponent implements OnInit{
   first = 0;
   rows = 10;
   categorias: Categoria[] = [];
+  
   /*---------- Crear Categorias-----------*/ 
   nuevaCategoria: Categoria = { nombre: '', activo: true };
   categoriaEnEdicion: Categoria = { nombre: '', activo: true }; 

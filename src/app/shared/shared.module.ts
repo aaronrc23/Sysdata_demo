@@ -8,16 +8,19 @@ import { CommunicationService } from './service/communication.service';
 import { SidebarModule } from 'primeng/sidebar';
 import { HttpClientModule } from '@angular/common/http';
 
+
 //btn imagen
 import { SplitButtonModule } from 'primeng/splitbutton';
 import { MenuModule } from 'primeng/menu';
 import { TreeModule } from 'primeng/tree';
+import { SideNavComponent } from './side-nav/side-nav.component';
 
 
 @NgModule({
   declarations: [
     SidebarComponent,
-    NavbarComponent
+    NavbarComponent,
+    SideNavComponent
   ],
   imports: [
     CommonModule,
@@ -32,6 +35,7 @@ import { TreeModule } from 'primeng/tree';
   exports:[
     SidebarComponent,
     NavbarComponent,
+    SideNavComponent 
   ],
   providers: [CommunicationService],
 })

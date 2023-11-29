@@ -1,71 +1,120 @@
-  <div class="sidebar-container h-full w-full overflow-y-auto" *ngIf="isActive">
+  <div class="sidebar h-full w-full overflow-y-auto" *ngIf="isActive">
     <!-- Logo Section -->
     <div class="logo-section ">
-      <div class="logo ">
-        <img src="../../../assets/virtual (1).png" alt="Logo"  width="50px"  class=" object-cover rounded-full  flex justify-content-center align-items-center  " >
-        <p class=" nom_logo" >SysData</p>
+      <div class="logo flex flex-column  ">
+        <p class=" nom_logo mt-4 " >SysData</p>
+        <h4 class=" p-0 m-0 mt-1 text-center text-xs">Sistema de Facturacion Electronica</h4>
       </div>
     </div>
 
+    
+
     <!-- Links Section -->
-    <nav class="links-section p-2 mt-1">
+    <nav class="links-section p-2 mt-3">
       <ul>
         <li class=" ctn_op mb-2">
-          <div class="flex items-center">
-            <fa-icon [icon]="faGauge" class="text-xl"></fa-icon>
-            <a routerLink="dashboard" routerLinkActive="active">dashboard</a>
+          <div class="flex items-center w-full btn">
+            <fa-icon [icon]="faGauge" class="text-lg"></fa-icon>
+            <a routerLink="dashboard" routerLinkActive="active" class="text-sm">Dashboard</a>
           </div>
         </li>
-        <p class="ml-2">Mantenimiento</p>
+        <p class="ml-2 subtitle">Mantenimiento</p>
+
+
+        <li class=" ctn_op mb-2">
+          <div class="flex items-center p-2">
+            <fa-icon [icon]="faBoxesStacked" class="text-xl"></fa-icon>
+            <a routerLink="almacenes" routerLinkActive="active">Almacen</a>
+          </div>
+        </li>
+
+        <li class=" ctn_op mb-2">
+          <div class="flex items-center p-2">
+            <fa-icon [icon]="faArchive" class="text-lg"></fa-icon>
+            <a routerLink="categoria" routerLinkActive="active">Categorias</a>
+          </div>
+        </li>
+
+        <li class=" ctn_op mb-2">
+          <div class="flex items-center p-2">
+            <fa-icon [icon]="faUnderline" class="text-xl"></fa-icon>
+            <a routerLink="addunidadmedida" routerLinkActive="active">Unidad de Medida</a>
+          </div>
+        </li>
+
+          <!-- Proveedores -->
+
+        <li class="mb-2" [class.active]="isSubmenuOpen('compras')">
+          <div class="ctn_op flex items-center w-full p-2" (click)="toggleSubmenu('compras')">
+            <fa-icon [icon]="faTruck" class="text-lg"></fa-icon>
+            <a>Compras</a>
+            <i class="pi pi-chevron-down  arrow-icon  "></i>
+          </div>
+          <!-- Submenu para "Marcas" -->
+          <ul class="submenu" *ngIf="isSubmenuOpen('compras')">
+            
+            <li>
+              <div class=" flex w-full ">
+                <fa-icon [icon]="faCirclePlus" class="text-base"></fa-icon>
+            
+                <a routerLink="proveedores" routerLinkActive="active">Agregar Proveedor</a>
+              </div>
+            </li>
+
+            <li>
+              <div class=" flex w-full ">
+                <fa-icon [icon]="faFilePen" class="text-base"></fa-icon>
+                <a routerLink="productos" routerLinkActive="active">Registrar Compra</a>
+              </div>
+            </li>
+          </ul>
+        </li>
+
+        
         
         <li class="mb-2" [class.active]="isSubmenuOpen('marcas')">
-          <div class="ctn_op flex items-center" (click)="toggleSubmenu('marcas')">
-            <fa-icon [icon]="faBoxesStacked" class="text-xl"></fa-icon>
-            <a>Gestion de Productos</a>
-            <i class="pi pi-chevron-down ml-4 arrow-icon "></i>
+          <div class="ctn_op flex items-center w-full p-2" (click)="toggleSubmenu('marcas')">
+            <fa-icon [icon]="faBoxesStacked" class="text-lg"></fa-icon>
+            <a>Gestion de Producto</a>
+            <i class="pi pi-chevron-down  arrow-icon  "></i>
           </div>
           <!-- Submenu para "Marcas" -->
           <ul class="submenu" *ngIf="isSubmenuOpen('marcas')">
+            
             <li>
               <div class=" flex w-full ">
-                <fa-icon [icon]="faArchive" class=""></fa-icon>
-                <a routerLink="categoria" routerLinkActive="active">Categorias</a>
+                <fa-icon [icon]="faBox" class="text-lg"></fa-icon>
+                <a routerLink="productos" routerLinkActive="active">Agregar Productos</a>
               </div>
             </li>
+
             <li>
               <div class=" flex w-full ">
-                <fa-icon [icon]="faBox" class="text-xl"></fa-icon>
+                <fa-icon [icon]="faBox" class="text-lg"></fa-icon>
                 <a routerLink="productos" routerLinkActive="active">Productos</a>
               </div>
             </li>
-            <!-- <li>
-              <div class=" flex w-full ">
-                <i class="pi pi-bookmark-fill text-xl"></i>
-                <a routerLink="marcas" routerLinkActive="active">Marcas</a>
-              </div>
-            </li> -->
-            <li>
-              <div class=" flex w-full ">
-                <fa-icon [icon]="faBoxesStacked" class="text-xl"></fa-icon>
-                <a routerLink="almacenes" routerLinkActive="active">Almacen</a>
-              </div>
-            </li>
-
-            <li>
-              <div class=" flex w-full ">
-                <fa-icon [icon]="faUnderline" class="text-xl"></fa-icon>
-                <a routerLink="addunidadmedida" routerLinkActive="active">Unidad de Medida</a>
-              </div>
-            </li>
-
+            
+            
             
           </ul>
         </li>
+
+        
+
+
+
+
+
+
+
+
+
         <li class="mb-2" [class.active]="isSubmenuOpen('almacen')">
-          <div class="ctn_op flex items-center" (click)="toggleSubmenu('almacen')">
-            <fa-icon [icon]="faDollyBox" class="text-xl"></fa-icon>
-            <a routerLink="categoria" routerLinkActive="active">Gestión de Almacenes</a>
-            <i class="pi pi-chevron-down  ml-3 arrow-icon icon"></i>
+          <div class="ctn_op flex items-center p-2" (click)="toggleSubmenu('almacen')">
+            <fa-icon [icon]="faDollyBox" class="text-xl "></fa-icon>
+            <a routerLink="categoria" routerLinkActive="active">Gestión de Almacen</a>
+            <i class="pi pi-chevron-down  arrow-icon "></i>
           </div>
                     <!-- Submenu para "Marcas" -->
                     <ul class="submenu" *ngIf="isSubmenuOpen('almacen')">
@@ -78,13 +127,13 @@
                       <li>
                         <div class=" flex w-full ">
                           <fa-icon [icon]="faBox" class="text-xl"></fa-icon>
-                          <a routerLink="productos" routerLinkActive="active">Salida de Productos</a>
+                          <a routerLink="addedit" routerLinkActive="active">Salida de Productos</a>
                         </div>
                       </li>
                       <li>
                         <div class=" flex w-full ">
                           <fa-icon [icon]="faPeopleCarryBox" class="text-xl"></fa-icon>
-                          <a routerLink="moviento-almacen" routerLinkActive="active">Abastacimiento de Almacen</a>
+                          <a routerLink="moviento-almacen" routerLinkActive="active">Abastacimiento</a>
                         </div>
                       </li>
                       <li>
@@ -98,15 +147,11 @@
                     </ul>
         </li>
 
+      
 
+       
 
-
-        <li class=" ctn_op mb-2">
-          <div class="flex items-center">
-            <fa-icon [icon]="faBox" class="text-xl"></fa-icon>
-            <a routerLink="productos" routerLinkActive="active">Productos</a>
-          </div>
-        </li>
+      
         <!-- <li>
           <div class=" ctn_op flex items-center">
             <i class="pi pi-bookmark-fill text-xl"></i>

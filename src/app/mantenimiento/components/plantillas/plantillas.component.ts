@@ -2,6 +2,7 @@ import { Component ,OnInit,OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { CommunicationService } from 'src/app/shared/service/communication.service';
 import { Router } from '@angular/router';
+import { faBars } from '@fortawesome/free-solid-svg-icons';
 
 
 @Component({
@@ -26,6 +27,11 @@ export class PlantillasComponent implements OnInit,OnDestroy {
     this.subscription.unsubscribe();
   }
 
+  isMenuOpen = false;
 
+  toggleMenu() {
+    this.isMenuOpen = !this.isMenuOpen;
+  }
+  faBars = faBars;
   
 }

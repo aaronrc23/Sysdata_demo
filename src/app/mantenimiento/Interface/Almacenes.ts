@@ -1,9 +1,9 @@
-export class Almacenes{
+export interface Almacenes{
 
-    id? : number
-    nombreAlmacen?: string
-    numeroAlmacen?: number
+    id : number
+    nombreAlmacen: string
+    numeroAlmacen: number
     direccion?: string
-    activo?: boolean
+    activo: boolean
 
 }

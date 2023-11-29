@@ -1,24 +1,24 @@
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Proveedores } from '../Interface/Proveedores';
 import { Observable, Subject, map, tap } from 'rxjs';
-import { UnidadMedida } from '../Interface/UnidadMedida';
 import { Credentials } from '../Interface/Credentials';
-
 
 @Injectable({
   providedIn: 'root'
 })
-export class UnidaMedidaService {
-  rutaGlobal = 'http://localhost:8090/api/undmedida'; 
+export class ProveedoresService {
+
+  rutaGlobal = 'http://localhost:8090/api/proveedores'; 
 
 
   constructor(private http: HttpClient) { }
 
 
   /*-----------Listar Categorias-------------*/
-  getUnidadMedida(): Observable<UnidadMedida[]> {
+  getProveedores(): Observable<Proveedores[]> {
     console.log('Llamando a getUnidadMedida');
-    return this.http.get<UnidadMedida[]>(`${this.rutaGlobal}/listar`);
+    return this.http.get<Proveedores[]>(`${this.rutaGlobal}/listar`);
   }
 
   
@@ -43,12 +43,12 @@ export class UnidaMedidaService {
   
   /*------------Registrar Categorias----------------*/
 
-  private unidadSubject = new Subject<UnidadMedida[]>();
+  private unidadSubject = new Subject<Proveedores[]>();
   unidades$ = this.unidadSubject.asObservable();
-  registrarUnidadMedida(unidades: UnidadMedida): Observable<UnidadMedida> {
-    return this.http.post<UnidadMedida>(`${this.rutaGlobal}/registrar`, unidades).pipe( 
+  registrarProveedores(unidades: Proveedores): Observable<Proveedores> {
+    return this.http.post<Proveedores>(`${this.rutaGlobal}/registrar`, unidades).pipe( 
       tap(() => {
-      this.getUnidadMedida().subscribe((unidades) => {
+      this.getProveedores().subscribe((unidades) => {
         this.unidadSubject.next(unidades);
       });
     }));
@@ -56,11 +56,11 @@ export class UnidaMedidaService {
 
 
 
-  editarUnidadMedida(id: number, unidad: UnidadMedida): Observable<UnidadMedida> {
-    return this.http.put<UnidadMedida>(`${this.rutaGlobal}/actualizar/${id}`, unidad);
+  editarProveedores(id: number, unidad: Proveedores): Observable<Proveedores> {
+    return this.http.put<Proveedores>(`${this.rutaGlobal}/actualizar/${id}`, unidad);
 }
 
-  eliminarUnidadMedida(id: number): Observable<void> {
+  eliminarProveedores(id: number): Observable<void> {
     return this.http.delete<void>(`${this.rutaGlobal}/delete/${id}`);
   }
 }

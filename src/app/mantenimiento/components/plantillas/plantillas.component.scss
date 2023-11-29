@@ -1,70 +1,177 @@
-/* dashboard.component.scss */
-.active{
-
-}
-.dashboard-container {
-  display: grid;
-  grid-template-columns: auto 2fr; /* Sidebar de 200px y el resto del espacio para el contenido principal */
-  height: 100vh; /* Altura completa de la ventana */
+/* app.component.scss */
+::root {
+  --sidebar: linear-gradient(to top, #1e3c72 0%, #214a96 1%, #2a5298 100%);
+  --tu-color-de-texto: #ad8350;
 }
 
-.main-content {
-  display: grid;
-  grid-template-rows: auto 1fr; /* Altura automática para el encabezado y el resto para el cuerpo */
-  grid-gap: 1rem;
-  overflow: hidden;
+
+
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
 }
 
-.grid-container {
-  display: grid;
-  grid-template-rows: 1fr;
-  grid-template-columns: 1fr; /* Una sola columna para el contenido principal */
-  gap: 1rem;
+.container {
+  display: flex;
+  height: 100vh;
 }
 
-.sidebar-content {
-  overflow-x: hidden;
-  overflow-y: auto;
-  background-color: #eee;
-  padding: 1rem;
+
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  
+  display: none;
+  z-index: 1;
 }
 
- .bodycard{
-    padding: 1.5rem;
- }
+.navbar {
+  background-color: #054A91;
+  color: #fff;
+  width: 20rem; /* Ancho del Navbar cuando no es responsive */
+}
 
+.navbar-brand {
+  font-size: 20px;
+  margin-left: 10px;
+}
+
+.sidebar {
+  width: 250px;
+  height: 100vh;
+  background-color: #054A91;
+  color: #fff;
+  padding-top: 20px;
+  position: fixed;
+  transition: transform 0.3s ease-in-out;
+  transform: translateX(-250px);
+  z-index: 2;
+}
+
+.menu-toggle-container {
+ background-color: #fff;
+  padding: 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  
+}
+
+.icon-config{
+  color: #536485;
+}
+
+.menu-toggle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.menu-toggle fa-icon {
+  color: #536485;
+  margin-bottom: 4px;
+  transition: transform 0.3s ease-in-out;
+  display: none;
+}
+
+.menu-toggle.active span:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+
+.menu-toggle.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-toggle.active span:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+.menu {
+  list-style: none;
+  padding: 0;
+  overflow-y: hidden ;
+}
+
+.menu li {
+  padding: 15px;
+  text-align: center;
+}
+
+.menu a {
+  text-decoration: none;
+  color: #fff;
+  font-size: 18px;
+}
+
+.content {
+  flex: 1;
+  padding: 20px;
+  transition: margin-left 0.3s;
+  background-color: #F0F1F7;
+  height: 100vh;
+}
+
+.active .sidebar {
+  transform: translateX(0);
+}
+
+.active .overlay {
+  display: block;
+}
+
+
+
+@media screen and (max-width: 768px) {
+  .navbar, .content {
+    width: 100%; /* Ancho del Navbar y del contenido cuando es responsive */
+    margin-left: 0;
+    height: 100vh;
+  }
+  .navbar{
+    display: none;
+  }
+
+  .menu-toggle fa-icon {
+    display: block;
+  }
+  
   
 
-
-  @media screen and (max-width: 875px) {
-    .sidebar{
-      display: none;
-    }
-    .dashboard-container{
-      grid-template-columns: auto;
-    }
-    // .sidebar{
-    //   position: fixed;
-    //   top: 0;
-    //   left: 0;
-    //   height: 100%;
-    //   width: 300px; // Ancho inicial del sidebar
-    //   background: linear-gradient(to right, #2d305c, #4e4f8d);
-    //   color: #fff;
-    //   transition: width 0.3s;
-    //   z-index: 1000;
-    //   }
-    //   .dashboard-container{
-    //     grid-template-columns: auto;
-    //   }
-      
+  .sidebar {
+    transform: translateX(-250px);
   }
- 
-  @media only screen and (max-width: 280px) {
-    .bodycard {
-        padding: 7px;
-    }
-    .p-col{
-      padding: 1px;
-    }
+
+  .container {
+    flex-direction: column;
+  }
+
+  .menu-toggle-container {
+    order: -1;
+    width: 100%;
+  }
+
+  .menu-toggle {
+    margin-left: auto;
+    margin-right: 20px;
+  }
+
+  .content {
+    margin-left: 0;
+  }
+
+  .active .sidebar {
+    transform: translateX(0);
+  }
+
+  .active .overlay {
+    display: block;
+  }
 }
+
+
+

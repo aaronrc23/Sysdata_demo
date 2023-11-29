@@ -122,6 +122,16 @@
     color: #82cd47;
 }
 
+.nom_logo {
+  font-size: 1.5rem;
+  margin-left: 20px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Black Ops One', sans-serif;
+}
+
 
 
 
@@ -140,3 +150,16 @@
   }
 }
 
+.sidebar_movil{
+    display: none;
+}
+
+
+body .ui-sidebar-close {
+  display: none !important; /* Oculta el botón de cierre */
+}
+// Estilo para pantallas más pequeñas (848px o menos)
+@media (max-width: 848px) {
+    
+  
+}

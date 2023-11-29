@@ -8,7 +8,8 @@ import { PlantillasComponent } from './components/plantillas/plantillas.componen
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { MovimientoAlmacenComponent } from './pages/Almacen/movimiento-almacen/movimiento-almacen.component';
 import { AddunidadmedidaComponent } from './pages/UnidadMedida/addunidadmedida/addunidadmedida.component';
-
+import { ProveedoresComponent } from './pages/proveedores/proveedores.component';
+import { AddproductsComponent } from './pages/Products/addproducts/addproducts.component';
 const routes: Routes = [
 
 
@@ -23,6 +24,8 @@ const routes: Routes = [
       { path: 'almacenes', component: AlmacenesComponent },
       { path: 'moviento-almacen', component: MovimientoAlmacenComponent },
       {path: 'addunidadmedida', component: AddunidadmedidaComponent},
+      {path: 'proveedores', component: ProveedoresComponent},
+      {path: 'addedit', component: AddproductsComponent},
       // ... otras rutas del mantenimiento ...
     ],
   },

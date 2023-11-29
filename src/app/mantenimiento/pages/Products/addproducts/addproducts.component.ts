@@ -1,42 +1,33 @@
-import { ChangeDetectorRef, Component, EventEmitter, Output } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  EventEmitter,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import * as JsBarcode from 'jsbarcode';
 import jsPDF from 'jspdf';
 import { Productos } from 'src/app/mantenimiento/Interface/Productos';
 import Swal from 'sweetalert2';
 import { CategoriaServiceService } from '../../../service/categoria-service.service';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, NgForm } from '@angular/forms';
 import { ProductoService } from 'src/app/mantenimiento/service/producto.service';
-
-
 
 @Component({
   selector: 'app-addproducts',
   templateUrl: './addproducts.component.html',
-  styleUrls: ['./addproducts.component.scss']
+  styleUrls: ['./addproducts.component.scss'],
 })
-export class AddproductsComponent {
-  visible: boolean = false;
+export class AddproductsComponent implements OnInit{
+  checked: boolean = true;
+  visible = false;
+  position: string = 'center';
 
-  showDialog() {
-      this.visible = true;
+  showDialog(position: string) {
+    this.position = position;
+    this.visible = true;
   }
-
-
-  
-  formGroup: FormGroup;
-  products: Productos[] = [];
-  displayAddModal = false;
-  categorias: any[] = [];
-  
-    /*-----Paginacion de la tabla-----*/
-
-    first = 0;
-    rows = 10;
-    pageChange(event: { first: number; rows: number }) {
-      this.first = event.first;
-      this.rows = event.rows;
-    }
-  
 
   /*------ Variables para el formulario ------- */
   selectProducto: Productos = {
@@ -48,44 +39,37 @@ export class AddproductsComponent {
     descripcion: '',
     imagen: '',
     activo: false,
-    categoria: { idcategoria: 0 },
+    categoria: { idcategoria: 1 },
     // marca: { idmarca: 0 },
   };
 
-  constructor(
-    private fb: FormBuilder,
-    private productService: ProductoService,
-    private categoriaService: CategoriaServiceService,
-    private cdRef: ChangeDetectorRef,
+  /*--Array--*/
+  products: Productos[] = [];
+  displayAddModal = false;
+  categorias: any[] = [];
 
-  ) {
-    this.formGroup = this.fb.group({
-      categoria: ['']  // Puedes establecer un valor inicial si es necesario
-    });
-  }
 
-  
-  /*------ METODOS -------- */
+  constructor(private  productService: ProductoService,private categoriaService: CategoriaServiceService,) {}
+
   ngOnInit(): void {
-    this.getProductList();
+    this.obtenerUnidad();
     this.getCategorias();
-
-
-    this.formGroup = this.fb.group({  // Cambia formBuilder a fb
-      categoria: ['']  // Puedes establecer un valor inicial si es necesario
-    });
-
-    // Luego puedes cargar las categorías
-    this.categoriaService.getCategorias().subscribe((categorias) => {
-      this.categorias = categorias;
-    });
   }
 
-  /*------- Metodo para obtener la lista de productos y categorias ------- */
-  getProductList() {
-    this.productService.getProducts().subscribe((data) => {
-      this.products = data;
-    });
+  /*------Agregar----- */
+
+  /*---Metodos------ */
+  /*-----Metodo listar----- */
+  obtenerUnidad() {
+    this.productService.getProducts().subscribe(
+      (almacenes) => {
+        this.products = almacenes;
+        console.log('Unidad obtenidas:', almacenes);
+      },
+      (error) => {
+        console.error('Error al cargar las categorías:', error);
+      }
+    );
   }
 
   getCategorias() {
@@ -94,113 +78,204 @@ export class AddproductsComponent {
     });
   }
 
+  getProductList() {
+    this.productService.getProducts().subscribe((data) => {
+      this.products = data;
+    });
+  }
 
+  @ViewChild('nombreInput') nombreInput: any;
 
-  /*-----------------Registro de Productos------------------ */
+  crearUnidad(): void {
+    const unidadExistente = this.products.find(
+      (c) => c.nombre === this.selectProducto.nombre
+    );
+    if (unidadExistente) {
+      this.mostrarErrorExistente();
+    } else {
+      this.mostrarConfirmacionRegistro();
+    }
+  }
 
-  @Output() productoRegistrado = new EventEmitter<void>();
+  private mostrarErrorExistente(): void {
+    this.visible = false;
+    Swal.fire({
+      icon: 'error',
+      title: 'Error',
+      text: `Este Producto  "${this.selectProducto.nombre}" ya está registrado.`,
+      confirmButtonText: 'Aceptar',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.visible = true;
+      }
+    });
+  }
 
-  registrarProducto(event: Event) {
-    event.preventDefault();
-  
+  private mostrarConfirmacionRegistro(): void {
+    this.visible = false;
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: '¿Deseas registrar esta categoría?',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonText: 'Sí, registrar',
+      cancelButtonText: 'Cancelar',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.registrarCategoria();
+        this.mostrarExitoRegistro();
+        this.resetearFormulario();
+      } else {
+        this.nombreInput.nativeElement.value = '';
+      }
+    });
+  }
+  unidadForm: any;
+  @ViewChild('unidadForm') unidadForms!: NgForm;
+
+  private registrarCategoria(): void {
+    
+    
     this.productService.registrarProducto(this.selectProducto).subscribe(
-      (response) => {
-        // Resto del código...
-  
-        if (response === '¡Producto creado!') {
-          // Emitir evento de producto registrado
-          this.productoRegistrado.emit();
-        }
+      () => {
+        this.mostrarExitoRegistro();
+       
+        this.obtenerUnidad();
       },
       (error) => {
-        this.handleError('Error al registrar el producto:', error);
+        console.error('Error al crear la categoría:', error);
       }
     );
   }
+  private resetearFormulario(): void {
+    
+      this.selectProducto = {
+        codigo_barra: '',
+        nombre: '',
+        precio_venta: 0,
+        precio_pormayor: 0,
+        stock: 0,
+        descripcion: '',
+        imagen: '',
+        activo: false,
+        categoria: { idcategoria: 1 },
+        // marca: { idmarca: 0 },
+      };
+       // Reiniciar el estado de validación del formulario
+    if (this.unidadForm) {
+      this.unidadForm.resetForm();
   
-  private mostrarExitoRegistroProducto(): void {
+       // Opcionalmente, puedes reiniciar el estado de validación de campos individuales si es necesario
+      
+      // Repite este bloque para otros campos si es necesario
+    }
+    
+  }
+
+  private mostrarExitoRegistro(): void {
+   
     Swal.fire({
       position: 'top-end',
       icon: 'success',
-      title: 'Producto creado con éxito',
+      title: 'Categoría creada con éxito',
       showConfirmButton: false,
       timer: 1500,
     });
-  }
-  
-  private limpiarFormulario(): void {
-    // Limpiar los campos del formulario o restablecer el objeto selectProducto
-    this.selectProducto = {
-      codigo_barra: '',
-      nombre: '',
-      precio_venta: 0,
-      precio_pormayor: 0,
-      stock: 0,
-      descripcion: '',
-      imagen: '',
-      activo: false,
-      categoria: { idcategoria: 0 },
-      // marca: { idmarca: 0 },
-    };
-  }
-  /*---------Metodo para seleccionar imagen en el formulario--------*/
-  onImageSelected(event: any) {
-    const file = event.target.files[0];
-    if (file) {
-      console.log('Archivo seleccionado:', file);
-      const reader = new FileReader();
-      reader.onload = (e: any) => {
-        console.log('Imagen leída:', e.target.result);
-        this.selectProducto.imagen = e.target.result;
-      };
-      reader.readAsDataURL(file);
-    }
-  }
-
-  /*---------- METODOS DE CODIGO DE BARRAS ------------------ */
-
-  generateBarcode() {
-    const randomNumber = Math.floor(Math.random() * 9999999999999);
-    const randomNumberString = randomNumber.toString();
-    this.selectProducto.codigo_barra = randomNumberString;
-    JsBarcode('#barCode', randomNumberString);
-    console.log(this.selectProducto.codigo_barra);
+    this.getProductList();
   }
 
 
-  /*------------------- METODOS DE PDF ----------------------- */
 
-  downloadPDF() {
-    const img = document.querySelector('img#barCode') as HTMLImageElement;
 
-    if (img && img.complete) {
-      this.generatePDF(img);
+  onSwitchChange(newStatus: boolean): void {
+    // `newStatus` contendrá el nuevo estado (true o false) del switch
+    console.log('Nuevo estado:', newStatus);
+
+    // Aquí puedes realizar acciones adicionales según sea necesario
+    // Por ejemplo, puedes llamar a tu función para desactivar/activar la unidad
+    if (newStatus) {
+      this.activarUnidad(); // Supongamos que tienes una función para activar la unidad
     } else {
-      console.error('La imagen no se encontró o no se cargó correctamente.');
+      this.desactivarUnidad(); // Supongamos que tienes una función para desactivar la unidad
     }
   }
 
-  private async generatePDF(img: HTMLImageElement) {
-    const doc = new jsPDF();
-    doc.text('Hola mundo', 10, 10);
-    doc.addImage(img, 10, 20, 60, 40);
-    doc.addImage(img, 10, 80, 60, 40);
-    doc.addImage(img, 10, 120, 60, 40);
-
-    const pdfName = 'prueba.pdf';
-    doc.save(pdfName);
-    console.log(`PDF "${pdfName}" generado exitosamente.`);
+  activarUnidad(): void {
+    // Lógica para activar la unidad
   }
 
-  private showSuccessNotification(message: string) {
-    Swal.fire('Éxito', message, 'success');
+  desactivarUnidad(): void {
+    // Lógica para desactivar la unidad
   }
 
-  private handleError(message: string, error: any) {
-    console.error(message, error);
-    // Aquí puedes mostrar notificaciones de error si es necesario
-  }
+  @ViewChild('numrucInput') numrucInput: any;
 
-
-
+    /*---------Metodo para seleccionar imagen en el formulario--------*/
+    onImageSelected(event: any) {
+      const file = event.target.files[0];
+      if (file) {
+        console.log('Archivo seleccionado:', file);
+        const reader = new FileReader();
+        reader.onload = (e: any) => {
+          console.log('Imagen leída:', e.target.result);
+          this.selectProducto.imagen = e.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+  
+    /*---------- METODOS DE CODIGO DE BARRAS ------------------ */
+  
+    generateBarcode() {
+      const randomNumber = Math.floor(Math.random() * 9999999999999);
+      const randomNumberString = randomNumber.toString();
+      this.selectProducto.codigo_barra = randomNumberString;
+   
+      // Asegúrate de que el elemento con ID 'barCode' es un canvas.
+      const canvasElement = document.getElementById('barCode') as HTMLCanvasElement;
+   
+      if (canvasElement) {
+         JsBarcode(canvasElement, randomNumberString);
+      } else {
+         console.error('Elemento con ID "barCode" no encontrado o no es un canvas.');
+      }
+   
+      console.log(this.selectProducto.codigo_barra);
+   }
+   
+   
+  
+    /*------------------- METODOS DE PDF ----------------------- */
+  
+    downloadPDF() {
+      const img = document.querySelector('img#barCode') as HTMLImageElement;
+  
+      if (img && img.complete) {
+        this.generatePDF(img);
+      } else {
+        console.error('La imagen no se encontró o no se cargó correctamente.');
+      }
+    }
+  
+    private async generatePDF(img: HTMLImageElement) {
+      const doc = new jsPDF();
+      doc.text('Hola mundo', 10, 10);
+      doc.addImage(img, 10, 20, 60, 40);
+      doc.addImage(img, 10, 80, 60, 40);
+      doc.addImage(img, 10, 120, 60, 40);
+  
+      const pdfName = 'prueba.pdf';
+      doc.save(pdfName);
+      console.log(`PDF "${pdfName}" generado exitosamente.`);
+    }
+  
+    private showSuccessNotification(message: string) {
+      Swal.fire('Éxito', message, 'success');
+    }
+  
+    private handleError(message: string, error: any) {
+      console.error(message, error);
+      // Aquí puedes mostrar notificaciones de error si es necesario
+    }
+  
 }

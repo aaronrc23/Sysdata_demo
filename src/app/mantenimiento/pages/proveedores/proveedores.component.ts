@@ -1,16 +1,14 @@
-import { Component, OnInit, ViewChild  } from '@angular/core';
-import { Almacenes } from '../../Interface/Almacenes';
-import { AlmacenesService } from '../../service/almacenes.service';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { Proveedores } from '../../Interface/Proveedores';
+import { ProveedoresService } from '../../service/proveedores.service';
 import Swal from 'sweetalert2';
-import { NgZone } from '@angular/core';
-
 
 @Component({
-  selector: 'app-almacenes',
-  templateUrl: './almacenes.component.html',
-  styleUrls: ['./almacenes.component.scss']
+  selector: 'app-proveedores',
+  templateUrl: './proveedores.component.html',
+  styleUrls: ['./proveedores.component.scss']
 })
-export class AlmacenesComponent   implements OnInit{
+export class ProveedoresComponent implements OnInit {
 
   checked: boolean = true;
   visible = false;
@@ -21,26 +19,30 @@ export class AlmacenesComponent   implements OnInit{
   }
 
   /*---Variables------ */
-  nuevaAlmacen: Almacenes = {
-    id: 0,
-    nombreAlmacen: '',
+  nuevaProveedor: Proveedores = {
+    id_proveedores: 0,
+    nombre_prov: '',
+    numruc: '',
     direccion: '',
-    numeroAlmacen: 0,
+    telefono: 0,
+    email: '',
     activo: true,
   };
 
-  edicionAlmacen: Almacenes = {
-    id: 0,
-    nombreAlmacen: '',
+  edicionProveedor: Proveedores = {
+    id_proveedores: 0,
+    nombre_prov: '',
+    numruc: '',
     direccion: '',
-    numeroAlmacen: 0,
+    telefono: 0,
+    email: '',
     activo: true,
   };
   
   
 
   /*--Array--*/
-  almacen:Almacenes[] = [];
+  proveedor:Proveedores[] = [];
 
 
   
@@ -53,7 +55,7 @@ export class AlmacenesComponent   implements OnInit{
   first = 0;
   rows = 10;
  
-  constructor(private almacenesService: AlmacenesService) {}
+  constructor(private proveedorService: ProveedoresService) {}
 
 
 
@@ -67,9 +69,9 @@ export class AlmacenesComponent   implements OnInit{
   /*---Metodos------ */
   /*-----Metodo listar----- */
   obtenerUnidad() {
-    this.almacenesService.listarAlmacenes().subscribe(
+    this.proveedorService.getProveedores().subscribe(
       (almacenes) => {
-        this.almacen = almacenes;
+        this.proveedor = almacenes;
         console.log('Unidad obtenidas:', almacenes);
       },
       (error) => {
@@ -81,7 +83,7 @@ export class AlmacenesComponent   implements OnInit{
   @ViewChild('nombreInput') nombreInput: any;
 
   crearUnidad(): void {
-    const unidadExistente = this.almacen.find(c => c.nombreAlmacen === this.nuevaAlmacen.nombreAlmacen);
+    const unidadExistente = this.proveedor.find(c => c.nombre_prov === this.nuevaProveedor.nombre_prov);
     if (unidadExistente) {
       this.mostrarErrorExistente();
     } else {
@@ -94,7 +96,7 @@ export class AlmacenesComponent   implements OnInit{
     Swal.fire({
       icon: 'error',
       title: 'Error',
-      text: `La categoría "${this.nuevaAlmacen.nombreAlmacen}" ya está registrada.`,
+      text: `La categoría "${this.nuevaProveedor.nombre_prov}" ya está registrada.`,
       confirmButtonText: 'Aceptar',
     }).then((result) => {
       if (result.isConfirmed) {
@@ -120,12 +122,22 @@ export class AlmacenesComponent   implements OnInit{
       }
     });
   }
+  unidadForm: any;
 
   private registrarCategoria(): void {
-    this.almacenesService.registrarAlmacen(this.nuevaAlmacen).subscribe(
+    this.proveedorService.registrarProveedores(this.nuevaProveedor).subscribe(
       () => {
         this.mostrarExitoRegistro();
         this.nombreInput.nativeElement.value = '';
+          // Resetear el formulario después de la creación exitosa
+        if (this.unidadForm) {
+          this.unidadForm.resetForm();
+        }
+
+        // Utilizar el método para reiniciar nuevaProveedor
+        this.reiniciarNuevaProveedor();
+
+        this.obtenerUnidad();
         this.obtenerUnidad();
       },
       (error) => {
@@ -147,16 +159,16 @@ export class AlmacenesComponent   implements OnInit{
 
 
 
-  editarUnidad(unidad: Almacenes): void {
-    console.log('ID de la unidad a editar:', unidad.id);
-    this.edicionAlmacen = { ...unidad };
+  editarUnidad(unidad: Proveedores): void {
+    console.log('ID de la unidad a editar:', unidad.id_proveedores);
+    this.edicionProveedor = { ...unidad };
     this.mostrarModalEdicion = true;
   }
   mostrarModalEdicion = false;
 
   actualizarUnidad(): void {
     // Verificar si categoriaEnEdicion está definido y si su propiedad nombre es válida antes de la actualización
-    if (!this.edicionAlmacen || !this.edicionAlmacen.nombreAlmacen || this.edicionAlmacen.nombreAlmacen.trim() === '') {
+    if (!this.edicionProveedor || !this.edicionProveedor.nombre_prov || this.edicionProveedor.nombre_prov.trim() === '') {
       // Mostrar un mensaje de error o realizar la acción necesaria
       return;
     }
@@ -171,10 +183,10 @@ export class AlmacenesComponent   implements OnInit{
       cancelButtonText: 'Cancelar',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.almacenesService.editarAlmacen(this.edicionAlmacen.id, this.edicionAlmacen).subscribe(
+        this.proveedorService.editarProveedores(this.edicionProveedor.id_proveedores, this.edicionProveedor).subscribe(
           () => {
             this.mostrarExitoActualizacionEditar();
-            this.edicionAlmacen = { id: 0,nombreAlmacen: '', direccion: '', numeroAlmacen: 0, activo: true };  // Reinicializa la categoría en edición
+            this.edicionProveedor = { id_proveedores: 0,nombre_prov: '',numruc:'', direccion: '', telefono  : 0,email: '', activo: true };  // Reinicializa la categoría en edición
             this.obtenerUnidad();
           },
           (error) => {
@@ -217,26 +229,26 @@ desactivarUnidad(): void {
 }
 
   /*---------- Eliminar Unidades----------- */
-  eliminarUnidad(unidad: Almacenes): void {
+  eliminarUnidad(unidad: Proveedores): void {
     if (unidad.activo) {
       // Si la unidad está activa, mostrar un mensaje indicando que no se puede eliminar
       Swal.fire({
         icon: 'error',
         title: 'No se puede eliminar',
-        text: `La unidad "${unidad.nombreAlmacen}" está activa. Desactívala antes de eliminar.`,
+        text: `La unidad "${unidad.nombre_prov}" está activa. Desactívala antes de eliminar.`,
       });
     } else {
       // Si la unidad está desactivada, mostrar el mensaje de confirmación para eliminar
       Swal.fire({
         title: '¿Estás seguro?',
-        text: `¿Deseas eliminar la unidad "${unidad.nombreAlmacen}"?`,
+        text: `¿Deseas eliminar la unidad "${unidad.nombre_prov}"?`,
         icon: 'error',
         showCancelButton: true,
         confirmButtonText: 'Sí, eliminar',
         cancelButtonText: 'Cancelar',
       }).then((result) => {
-        if (result.isConfirmed && unidad.id !== undefined) {
-          this.almacenesService.eliminarAlmacen(unidad.id).subscribe(
+        if (result.isConfirmed && unidad.id_proveedores !== undefined) {
+          this.proveedorService.eliminarProveedores(unidad.id_proveedores).subscribe(
             () => {
               this.mostrarExitoEliminacion();
               this.obtenerUnidad();
@@ -260,5 +272,29 @@ desactivarUnidad(): void {
       timer: 1500,
     });
   }
+
   
+  @ViewChild('numrucInput') numrucInput: any;
+
+  private reiniciarNuevaProveedor(): void {
+    this.nuevaProveedor = {
+      id_proveedores: 0,
+      nombre_prov: '',
+      numruc: '',
+      direccion: '',
+      telefono: 0,
+      email: '',
+      activo: true,
+    };
+     // Reiniciar el estado de validación del formulario
+  if (this.unidadForm) {
+    this.unidadForm.resetForm();
+
+     // Opcionalmente, puedes reiniciar el estado de validación de campos individuales si es necesario
+     if (this.numrucInput) {
+      this.numrucInput.control.reset();
+    }
+    // Repite este bloque para otros campos si es necesario
+  }
+  }
 }

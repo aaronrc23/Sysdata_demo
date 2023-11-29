@@ -1,78 +1,82 @@
 <div class="card flex p-3">
-    <p-button (click)="showDialog()" icon="pi pi-plus" label="Agregar"  styleClass="custom-button"></p-button>
-    <p-dialog  header="Agregar Productos" [(visible)]="visible" [modal]="true"
+   
+    <form (ngSubmit)="crearUnidad()" #unidadForms="ngForm">
+        <p-button (click)="showDialog('top')" icon="pi pi-plus" label="Agregar"  styleClass="custom-button" ></p-button>
+        <p-dialog #productoDialog header="Agregar Productos" [(visible)]="visible" [modal]="true"
         [style]="{ width: '90%', maxWidth: '450px', zIndex: 1001, margin: '20px' }" [draggable]="false"
-        [resizable]="false" class="mod-prod">
-        <div>
-            <p>CodigoBarra</p>
-            <div class="flex">
-                <input name="codigo_barra" pInputText type="text" class="p-inputtext-sm w-full" placeholder="Small"
-                placeholder="CodigoBarra" [(ngModel)]="selectProducto.codigo_barra" />
-                <button class="btn_generarCodigo" (click)="generateBarcode()">Generar Codigo </button>
+        [resizable]="false" class="mod-prod" [position]="'top'">
+            <div>
+                <p>CodigoBarra</p>
+                
+                 <div class="flex">
+                    <div class="flex flex-column w-full">
+                        <canvas name="codigo_barra" class="p-inputtext-sm w-full" id="barCode"></canvas>
+                        <button type="button" class="btn_generarCodigo" (click)="generateBarcode()">Generar Codigo </button>
+                     </div>
+
+                 </div>
+                
+               
             </div>
-
-           
-        </div>
-        <div>
-            <p>Nombre de Productos</p>
-            <input name="nombre" pInputText type="text" class="p-inputtext-sm w-full" placeholder="Small"
-                placeholder="Nombre" [(ngModel)]="selectProducto.nombre" />
-        </div>
-        <div>
-            <p>Descripcion de Productos</p>
-            <input name="descripcion" pInputText type="text" class="p-inputtext-sm w-full" placeholder="Small"
-                placeholder="descripcion" [(ngModel)]="selectProducto.descripcion" />
-        </div>
-
-        <label for="fileInput" class="custom-file-upload">
-            Agregar Imagen
-        </label>
-        <input id="fileInput" name="imagen" type="file" (change)="onImageSelected($event)" style="display:none;">
-
-
-        <div class="flex justify-content-center">
-            <div class="image-container" [style.background]="selectProducto.imagen ? 'none' : '#ccc'">
-                <img [src]="selectProducto.imagen" *ngIf="selectProducto.imagen" alt="Imagen seleccionada">
+            <div>
+                <p>Nombre de Productos</p>
+                <input name="nombre" pInputText type="text" class="p-inputtext-sm w-full" placeholder="Small"
+                    placeholder="Nombre" [(ngModel)]="selectProducto.nombre" />
             </div>
-        </div>
-
-        <div>
-            <p>Precio Venta</p>
-            <input name="precio_venta" pInputText type="text" class="p-inputtext-sm w-full" placeholder="Small"
-                placeholder="precio_venta" [(ngModel)]="selectProducto.precio_venta" />
-        </div>
-
-        <div>
-            <p>Precio por Mayor</p>
-            <input name="precio_pormayor" pInputText type="text" class="p-inputtext-sm w-full" placeholder="Small"
-                placeholder="precio_pormayor" [(ngModel)]="selectProducto.precio_pormayor" />
-        </div>
-
-        <div>
-            <p>Stock de Productos</p>
-            <input name="stock" pInputText type="text" class="p-inputtext-sm w-full" placeholder="Small"
-                placeholder="stock" [(ngModel)]="selectProducto.stock" />
-        </div>
-
-        <div>
-            <p for="categoria">Elige una Categoría</p>
-            <select name="categoria" [(ngModel)]="selectProducto.categoria.idcategoria" class="custom-select-card w-full">
-                <option value="" disabled>{{ selectProducto.categoria.idcategoria ? 'Categoría actual: ' + selectProducto.categoria.idcategoria : 'Selecciona una categoría' }}</option>
-                <option *ngFor="let categoria of categorias" [ngValue]="categoria.idcategoria">
-                    {{ categoria.idcategoria }} - {{ categoria.nombre }}
-                </option>
-            </select>
+            <div>
+                <p>Descripcion de Productos</p>
+                <input name="descripcion" pInputText type="text" class="p-inputtext-sm w-full" placeholder="Small"
+                    placeholder="descripcion" [(ngModel)]="selectProducto.descripcion" />
+            </div>
+    
+            <label for="fileInput" class="custom-file-upload">
+                Agregar Imagen
+            </label>
+            <input id="fileInput" name="imagen" type="file" (change)="onImageSelected($event)" style="display:none;">
+    
+    
+            <div class="flex justify-content-center">
+                <div class="image-container" [style.background]="selectProducto.imagen ? 'none' : '#ccc'">
+                    <img [src]="selectProducto.imagen" *ngIf="selectProducto.imagen" alt="Imagen seleccionada">
+                </div>
+            </div>
+    
+            <div>
+                <p>Precio Venta</p>
+                <input name="precio_venta" pInputText type="text" class="p-inputtext-sm w-full" placeholder="Small"
+                    placeholder="precio_venta" [(ngModel)]="selectProducto.precio_venta" />
+            </div>
+    
+            <div>
+                <p>Precio por Mayor</p>
+                <input name="precio_pormayor" pInputText type="text" class="p-inputtext-sm w-full" placeholder="Small"
+                    placeholder="precio_pormayor" [(ngModel)]="selectProducto.precio_pormayor" />
+            </div>
+    
+            <div>
+                <p>Stock de Productos</p>
+                <input name="stock" pInputText type="text" class="p-inputtext-sm w-full" placeholder="Small"
+                    placeholder="stock" [(ngModel)]="selectProducto.stock" />
+            </div>
+    
+            <div>
+                <p for="categoria">Elige una Categoría</p>
+                <select name="categoria" [(ngModel)]="selectProducto.categoria.idcategoria" class="custom-select-card w-full">
+                    <option value="" disabled>{{ selectProducto.categoria.idcategoria ? 'Categoría actual: ' + selectProducto.categoria.idcategoria : 'Selecciona una categoría' }}</option>
+                    <option *ngFor="let categoria of categorias" [ngValue]="categoria.idcategoria">
+                        {{ categoria.idcategoria }} - {{ categoria.nombre }}
+                    </option>
+                </select>
+                <button type="submit" class="bg-gray">Registrar</button>
+    
+                
+    
+            </div>
             
-
-            
-
-        </div>
-        <form (ngSubmit)="registrarProducto($event)">
-            <!-- Otros campos del formulario -->
+    
+    
+        </p-dialog>
          
-            <button type="submit" class="custom-button mt-3">Registrar</button>
-         </form>
-
-
-    </p-dialog>
+      
+     </form>
 </div>

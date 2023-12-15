@@ -7,6 +7,7 @@ export interface Productos {
     precio_venta: number;
     precio_pormayor: number;
     stock: number;
+    cantidad?: number;
     descripcion: string;
     imagen: string;
     activo: boolean;

@@ -10,6 +10,10 @@ import { MovimientoAlmacenComponent } from './pages/Almacen/movimiento-almacen/m
 import { AddunidadmedidaComponent } from './pages/UnidadMedida/addunidadmedida/addunidadmedida.component';
 import { ProveedoresComponent } from './pages/proveedores/proveedores.component';
 import { AddproductsComponent } from './pages/Products/addproducts/addproducts.component';
+import { EntradaproductsComponent } from './pages/compras/entradaproducts/entradaproducts.component';
+import { EmpresaComponent } from './pages/empresa/empresa.component';
+
+
 const routes: Routes = [
 
 
@@ -26,6 +30,8 @@ const routes: Routes = [
       {path: 'addunidadmedida', component: AddunidadmedidaComponent},
       {path: 'proveedores', component: ProveedoresComponent},
       {path: 'addedit', component: AddproductsComponent},
+      {path: 'entradaproducts', component: EntradaproductsComponent},
+      {path: 'empresas', component: EmpresaComponent},
       // ... otras rutas del mantenimiento ...
     ],
   },

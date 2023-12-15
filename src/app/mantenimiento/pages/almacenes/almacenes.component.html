@@ -1,144 +1,148 @@
 
 
-  <h3 class="titulo -mt-2">Almacenes</h3>
+  <p class="title  ml-3 mt-2">Almacenes</p>
 <br />
-<div class="sub-card">
-    <form (ngSubmit)="crearUnidad()" #unidadForm="ngForm">
-        <div class="card1">
-            <div class="card flex p-3 mt-1">
-                <p-button (click)="showDialog('top')" icon="pi pi-plus" label="Agregar"
-                    styleClass="custom-button" ></p-button>
-                <p-dialog header="Registrar " [(visible)]="visible" [position]="'top'" [breakpoints]="{ '960px': '97vw' }"
-                    [modal]="true" [style]="{ width: '50vw' }" [draggable]="false" [resizable]="false">
 
-                    <div class="inputgroup bg-gray ">
-                        
-                        <div class="card flex  flex-column ">
-                            <p>Nombre de Almacen</p>
-                            <input pInputText type="text" placeholder="Ingrese el nombre"
-                                [(ngModel)]="nuevaAlmacen.nombreAlmacen" name="nombre" required #nombreInput />
+<div class="">
+    <div class="sub-card mx-3  bg-white  contd  ">
+        <form (ngSubmit)="crearUnidad()" #unidadForm="ngForm">
+            <div class="card1">
+                <div class="card flex p-3 mt-1">
+                    <p-button (click)="showDialog('top')" icon="pi pi-plus" label="Agregar"
+                        styleClass="custom-button" [style]="{height: '2.5rem' ,width: '8.125rem'}" ></p-button>
+                    <p-dialog header="Registrar " [(visible)]="visible" [position]="'top'" [breakpoints]="{ '1200px': '97vw' }"
+                        [modal]="true" [style]="{ width: '80vw' }" [draggable]="false" [resizable]="false">
+    
+                        <div class="inputgroup bg-gray ">
+                            
+                            <div class="card flex  flex-column ">
+                                <p>Nombre de Almacen</p>
+                                <input pInputText type="text" placeholder="Ingrese el nombre"
+                                    [(ngModel)]="nuevaAlmacen.nombreAlmacen" name="nombre" required #nombreInput />
+                            </div>
+                            <div class="card flex  flex-column ">
+                                <p>Direccion</p>
+                                <input pInputText type="text" placeholder="Ingrese la direccion local" id="direccion"
+                                    [(ngModel)]="nuevaAlmacen.direccion" name="direccion" />
+                            </div>
+                            <div class="card flex  flex-column ">
+                                <p>Numero Almacen</p>
+                                <input pInputText type="number" placeholder="Nº Almacen" id="abreviacion"
+                                [(ngModel)]="nuevaAlmacen.numeroAlmacen"
+                                name="valor" required/>
+                              
+                            </div>
+                            <!----------Checkbox------------>
+                            <div class="contd">
+                                <input type="checkbox" [(ngModel)]="nuevaAlmacen.activo" name="activo" required
+                                    hidden />
+                            </div>
+                            <div class="mt-3 flex justify-content-center">
+                                <button type="submit" pButton pRipple label="Crear Categoría" class="p-button-success "
+                                    [disabled]="unidadForm.invalid"></button>
+                            </div>
+    
                         </div>
-                        <div class="card flex  flex-column ">
-                            <p>Direccion</p>
-                            <input pInputText type="text" placeholder="Ingrese la direccion local" id="direccion"
-                                [(ngModel)]="nuevaAlmacen.direccion" name="direccion" />
-                        </div>
-                        <div class="card flex  flex-column ">
-                            <p>Numero Almacen</p>
-                            <input pInputText type="number" placeholder="Nº Almacen" id="abreviacion"
-                            [(ngModel)]="nuevaAlmacen.numeroAlmacen"
-                            name="valor" required/>
-                          
-                        </div>
-                        <!----------Checkbox------------>
-                        <div class="contd">
-                            <input type="checkbox" [(ngModel)]="nuevaAlmacen.activo" name="activo" required
-                                hidden />
-                        </div>
-                        <div class="mt-3 flex justify-content-center">
-                            <button type="submit" pButton pRipple label="Crear Categoría" class="p-button-success "
-                                [disabled]="unidadForm.invalid"></button>
-                        </div>
-
-                    </div>
-                </p-dialog>
-
+                    </p-dialog>
+    
+                </div>
             </div>
+        </form>
+        <div class="card-table mx-2">
+            <p-table [value]="almacen" [tableStyle]="{ 'min-width': '10rem' } " [resizableColumns]="true"
+                [paginator]="true" [rows]="5" [showCurrentPageReport]="true" scrollHeight="600px"
+                currentPageReportTemplate="Mostrar {first} a {last} de {totalRecords} registros"
+                (onPage)="pageChange($event)" [rowsPerPageOptions]="[10, 25, 50]" styleClass="p-datatable-gridlines"
+                [scrollable]="true">
+                <ng-template pTemplate="header" class="header1">
+                    <tr class="ui-table-header ">
+                        <th pSortableColumn="code" style="width:20%">Codigo <p-sortIcon field="code"></p-sortIcon></th>
+                        <th pSortableColumn="name" style="width:20%">Nombre <p-sortIcon field="name"></p-sortIcon></th>
+                        <th pSortableColumn="direccion" style="width:20%">Direccion <p-sortIcon field="direccion"></p-sortIcon></th>
+                        <th pSortableColumn="numero" style="width:20%">Nº Almacen <p-sortIcon field="numero"></p-sortIcon></th>
+                        <th pSortableColumn="category" style="width:20%">Estado <p-sortIcon field="estado"></p-sortIcon></th>
+                        <th pSortableColumn="quantity" style="width:20%">Opciones <p-sortIcon field="opciones"></p-sortIcon></th>
+                     
+                    </tr>
+                </ng-template>
+        
+                <ng-template pTemplate="body" let-unidad>
+                    <tr class="ui-table-contenido  ">
+                        <td>{{ unidad.id }}</td>
+                        <td>{{ unidad.nombreAlmacen }}</td>
+                        <td>{{ unidad.direccion }}</td>
+                        <td>{{ unidad.numeroAlmacen }}</td>
+                        <td>{{ unidad.activo ? 'Activo' : 'Inactivo' }}</td>
+        
+                        <td>
+                            <div class="flex justify-content-center">
+                                <!-- Modificación en el botón "Editar" dentro de la tabla -->
+                                <p-button label="Editar" icon="pi pi-pencil" styleClass="btn-edit"
+                                    (click)="editarUnidad(unidad)"></p-button>
+        
+                                <p-button label="Eliminar" icon="pi pi-trash" styleClass="btn-delete"
+                                    (click)="eliminarUnidad(unidad)"></p-button>
+                            </div>
+                        </td>
+        
+                    </tr>
+                </ng-template>
+            </p-table>
         </div>
-    </form>
-
+    </div>
+    
+    
+    
+    
+    
+    
+    <!-- Después del formulario de creación, antes del formulario de actualización -->
+    <p-dialog header="Editar Almacen" [(visible)]="mostrarModalEdicion" [breakpoints]="{ '960px': '95vw' }" [modal]="true" [position]="'top'"
+        [style]="{ width: '50vw' }" [draggable]="false" [resizable]="false">
+        <!-- Contenido del formulario de actualización -->
+        <form (ngSubmit)="actualizarUnidad()" #categoriasForm="ngForm">
+            <div class="inputgroup">
+                
+    
+                <div class="card flex  flex-column ">
+                    <p>Nombre de Almacen</p>
+                    <input pInputText type="text" placeholder="Ingrese el nombre" [(ngModel)]="edicionAlmacen.nombreAlmacen"
+                        name="nombreAlmacen" #nombreInput />
+                </div>
+                <div class="card flex  flex-column ">
+                    <p>Direccion</p>
+                    <input pInputText type="text" placeholder="Direccion del Local" id="direccion"
+                        [(ngModel)]="edicionAlmacen.direccion" name="direccion" />
+                </div>
+                <div class="card flex  flex-column ">
+                    <p>Numero Almacen</p>
+                    <input pInputText type="number" placeholder="Nº Almacen" id="numeroAlmacen"
+                    [(ngModel)]="edicionAlmacen.numeroAlmacen"
+                    name="numeroAlmacen" required/>
+                  
+                </div>
+    
+                
+                <!----------Checkbox------------>
+                <div class="contd mt-3 flex align-items-center">
+                    <p-inputSwitch [(ngModel)]="edicionAlmacen.activo" name="activo" (ngModelChange)="onSwitchChange($event)"></p-inputSwitch>
+                    <p class="ml-2 flex align-items-center">{{ edicionAlmacen.activo ? 'Activado' : 'Desactivado' }}</p>
+                </div>
+                
+                
+    
+                <!-- ... otros campos del formulario ... -->
+                <div class="mt-3 flex justify-content-center headereditar">
+                    <button type="submit" pButton pRipple label="Actualizar Categoría" class="p-button-success mb-2"
+                        [disabled]="categoriasForm.invalid"></button>
+                    <button type="button" pButton pRipple label="Cerrar" class="p-button-danger ml-1 mb-2"
+                        (click)="mostrarModalEdicion = false"></button>
+                </div>
+            </div>
+        </form>
+    </p-dialog>
+    
 </div>
-
-
-<div class="card-table">
-    <p-table [value]="almacen" [tableStyle]="{ 'min-width': '10rem' } " [resizableColumns]="true"
-        [paginator]="true" [rows]="5" [showCurrentPageReport]="true" scrollHeight="600px"
-        currentPageReportTemplate="Mostrar {first} a {last} de {totalRecords} registros"
-        (onPage)="pageChange($event)" [rowsPerPageOptions]="[10, 25, 50]" styleClass="p-datatable-gridlines"
-        [scrollable]="true">
-        <ng-template pTemplate="header" class="header1">
-            <tr class="ui-table-header ">
-                <th pSortableColumn="code" style="width:20%">Codigo <p-sortIcon field="code"></p-sortIcon></th>
-                <th pSortableColumn="name" style="width:20%">Nombre <p-sortIcon field="name"></p-sortIcon></th>
-                <th pSortableColumn="direccion" style="width:20%">Direccion <p-sortIcon field="direccion"></p-sortIcon></th>
-                <th pSortableColumn="numero" style="width:20%">Nº Almacen <p-sortIcon field="numero"></p-sortIcon></th>
-                <th pSortableColumn="category" style="width:20%">Estado <p-sortIcon field="estado"></p-sortIcon></th>
-                <th pSortableColumn="quantity" style="width:20%">Opciones <p-sortIcon field="opciones"></p-sortIcon></th>
-             
-            </tr>
-        </ng-template>
-
-        <ng-template pTemplate="body" let-unidad>
-            <tr class="ui-table-contenido  ">
-                <td>{{ unidad.id }}</td>
-                <td>{{ unidad.nombreAlmacen }}</td>
-                <td>{{ unidad.direccion }}</td>
-                <td>{{ unidad.numeroAlmacen }}</td>
-                <td>{{ unidad.activo ? 'Activo' : 'Inactivo' }}</td>
-
-                <td>
-                    <div class="flex justify-content-center">
-                        <!-- Modificación en el botón "Editar" dentro de la tabla -->
-                        <p-button label="Editar" icon="pi pi-pencil" styleClass="btn-edit"
-                            (click)="editarUnidad(unidad)"></p-button>
-
-                        <p-button label="Eliminar" icon="pi pi-trash" styleClass="btn-delete"
-                            (click)="eliminarUnidad(unidad)"></p-button>
-                    </div>
-                </td>
-
-            </tr>
-        </ng-template>
-    </p-table>
-</div>
-
-
-
-<!-- Después del formulario de creación, antes del formulario de actualización -->
-<p-dialog header="Editar Almacen" [(visible)]="mostrarModalEdicion" [breakpoints]="{ '960px': '95vw' }" [modal]="true" [position]="'top'"
-    [style]="{ width: '50vw' }" [draggable]="false" [resizable]="false">
-    <!-- Contenido del formulario de actualización -->
-    <form (ngSubmit)="actualizarUnidad()" #categoriasForm="ngForm">
-        <div class="inputgroup">
-            
-
-            <div class="card flex  flex-column ">
-                <p>Nombre de Almacen</p>
-                <input pInputText type="text" placeholder="Ingrese el nombre" [(ngModel)]="edicionAlmacen.nombreAlmacen"
-                    name="nombreAlmacen" #nombreInput />
-            </div>
-            <div class="card flex  flex-column ">
-                <p>Direccion</p>
-                <input pInputText type="text" placeholder="Direccion del Local" id="direccion"
-                    [(ngModel)]="edicionAlmacen.direccion" name="direccion" />
-            </div>
-            <div class="card flex  flex-column ">
-                <p>Numero Almacen</p>
-                <input pInputText type="number" placeholder="Nº Almacen" id="numeroAlmacen"
-                [(ngModel)]="edicionAlmacen.numeroAlmacen"
-                name="numeroAlmacen" required/>
-              
-            </div>
-
-            
-            <!----------Checkbox------------>
-            <div class="contd mt-3 flex align-items-center">
-                <p-inputSwitch [(ngModel)]="edicionAlmacen.activo" name="activo" (ngModelChange)="onSwitchChange($event)"></p-inputSwitch>
-                <p class="ml-2 flex align-items-center">{{ edicionAlmacen.activo ? 'Activado' : 'Desactivado' }}</p>
-            </div>
-            
-            
-
-            <!-- ... otros campos del formulario ... -->
-            <div class="mt-3 flex justify-content-center headereditar">
-                <button type="submit" pButton pRipple label="Actualizar Categoría" class="p-button-success mb-2"
-                    [disabled]="categoriasForm.invalid"></button>
-                <button type="button" pButton pRipple label="Cerrar" class="p-button-danger ml-1 mb-2"
-                    (click)="mostrarModalEdicion = false"></button>
-            </div>
-        </div>
-    </form>
-</p-dialog>
 
     
 <!-- sidebar.component.html -->

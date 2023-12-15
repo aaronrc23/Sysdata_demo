@@ -1,116 +1,119 @@
-<h1>Productos</h1>
-<app-addproducts (productoRegistrado)="productoRegistrado()"></app-addproducts>
+<h1 class="title ml-3">Productos</h1>
+
+<div class="bg-blue-100 cont mx-3">
+    <app-addproducts (productoRegistrado)="productoRegistrado()"></app-addproducts>
 
 
-<div class="card  gap-3 ">
-    <div class="card-table">
-        <p-table [value]="products" [tableStyle]="{ 'min-width': '60rem' } " [resizableColumns]="true"
-            [paginator]="true" [rows]="5" [showCurrentPageReport]="true" scrollHeight="600px"
-            currentPageReportTemplate="Mostrar {first} a {last} de {totalRecords} registros"
-            (onPage)="pageChange($event)" [rowsPerPageOptions]="[10, 25, 50]" styleClass="p-datatable-gridlines"
-            [scrollable]="true">
-            <ng-template pTemplate="header" >
-                <tr class="ui-table-header">
-                    <th>Codigo Barra</th>
-                    <th>Nombre</th>
-                    <th>precio</th>
-                    <th>stock</th>
-                    <th>descripcion</th>
-                    <th>Categoria</th>
-                    <th>imagen</th>
-                    <th>Opciones</th>
-
-                </tr>
-            </ng-template>
-
-            <ng-template pTemplate="body" let-productos>
-                <tr class="ui-table-contenido">
-                    <td>{{ productos.codigo_barra }}</td>
-                    <td>{{ productos.nombre }}</td>
-                    <td>{{ productos.precio_venta }}</td>
-                    <td>{{ productos.stock }}</td>
-                    <td>{{ productos.descripcion }}</td>
-                    <td>{{ productos.categoria }}</td>
-                    <td><img src="{{ productos.imagen }}" width="50px"></td>
-                    <td>
-                        <div class="flex justify-content-center">
-                            <!-- Modificación en el botón "Editar" dentro de la tabla -->
-                            <p-button label="Editar" icon="pi pi-pencil" styleClass="btn-edit" (click)="editarProducto(productos)"></p-button>
-
-                            <p-button label="Eliminar" icon="pi pi-trash" styleClass="btn-delete" (click)="eliminarProducto(productos.idproducto)"></p-button>
-                        </div>
-                    </td>
-
-                </tr>
-            </ng-template>
-        </p-table>
+    <div class="card  gap-3 ">
+        <div class="card-table">
+            <p-table [value]="products" [tableStyle]="{ 'min-width': '60rem' } " [resizableColumns]="true"
+                [paginator]="true" [rows]="5" [showCurrentPageReport]="true" scrollHeight="600px"
+                currentPageReportTemplate="Mostrar {first} a {last} de {totalRecords} registros"
+                (onPage)="pageChange($event)" [rowsPerPageOptions]="[10, 25, 50]" styleClass="p-datatable-gridlines"
+                [scrollable]="true">
+                <ng-template pTemplate="header" >
+                    <tr class="ui-table-header">
+                        <th>Codigo Barra</th>
+                        <th>Nombre</th>
+                        <th>precio</th>
+                        <th>stock</th>
+                        <th>descripcion</th>
+                        <th>Categoria</th>
+                        <th>imagen</th>
+                        <th>Opciones</th>
+    
+                    </tr>
+                </ng-template>
+    
+                <ng-template pTemplate="body" let-productos>
+                    <tr class="ui-table-contenido">
+                        <td>{{ productos.codigo_barra }}</td>
+                        <td>{{ productos.nombre }}</td>
+                        <td>{{ productos.precio_venta }}</td>
+                        <td>{{ productos.stock }}</td>
+                        <td>{{ productos.descripcion }}</td>
+                        <td>{{ productos.categoria }}</td>
+                        <td><img src="{{ productos.imagen }}" width="50px"></td>
+                        <td>
+                            <div class="flex justify-content-center">
+                                <!-- Modificación en el botón "Editar" dentro de la tabla -->
+                                <p-button label="Editar" icon="pi pi-pencil" styleClass="btn-edit" (click)="editarProducto(productos)"></p-button>
+    
+                                <p-button label="Eliminar" icon="pi pi-trash" styleClass="btn-delete" (click)="eliminarProducto(productos.idproducto)"></p-button>
+                            </div>
+                        </td>
+    
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    
+    
+        <!----------- Formulario editar------------- -->
+        <p-dialog header="Editar Productos" [(visible)]="displayEditModal" [modal]="true"
+            [style]="{ width: '90%', maxWidth: '450px', zIndex: 1001, margin: '20px' }" [draggable]="false"
+            [resizable]="false" class="mod-prod">
+            <div>
+                <p>CodigoBarra</p>
+                <div class="flex">
+                    <input name="codigo_barra" pInputText type="text" class="p-inputtext-sm w-full" placeholder="CodigoBarra" [(ngModel)]="selectProducto.codigo_barra" readonly />
+    
+                </div>
+            </div>
+            <div>
+                <p>Nombre de Productos</p>
+                <input name="nombre" pInputText type="text" class="p-inputtext-sm w-full" placeholder="Small"
+                    placeholder="Nombre" [(ngModel)]="selectProducto.nombre" />
+            </div>
+            <div>
+                <p>Descripcion de Productos</p>
+                <input name="descripcion" pInputText type="text" class="p-inputtext-sm w-full" placeholder="Small"
+                    placeholder="descripcion" [(ngModel)]="selectProducto.descripcion" />
+            </div>
+    
+            <label for="fileInput" class="custom-file-upload">
+                Agregar Imagen
+            </label>
+            <input id="fileInput" name="imagen" type="file" (change)="onImageSelected($event)" style="display:none;">
+    
+    
+            <div class="flex justify-content-center">
+                <div class="image-container" [style.background]="selectProducto.imagen ? 'none' : '#ccc'">
+                    <img [src]="selectProducto.imagen" *ngIf="selectProducto.imagen" alt="Imagen seleccionada">
+                </div>
+            </div>
+    
+            <div>
+                <p>Precio Venta</p>
+                <input name="precio_venta" pInputText type="text" class="p-inputtext-sm w-full" placeholder="Small"
+                    placeholder="precio_venta" [(ngModel)]="selectProducto.precio_venta" />
+            </div>
+    
+            <div>
+                <p>Precio por Mayor</p>
+                <input name="precio_pormayor" pInputText type="text" class="p-inputtext-sm w-full" placeholder="Small"
+                    placeholder="precio_pormayor" [(ngModel)]="selectProducto.precio_pormayor" />
+            </div>
+    
+            <div>
+                <p>Stock de Productos</p>
+                <input name="stock" pInputText type="text" class="p-inputtext-sm w-full" placeholder="Small"
+                    placeholder="stock" [(ngModel)]="selectProducto.stock" />
+            </div>
+    
+            <div>
+                <p for="categoria">Elige una Categoría</p>
+                <select name="categoria" [(ngModel)]="selectProducto.categoria.idcategoria" class="custom-select-card w-full">
+                    <option *ngFor="let categoria of categorias" [ngValue]="categoria.idcategoria">
+                        {{ categoria.nombre }}
+                    </option>
+                </select>
+            </div>
+            
+            <form (ngSubmit)="actualizarProducto()">
+                <button type="submit" class="custom-button mt-3">Editar Producto</button>
+            </form>
+        </p-dialog>
+    
     </div>
-
-
-    <!----------- Formulario editar------------- -->
-    <p-dialog header="Editar Productos" [(visible)]="displayEditModal" [modal]="true"
-        [style]="{ width: '90%', maxWidth: '450px', zIndex: 1001, margin: '20px' }" [draggable]="false"
-        [resizable]="false" class="mod-prod">
-        <div>
-            <p>CodigoBarra</p>
-            <div class="flex">
-                <input name="codigo_barra" pInputText type="text" class="p-inputtext-sm w-full" placeholder="CodigoBarra" [(ngModel)]="selectProducto.codigo_barra" readonly />
-
-            </div>
-        </div>
-        <div>
-            <p>Nombre de Productos</p>
-            <input name="nombre" pInputText type="text" class="p-inputtext-sm w-full" placeholder="Small"
-                placeholder="Nombre" [(ngModel)]="selectProducto.nombre" />
-        </div>
-        <div>
-            <p>Descripcion de Productos</p>
-            <input name="descripcion" pInputText type="text" class="p-inputtext-sm w-full" placeholder="Small"
-                placeholder="descripcion" [(ngModel)]="selectProducto.descripcion" />
-        </div>
-
-        <label for="fileInput" class="custom-file-upload">
-            Agregar Imagen
-        </label>
-        <input id="fileInput" name="imagen" type="file" (change)="onImageSelected($event)" style="display:none;">
-
-
-        <div class="flex justify-content-center">
-            <div class="image-container" [style.background]="selectProducto.imagen ? 'none' : '#ccc'">
-                <img [src]="selectProducto.imagen" *ngIf="selectProducto.imagen" alt="Imagen seleccionada">
-            </div>
-        </div>
-
-        <div>
-            <p>Precio Venta</p>
-            <input name="precio_venta" pInputText type="text" class="p-inputtext-sm w-full" placeholder="Small"
-                placeholder="precio_venta" [(ngModel)]="selectProducto.precio_venta" />
-        </div>
-
-        <div>
-            <p>Precio por Mayor</p>
-            <input name="precio_pormayor" pInputText type="text" class="p-inputtext-sm w-full" placeholder="Small"
-                placeholder="precio_pormayor" [(ngModel)]="selectProducto.precio_pormayor" />
-        </div>
-
-        <div>
-            <p>Stock de Productos</p>
-            <input name="stock" pInputText type="text" class="p-inputtext-sm w-full" placeholder="Small"
-                placeholder="stock" [(ngModel)]="selectProducto.stock" />
-        </div>
-
-        <div>
-            <p for="categoria">Elige una Categoría</p>
-            <select name="categoria" [(ngModel)]="selectProducto.categoria.idcategoria" class="custom-select-card w-full">
-                <option *ngFor="let categoria of categorias" [ngValue]="categoria.idcategoria">
-                    {{ categoria.nombre }}
-                </option>
-            </select>
-        </div>
-        
-        <form (ngSubmit)="actualizarProducto()">
-            <button type="submit" class="custom-button mt-3">Editar Producto</button>
-        </form>
-    </p-dialog>
-
 </div>

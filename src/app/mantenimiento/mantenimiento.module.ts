@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule,Pipe, PipeTransform } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { MantenimientoRoutingModule } from './mantenimiento-routing.module';
@@ -6,6 +6,8 @@ import { CategoriaComponent } from './pages/categoria/categoria.component';
 import { ProductosComponent } from './pages/Products/productos/productos.component';
 import { MarcasComponent } from './pages/marcas/marcas.component';
 
+
+import { ToastModule } from 'primeng/toast';
 import { AlmacenesComponent } from './pages/almacenes/almacenes.component';
 import { SharedModule } from '../shared/shared.module';
 import { TableModule } from 'primeng/table';
@@ -37,6 +39,38 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { ProveedoresComponent } from './pages/proveedores/proveedores.component';
 
+import { EntradaproductsComponent } from './pages/compras/entradaproducts/entradaproducts.component';
+import { AutoCompleteModule } from 'primeng/autocomplete';
+
+import { PanelModule } from 'primeng/panel';
+import { ListaEmpresasComponent } from './components/empresas/lista-empresas/lista-empresas.component';
+import { EmpresaComponent } from './pages/empresa/empresa.component';
+import { AgregarEmpresasComponent } from './components/empresas/agregar-empresas/agregar-empresas.component';
+
+
+
+@Pipe({
+  name: 'filter'
+})
+export class FilterPipe implements PipeTransform {
+  transform(items: any[], searchText: string, propertyName: string): any[] {
+    if (!items || !searchText) {
+      return items;
+    }
+
+    searchText = searchText.toLowerCase();
+
+    return items.filter(item => {
+      const propertyValue = item[propertyName];
+      if (propertyValue !== undefined && propertyValue !== null) {
+        return propertyValue.toLowerCase().includes(searchText);
+      }
+      return false;
+    });
+  }
+}
+
+
 @NgModule({
   declarations: [
     CategoriaComponent,
@@ -49,7 +83,12 @@ import { ProveedoresComponent } from './pages/proveedores/proveedores.component'
     MovimientoAlmacenComponent,
     AddproductsComponent,
     AddunidadmedidaComponent,
-    ProveedoresComponent
+    ProveedoresComponent,
+    FilterPipe,
+    EntradaproductsComponent,
+    ListaEmpresasComponent,
+    EmpresaComponent,
+    AgregarEmpresasComponent
   ],
   imports: [
     CommonModule,
@@ -71,7 +110,10 @@ import { ProveedoresComponent } from './pages/proveedores/proveedores.component'
     CalendarModule,
     ImageModule,
     InputSwitchModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    AutoCompleteModule,
+    PanelModule,
+    ToastModule
 
   ]
 })

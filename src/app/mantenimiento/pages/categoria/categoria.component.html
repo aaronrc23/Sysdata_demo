@@ -1,6 +1,6 @@
-<p class="titulo">Categorias</p>
+<h2 class="title ml-3">Categorias</h2>
 <br />
-<div class="sub-card">
+<div class="sub-card bg-white mx-3">
     <form (ngSubmit)="crearCategoria()" #categoriaForm="ngForm">
         <div class="card1">
             <div class="card flex p-3 mt-1">
@@ -30,7 +30,7 @@
             </div>
         </div>
     </form>
-    <div class="card-table">
+    <div class="card-table mx-2">
         <p-table [value]="categorias" [tableStyle]="{ 'min-width': '10rem' } "  [resizableColumns]="true"
             [paginator]="true" [rows]="5" [showCurrentPageReport]="true" scrollHeight="600px"
             currentPageReportTemplate="Mostrar {first} a {last} de {totalRecords} registros" 

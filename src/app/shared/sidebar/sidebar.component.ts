@@ -12,7 +12,8 @@ import {
   faShoppingBag,
   faCirclePlus,
   faFilePen,
-  faTruck
+  faTruck,
+  
 } from '@fortawesome/free-solid-svg-icons';
 import { CommunicationService } from '../service/communication.service';
 import { Subscription } from 'rxjs';

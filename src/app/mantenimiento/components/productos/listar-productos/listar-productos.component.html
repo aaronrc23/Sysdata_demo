@@ -1,0 +1,79 @@
+
+
+<div class="container overflow-x-auto mx-auto max-w-1000 mt-2">
+    <div class="relative container shadow-md sm:rounded-lg">
+      <table class="table w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 elemento">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+          <tr class="bg-gray-200">
+          
+            <th scope="col" class="px-6 py-3">
+              <div class="flex items-center font-bold">
+                Codigo de Barra
+              </div>
+            </th>
+            <th scope="col" class="px-6 py-3">
+              <div class="flex items-center">
+                Nombre
+              </div>
+            </th>
+            <th scope="col" class="px-6 py-3">
+                <div class="flex items-center">
+                  Precio
+                </div>
+              </th>
+              <th scope="col" class="px-6 py-3">
+                <div class="flex items-center">
+                  Precio por Mayor
+                </div>
+              </th>
+              
+              <th scope="col" class="px-6 py-3">
+                <div class="flex items-center">
+                  Descripcion
+                </div>
+              </th>
+              <th scope="col" class="px-6 py-3">
+                <div class="flex items-center">
+                  Imagen
+                </div>
+              </th>
+              <th scope="col" class="px-6 py-3">
+                <div class="flex items-center">
+                  Estado
+                </div>
+              </th>
+            <th scope="col" class="px-6 py-3">
+              <span class="flex items-center">Opciones</span>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          
+          <tr *ngFor="let producto of productos | filter:searchTerm:'nombreAlmacen' | slice:(currentPage - 1) * itemsPerPage:currentPage * itemsPerPage"
+            class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 elemento">
+
+
+            <td class="font-normal px-6 py-4" data-label="Precio">{{ producto .codigo_barra }}</td>
+            <td class="font-normal px-6 py-4" data-label="Precio">{{ producto .nombre }}</td>
+            <td class="font-normal px-6 py-4" data-label="Precio">{{ producto .precio_venta }}</td>
+            <td class="font-normal px-6 py-4" data-label="Precio">{{ producto .precio_pormayor}}</td>
+            
+            <td class="font-normal px-6 py-4" data-label="Precio">{{ producto .descripcion}}</td>
+            <td class="font-normal px-6 py-4" data-label="Imagen"><img class="imagen" src="{{ producto.imagen }}" width="50px"></td>
+
+            <td class="font-normal px-6 py-4" data-label="Ventas">{{ producto .activo ? 'Activo' : 'Inactivo' }}</td>
+            <td class="flex justify-center space-x-2 p-4" data-label="Acciones">
+              <button 
+                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                Editar
+              </button>
+              <button 
+                class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                Eliminar
+              </button>
+            </td>
+          </tr>
+        </tbody>
+        <!-- Paginación manual con Tailwind CSS -->
+  
+      </table>

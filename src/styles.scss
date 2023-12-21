@@ -1,75 +1,74 @@
 /* You can add global styles to this file, and also import other style files */
 @import "https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap";
-// body {
-//     margin: 0;
-//     padding: 0;
-//     font-family: 'Poppins', sans-serif;
-//   }
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Open+Sans:wght@500&family=Plus+Jakarta+Sans:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700&family=Poppins:wght@300;400&display=swap');
 
 
-
-@import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Inclusive+Sans:ital@0;1&family=Inter:wght@300;400;500;600&family=Mooli&family=Open+Sans:wght@500&family=Poppins:wght@300;400&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Poppins:ital,wght@0,500;0,600;1,500&display=swap');
 
   @import "primeng/resources/themes/lara-light-blue/theme.css";
   @import "primeng/resources/primeng.css";
-  @import "primeicons/primeicons.css";
-  @import 'primeflex/primeflex.scss';
+  // @import "primeicons/primeicons.css";
+  // @import 'primeflex/primeflex.scss';
   
 
 
   
 
-body {
-  margin: 0;
-  padding: 0;
-  font-size: 14px;
-}
+// body {
+//   margin: 0;
+//   padding: 0;
+//   font-size: 14px;
+// }
 
-.ui-table-header th {
+// .ui-table-header th {
 
-  font-family: 'Inter', sans-serif;
-  font-weight: 600;
-  text-align: center;
-  font-size: 0.85rem;
-  padding: 10px 26px 10px 18px;
-}
+//   font-family: 'Inter', sans-serif;
+//   font-weight: 600;
+//   text-align: center;
+//   font-size: 0.85rem;
+//   padding: 10px 26px 10px 18px;
+// }
 
-td{
-  text-align: center;
-  padding: 0.6rem;
-}
-.title{
+// td{
+//   text-align: center;
+//   padding: 0.6rem;
+// }
+// .title{
   
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding-top: 1.2rem;
-  background-color: #F0F1F7;
-  font-weight: bold;
-  font-size: 1.5rem;
-  margin: 0;
-  font-family: 'Inter', sans-serif;
-  color: #333335;
-}
-/*Contenido del router*/
-.cont{
-  border-radius: 0.9375rem;
-  margin: 1rem 0.7rem 1rem 0.7rem;
-  flex: 1;
-  background-color: white;
+//   display: flex;
+//   align-items: center;
+//   justify-content: space-between;
+//   padding-top: 1.2rem;
+//   background-color: #F0F1F7;
+//   font-weight: bold;
+//   font-size: 1.5rem;
+//   margin: 0;
+//   font-family: 'Inter', sans-serif;
+//   color: #333335;
+// }
+// /*Contenido del router*/
+// .cont{
+//   border-radius: 0.9375rem;
+//   margin: 1rem 0.7rem 1rem 0.7rem;
+//   flex: 1;
+//   background-color: white;
   
-}
+// }
 
-@media (max-width: 390px) {
+// @media (max-width: 390px) {
   
-  .cont{
-    margin: 0;
-  }
-  .title{
-    padding: 10px;
-  }
-}
+//   .cont{
+//     margin: 0;
+//   }
+//   .title{
+//     padding: 10px;
+//   }
+// }
   
 
 

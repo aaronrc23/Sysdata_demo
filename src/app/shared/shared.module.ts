@@ -7,22 +7,29 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CommunicationService } from './service/communication.service';
 import { SidebarModule } from 'primeng/sidebar';
 import { HttpClientModule } from '@angular/common/http';
+import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 
 
 //btn imagen
 import { SplitButtonModule } from 'primeng/splitbutton';
 import { MenuModule } from 'primeng/menu';
 import { TreeModule } from 'primeng/tree';
-import { SideNavComponent } from './side-nav/side-nav.component';
+import { PaginationComponent } from './pagination/pagination.component';
+import { RangePipe } from '../mantenimiento/pipe/categoriapipe';
+
 
 
 @NgModule({
   declarations: [
     SidebarComponent,
     NavbarComponent,
-    SideNavComponent
+    BreadcrumbComponent,
+    PaginationComponent,
+    RangePipe
+
   ],
   imports: [
+
     CommonModule,
     RouterModule,
     FontAwesomeModule,
@@ -30,12 +37,15 @@ import { SideNavComponent } from './side-nav/side-nav.component';
     MenuModule ,
     SidebarModule,
     TreeModule,
-    HttpClientModule
+    HttpClientModule,
+  
   ],
   exports:[
     SidebarComponent,
     NavbarComponent,
-    SideNavComponent 
+    BreadcrumbComponent,
+    PaginationComponent
+  
   ],
   providers: [CommunicationService],
 })

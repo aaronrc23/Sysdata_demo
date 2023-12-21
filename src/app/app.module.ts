@@ -18,6 +18,7 @@ import { ButtonModule } from 'primeng/button';
    
   ],
   imports: [
+
     BrowserModule,
     AppRoutingModule,
     SharedModule,

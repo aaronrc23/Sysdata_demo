@@ -1,0 +1,40 @@
+<!-- pagination.component.html -->
+<div class="pagination">
+    <button (click)="prevPage()" [disabled]="currentPage === 1"
+        class="min-h-[38px] min-w-[38px] py-2 px-2.5 inline-flex justify-center items-center gap-x-1.5 text-sm rounded-lg text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:hover:bg-white/10 dark:focus:bg-white/10">
+        <fa-icon [icon]="faChevronLeft"></fa-icon>
+        Anterior
+    </button>
+
+    <!-- Botones numerados -->
+
+    <button *ngFor="let pageNumber of totalPagesArray" (click)="goToPage(pageNumber)"
+        class="min-h-[38px] min-w-[38px] py-2 px-2.5 inline-flex justify-center items-center gap-x-1.5 text-sm rounded-lg text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:hover:bg-white/10 dark:focus:bg-white/10"
+        [class.bg-blue-500]="currentPage === pageNumber" [class.text-white]="currentPage === pageNumber">
+        {{ pageNumber }}
+    </button>
+    <button (click)="nextPage()" [disabled]="currentPage === totalPages"
+        class="min-h-[38px] min-w-[38px] py-2 px-2.5 inline-flex justify-center items-center gap-x-1.5 text-sm rounded-lg text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:hover:bg-white/10 dark:focus:bg-white/10">
+        Siguiente
+        <fa-icon [icon]="faChevronRight"></fa-icon>
+    </button>
+    <!-- <span>{{ currentPage }} de {{ totalPages }}</span> -->
+
+    
+     <!-- Menú desplegable para seleccionar la cantidad de elementos por página
+     <div class="hs-dropdown relative inline-flex [--placement:top-left]">
+        <label class="flex items-center">Elementos por página</label>
+        <button id="hs-large-pagination-dropdown" type="button" class="hs-dropdown-toggle py-3 px-3.5  mx-5 inline-flex items-center gap-x-1 text-sm rounded-lg border border-gray-200 text-gray-800 shadow-sm hover:bg-gray-50 focus:outline-none focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:border-gray-700 dark:text-white dark:hover:bg-gray-700 dark:focus:bg-gray-700">
+          {{ itemsPerPage }} por página
+          <svg class="flex-shrink-0 w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m6 9 6 6 6-6"/>
+          </svg>
+        </button>
+        <div class="hs-dropdown-menu hs-dropdown-open:opacity-100 w-48 hidden z-50 transition-[margin,opacity] opacity-0 duration-300 mb-2 bg-white shadow-md rounded-lg p-2 dark:bg-gray-800 dark:border dark:border-gray-700 dark:divide-gray-700" aria-labelledby="hs-large-pagination-dropdown">
+          <button *ngFor="let option of itemsPerPageOptions" type="button" class="w-full flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300 dark:focus:bg-gray-700" (click)="setItemsPerPage(option)">
+            {{ option }} por página
+          </button>
+        </div>
+      </div> -->
+
+</div>

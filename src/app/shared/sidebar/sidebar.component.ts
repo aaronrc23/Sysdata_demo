@@ -1,71 +1,50 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, Inject,PLATFORM_ID} from '@angular/core';
 import {
-  faBox,
-  faBoxesStacked,
-  faDolly,
-  faArchive,
   faGauge,
-  faDollyBox,
-  faBoxesPacking,
-  faPeopleCarryBox,
+  faBoxes,
+  faLayerGroup,
   faUnderline,
-  faShoppingBag,
-  faCirclePlus,
-  faFilePen,
   faTruck,
-  
+  faAngleDown,
+  faPersonCirclePlus,
+  faCirclePlus,
+  faFileCirclePlus,
+  faBoxesPacking,
+  faFilePen,
+  faFileCircleExclamation,
+  faFileCircleCheck,
 } from '@fortawesome/free-solid-svg-icons';
-import { CommunicationService } from '../service/communication.service';
-import { Subscription } from 'rxjs';
-import { TreeNode } from 'primeng/api';
+
+import { initFlowbite } from 'flowbite';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss'],
 })
-export class SidebarComponent implements OnInit, OnDestroy {
-  faBox = faBox;
-  faBoxesStacked = faBoxesStacked;
-  faDolly = faDolly;
-  faArchive = faArchive;
+export class SidebarComponent implements OnInit {
   faGauge = faGauge;
-  faDollyBox = faDollyBox;
-  faBoxesPacking = faBoxesPacking;
-  faPeopleCarryBox = faPeopleCarryBox;
+  faBoxes = faBoxes;
+  faLayerGroup = faLayerGroup;
   faUnderline = faUnderline;
-
-  faShoppingBag = faShoppingBag;
-  faCirclePlus = faCirclePlus;
-  faFilePen = faFilePen;
   faTruck = faTruck;
+  faAngleDown = faAngleDown;
+  faPersonCirclePlus = faPersonCirclePlus;
+  faCirclePlus = faCirclePlus;
+  faFileCirclePlus = faFileCirclePlus;
+  faBoxesPacking = faBoxesPacking;
+  faFilePen = faFilePen;
+  faFileCircleExclamation = faFileCircleExclamation;
+  faFileCircleCheck = faFileCircleCheck;
+  dropdownStates: boolean[] = [false, false];
 
-  private subscription: Subscription = new Subscription();
-  isActive: boolean = true;
 
-  constructor(private communicationService: CommunicationService) {}
-
-  ngOnInit() {
-    this.subscription = this.communicationService.sidebarToggle$.subscribe(
-      (value: boolean) => {
-        this.isActive = value;
-      }
-    );
-    /*----*/
-  }
-
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
-  }
-
-  /*--------*/
-  private submenuOpen: { [key: string]: boolean } = {};
-
-  toggleSubmenu(key: string): void {
-    this.submenuOpen[key] = !this.submenuOpen[key];
-  }
-
-  isSubmenuOpen(key: string): boolean {
-    return this.submenuOpen[key];
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
+  ngOnInit(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      initFlowbite();
+    }
+   
   }
 }

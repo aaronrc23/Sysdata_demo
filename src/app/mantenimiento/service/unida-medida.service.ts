@@ -3,13 +3,15 @@ import { Injectable } from '@angular/core';
 import { Observable, Subject, map, tap } from 'rxjs';
 import { UnidadMedida } from '../Interface/UnidadMedida';
 import { Credentials } from '../Interface/Credentials';
+import { environment } from 'src/app/enviroment/environment.prod';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class UnidaMedidaService {
-  rutaGlobal = 'http://localhost:8090/api/undmedida'; 
+  private apiUrl = `${environment.apiUrl}/undmedida`;
+   
 
 
   constructor(private http: HttpClient) { }
@@ -18,12 +20,12 @@ export class UnidaMedidaService {
   /*-----------Listar Categorias-------------*/
   getUnidadMedida(): Observable<UnidadMedida[]> {
     console.log('Llamando a getUnidadMedida');
-    return this.http.get<UnidadMedida[]>(`${this.rutaGlobal}/listar`);
+    return this.http.get<UnidadMedida[]>(`${this.apiUrl}/listar`);
   }
 
   
   login(creds: Credentials) {
-    return this.http.post(`http://localhost:8090/login`, creds, {
+    return this.http.post(`https://sysdataapi.uc.r.appspot.com/login`, creds, {
       observe: 'response'
     }).pipe(map((response: HttpResponse<any>) => {
       const body = response.body;
@@ -46,7 +48,7 @@ export class UnidaMedidaService {
   private unidadSubject = new Subject<UnidadMedida[]>();
   unidades$ = this.unidadSubject.asObservable();
   registrarUnidadMedida(unidades: UnidadMedida): Observable<UnidadMedida> {
-    return this.http.post<UnidadMedida>(`${this.rutaGlobal}/registrar`, unidades).pipe( 
+    return this.http.post<UnidadMedida>(`${this.apiUrl}/registrar`, unidades).pipe( 
       tap(() => {
       this.getUnidadMedida().subscribe((unidades) => {
         this.unidadSubject.next(unidades);
@@ -57,10 +59,10 @@ export class UnidaMedidaService {
 
 
   editarUnidadMedida(id: number, unidad: UnidadMedida): Observable<UnidadMedida> {
-    return this.http.put<UnidadMedida>(`${this.rutaGlobal}/actualizar/${id}`, unidad);
+    return this.http.put<UnidadMedida>(`${this.apiUrl}/actualizar/${id}`, unidad);
 }
 
   eliminarUnidadMedida(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.rutaGlobal}/delete/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/delete/${id}`);
   }
 }

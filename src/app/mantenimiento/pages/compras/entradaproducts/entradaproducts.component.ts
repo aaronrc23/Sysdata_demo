@@ -289,5 +289,14 @@ export class EntradaproductsComponent implements OnInit {
       );
     }
   }
+
+
+  exportarPdf(gentradasId: number): void {
+    this.entradaService.exportarPdfPorEntrada(gentradasId).subscribe((response) => {
+      const blob = new Blob([response.body], { type: 'application/pdf' });
+      const url = window.URL.createObjectURL(blob);
+      window.open(url);
+    });
+  }
   
 }

@@ -1,0 +1,89 @@
+* {
+    font-size: 0.8125rem;
+    font-family: 'Inter var', sans-serif;
+    font-weight: 700;
+    h3{
+        font-size: 0.9375rem;
+        font-family: 'Inter var', sans-serif;
+        font-weight: 600;
+    }
+    label{
+      font-family: 'Inter var', sans-serif;
+      font-weight: 600;
+    }
+  }
+ 
+  .title{
+    background: #14b8a6;
+    color: rgb(255, 255, 255);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+   
+}
+  
+  /*----Animacion-----*/
+  .elemento {
+    animation: scale-up-top 0.5s;
+  }
+  @keyframes scale-up-top {
+    0% {
+      transform: scale(0.5);
+      transform-origin: center top;
+    }
+    100% {
+      transform: scale(1);
+      transform-origin: center top;
+    }
+  }
+  
+  @media screen and (max-width: 840px) {
+    .table {
+      border: 0px;
+    }
+  
+    .table caption {
+      font-size: 22px;
+    }
+  
+    .table thead {
+      display: none;
+    }
+  
+    .table tr {
+      margin-bottom: 8px;
+      border-bottom: 4px solid #ddd;
+      display: block;
+    }
+  
+    .table th,
+    .table td {
+      font-size: 12px;
+    }
+  
+    .table td {
+      display: block;
+      border-bottom: 1px solid #ddd;
+      text-align: right;
+      
+    }
+   
+  
+    .table td:last-child {
+      border-bottom: 0px;
+    }
+  
+    .table td::before {
+      content: attr(data-label);
+      font-weight: bold;
+      text-transform: uppercase;
+      float: left;
+    }
+    .pagnitacion {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+  }
+  

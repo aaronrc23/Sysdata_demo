@@ -1,4 +1,4 @@
-<div class="w-full login overflow-y-auto fondo">
+<!-- <div class="w-full login overflow-y-auto fondo">
 
 
 
@@ -25,5 +25,43 @@
     </form>
   </section> 
 
+
+</div> -->
+
+
+<div class="w-full login overflow-y-auto fondo">
+  <div class="flex justify-center items-center h-screen">
+    <div
+      class="w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">
+      <form class="space-y-4" action="#" (ngSubmit)="login(form)" #form="ngForm">
+        <div class="w-full flex justify-center align-items-center">
+          <img   src="../../../assets/logo.svg" alt="Image" class="" width="100">
+        </div>
+
+        <div class="  font-medium mb-3 logo">SysData </div>
+        <span class="text-600 font-medium line-height-4 text-gray-500">"Donde la Eficiencia Encuentra la Innovación."</span>
+       
+        <div class=" space-y-8">
+          <div class="">
+            <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Usuario</label>
+            <input type="email" name="email" id="email"
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+              placeholder="Ingrese usuario" required [(ngModel)]="creds.username">
+          </div>
+          <div>
+            <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Contraseña</label>
+            <input type="password" name="password" id="password" placeholder="••••••••"
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+              required  [(ngModel)]="creds.password">
+          </div>
+          <button type="submit"
+            class="w-full text-white py-4 bg-blue-600 rounded-xl">Ingresar</button>
+            
+        </div>
+
+
+      </form>
+    </div>
+  </div>
 
 </div>

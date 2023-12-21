@@ -13,6 +13,7 @@ import Swal from 'sweetalert2';
 import { CategoriaServiceService } from '../../../service/categoria-service.service';
 import { FormBuilder, FormGroup, NgForm } from '@angular/forms';
 import { ProductoService } from 'src/app/mantenimiento/service/producto.service';
+import { Categoria } from 'src/app/mantenimiento/Interface/Categorias';
 
 @Component({
   selector: 'app-addproducts',
@@ -38,7 +39,7 @@ export class AddproductsComponent implements OnInit{
     stock: 0,
     descripcion: '',
     imagen: '',
-    activo: false,
+    activo: true,
     categoria: { idcategoria: 1 },
     // marca: { idmarca: 0 },
   };
@@ -54,6 +55,12 @@ export class AddproductsComponent implements OnInit{
   ngOnInit(): void {
     this.obtenerUnidad();
     this.getCategorias();
+    this.productService.products$.subscribe((categorias: Productos[]) => {
+      this.categorias = categorias;
+    });
+    this.categoriaService.categorias$.subscribe((categorias: Categoria[]) => {
+      this.categorias = categorias;
+    });
   }
 
   /*------Agregar----- */
@@ -131,7 +138,7 @@ export class AddproductsComponent implements OnInit{
     });
   }
   unidadForm: any;
-  @ViewChild('unidadForm') unidadForms!: NgForm;
+  @ViewChild('unidadForm') unidadForms: any;
 
   private registrarCategoria(): void {
     

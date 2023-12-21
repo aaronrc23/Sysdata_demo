@@ -12,6 +12,8 @@ import { ProveedoresComponent } from './pages/proveedores/proveedores.component'
 import { AddproductsComponent } from './pages/Products/addproducts/addproducts.component';
 import { EntradaproductsComponent } from './pages/compras/entradaproducts/entradaproducts.component';
 import { EmpresaComponent } from './pages/empresa/empresa.component';
+import { AddAlamacenesComponent } from './components/almacen/add-alamacenes/add-alamacenes.component';
+import { ProductoStockComponent } from './pages/producto-stock/producto-stock.component';
 
 
 const routes: Routes = [
@@ -26,12 +28,14 @@ const routes: Routes = [
       { path: 'categoria', component: CategoriaComponent },
       { path: 'marcas', component: MarcasComponent },
       { path: 'almacenes', component: AlmacenesComponent },
+      { path: 'almacen', component: AddAlamacenesComponent },
       { path: 'moviento-almacen', component: MovimientoAlmacenComponent },
       {path: 'addunidadmedida', component: AddunidadmedidaComponent},
       {path: 'proveedores', component: ProveedoresComponent},
       {path: 'addedit', component: AddproductsComponent},
       {path: 'entradaproducts', component: EntradaproductsComponent},
       {path: 'empresas', component: EmpresaComponent},
+      {path: 'stock', component: ProductoStockComponent},
       // ... otras rutas del mantenimiento ...
     ],
   },

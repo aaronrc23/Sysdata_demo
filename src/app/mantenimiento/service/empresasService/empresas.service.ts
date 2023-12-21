@@ -9,7 +9,7 @@ import { Credentials } from '../../Interface/Credentials';
 })
 export class EmpresasService {
 
-  private apiUrl = 'http://localhost:8090/api/empresa';
+  private apiUrl = 'bbb5wpywgmczgiv0ujjj-mysql.services.clever-cloud.com/api/empresa';
 
   constructor(private http: HttpClient) {}
 
@@ -18,7 +18,7 @@ export class EmpresasService {
   }
 
   login(creds: Credentials) {
-    return this.http.post(`http://localhost:8090/login`, creds, {
+    return this.http.post(`bbb5wpywgmczgiv0ujjj-mysql.services.clever-cloud.com/login`, creds, {
       observe: 'response'
     }).pipe(map((response: HttpResponse<any>) => {
       const body = response.body;

@@ -41,11 +41,18 @@ import { ProveedoresComponent } from './pages/proveedores/proveedores.component'
 
 import { EntradaproductsComponent } from './pages/compras/entradaproducts/entradaproducts.component';
 import { AutoCompleteModule } from 'primeng/autocomplete';
-
 import { PanelModule } from 'primeng/panel';
 import { ListaEmpresasComponent } from './components/empresas/lista-empresas/lista-empresas.component';
 import { EmpresaComponent } from './pages/empresa/empresa.component';
 import { AgregarEmpresasComponent } from './components/empresas/agregar-empresas/agregar-empresas.component';
+import { ListarCategoriasComponent } from './components/categoria/listar-categorias/listar-categorias.component';
+import { AddCategoriasComponent } from './components/categoria/add-categorias/add-categorias.component';
+import { ListarAlamacenesComponent } from './components/almacen/listar-alamacenes/listar-alamacenes.component';
+import { AddAlamacenesComponent } from './components/almacen/add-alamacenes/add-alamacenes.component';
+import { ListarProductosComponent } from './components/productos/listar-productos/listar-productos.component';
+import { ListarStockComponent } from './components/stock/listar-stock/listar-stock.component';
+import { ProductoStockComponent } from './pages/producto-stock/producto-stock.component';
+
 
 
 
@@ -73,6 +80,8 @@ export class FilterPipe implements PipeTransform {
 
 @NgModule({
   declarations: [
+   
+
     CategoriaComponent,
     ProductosComponent,
     MarcasComponent,
@@ -88,9 +97,18 @@ export class FilterPipe implements PipeTransform {
     EntradaproductsComponent,
     ListaEmpresasComponent,
     EmpresaComponent,
-    AgregarEmpresasComponent
+    AgregarEmpresasComponent,
+    ListarCategoriasComponent,
+    AddCategoriasComponent,
+    ListarAlamacenesComponent,
+    AddAlamacenesComponent,
+    ListarProductosComponent,
+    ListarStockComponent,
+    ProductoStockComponent,
+
   ],
   imports: [
+    FormsModule,
     CommonModule,
     MantenimientoRoutingModule,
     SharedModule,

@@ -3,13 +3,14 @@ import { Injectable } from '@angular/core';
 import { Proveedores } from '../Interface/Proveedores';
 import { Observable, Subject, map, tap } from 'rxjs';
 import { Credentials } from '../Interface/Credentials';
+import { environment } from 'src/app/enviroment/environment.prod';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProveedoresService {
 
-  rutaGlobal = 'http://localhost:8090/api/proveedores'; 
+  private apiUrl = `${environment.apiUrl}/proveedores`;	 
 
 
   constructor(private http: HttpClient) { }
@@ -18,12 +19,12 @@ export class ProveedoresService {
   /*-----------Listar Categorias-------------*/
   getProveedores(): Observable<Proveedores[]> {
     console.log('Llamando a getUnidadMedida');
-    return this.http.get<Proveedores[]>(`${this.rutaGlobal}/listar`);
+    return this.http.get<Proveedores[]>(`${this.apiUrl}/listar`);
   }
 
   
   login(creds: Credentials) {
-    return this.http.post(`http://localhost:8090/login`, creds, {
+    return this.http.post(`https://sysdataapi.uc.r.appspot.com/login`, creds, {
       observe: 'response'
     }).pipe(map((response: HttpResponse<any>) => {
       const body = response.body;
@@ -46,7 +47,7 @@ export class ProveedoresService {
   private unidadSubject = new Subject<Proveedores[]>();
   unidades$ = this.unidadSubject.asObservable();
   registrarProveedores(unidades: Proveedores): Observable<Proveedores> {
-    return this.http.post<Proveedores>(`${this.rutaGlobal}/registrar`, unidades).pipe( 
+    return this.http.post<Proveedores>(`${this.apiUrl}/registrar`, unidades).pipe( 
       tap(() => {
       this.getProveedores().subscribe((unidades) => {
         this.unidadSubject.next(unidades);
@@ -57,10 +58,10 @@ export class ProveedoresService {
 
 
   editarProveedores(id: number, unidad: Proveedores): Observable<Proveedores> {
-    return this.http.put<Proveedores>(`${this.rutaGlobal}/actualizar/${id}`, unidad);
+    return this.http.put<Proveedores>(`${this.apiUrl}/actualizar/${id}`, unidad);
 }
 
   eliminarProveedores(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.rutaGlobal}/delete/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/delete/${id}`);
   }
 }

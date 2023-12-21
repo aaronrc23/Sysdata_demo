@@ -1,36 +1,18 @@
-import { Component } from '@angular/core';
-import { CommunicationService } from '../service/communication.service';
+import { Component,Inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { OnInit } from '@angular/core';
+import { initFlowbite } from 'flowbite';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss']
 })
-export class NavbarComponent {
-  sidebarVisible: boolean = false;
-
-  /*------------------Menumburguesa----------------*/
-  constructor(private communicationService: CommunicationService) {
-    
-  }
-  toggleSidebar() {
-    // Lógica para abrir o cerrar el sidebar
-    this.communicationService.toggleSidebar();
-  }
-
-  /*----------Menu options-----------*/
-  showOptions = false;
-  toggleOptions() {
-    const profileDropdownList = document.querySelector(".profile-dropdown-list") as HTMLElement;
-    if (profileDropdownList) {
-      profileDropdownList.classList.toggle("active");
-      this.showOptions = profileDropdownList.classList.contains("active");
+export class NavbarComponent implements OnInit {
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
+  
+  ngOnInit(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      initFlowbite();
     }
   }
-  optionSelected(option: string) {
-    // Lógica para manejar la opción seleccionada
-    console.log(`Opción seleccionada: ${option}`);
-  }
-
-
-  
 }

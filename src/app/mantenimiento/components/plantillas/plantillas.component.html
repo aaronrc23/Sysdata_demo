@@ -1,44 +1,12 @@
+<nav class="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+  <app-navbar></app-navbar>
+</nav>
 
-
-<div class="container" [class.active]="isMenuOpen">
-  <div class="overlay" (click)="toggleMenu()"></div>
-
-  <!-- Navbar -->
-  <div class="navbar overflow-y-auto">
-    <div class="menu" >
-      <app-sidebar></app-sidebar>
-    </div>
-  </div>
-
-  <!-- Sidebar -->
-  <div class="sidebar">
-    <app-sidebar></app-sidebar>
-  </div>
-
-  <!-- Content -->
-  <div class="flex flex-column w-full overflow-y-auto">
-    <div class="menu-toggle-container">
-      <div class="flex items-center w-full overflow-y-auto">
-        <div class="menu-toggle-container">
-          <div class="menu-toggle" (click)="toggleMenu()">
-            <fa-icon [icon]="faBars" class="text-xl"></fa-icon>
-          </div>
-        </div>
-        <div class="p-3 ml-auto">
-          <i class="pi pi-spin pi-cog icon-config" style="font-size: 1.5rem"></i>
-        </div>
-      </div>
-      
-      
-      
-    </div>
-
-    <!-- Contenido principal de la página -->
-    <div class="content h-full overflow-y-auto w-full p-0">
-      <div class="seccion">
+  <app-sidebar></app-sidebar>
+  <div class="p-4 h-full bg-[#F0F1F7]  sm:ml-64  fondo">
+     <div class="p-3 border-2 h-full border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-14">
+        <app-breadcrumb></app-breadcrumb>
+        <br />
         <router-outlet></router-outlet>
-      </div>
-      
-    </div>
+     </div>
   </div>
-</div>

@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpClient, HttpResponse } from '@angular/common/http';
+import { Observable, Subject, tap } from 'rxjs';
 import { Almacenes } from '../Interface/Almacenes';
+import { environment } from 'src/app/enviroment/environment.prod';
 @Injectable({
   providedIn: 'root',
 })
 export class AlmacenesService {
-  private apiUrl = 'http://localhost:8090/api/almacen';
+  private apiUrl = `${environment.apiUrl}/almacen`;
+
 
   constructor(private http: HttpClient) {}
 
@@ -14,9 +16,24 @@ export class AlmacenesService {
     return this.http.get<Almacenes[]>(`${this.apiUrl}/listar`);
   }
 
-  registrarAlmacen(almacen: Almacenes): Observable<Almacenes> {
-    return this.http.post<Almacenes>(`${this.apiUrl}/registrar`, almacen);
+ 
+
+  
+  /*------------Registrar Categorias----------------*/
+  private categoriasSubject = new Subject<Almacenes[]>();
+  almacenes$ = this.categoriasSubject.asObservable();
+  registrarAlmacen(categoria: Almacenes): Observable<Almacenes> {
+    return this.http.post<Almacenes>(`${this.apiUrl}/registrar`, categoria).pipe( 
+      tap(() => {
+      // Después de crear la categoría, actualizamos la lista de categorías
+      this.listarAlmacenes().subscribe((categorias) => {
+        this.categoriasSubject.next(categorias);
+      });
+    }));
   }
+
+
+
 
 
 
@@ -34,5 +51,15 @@ export class AlmacenesService {
   desactivarAlmacenPorId(id: number): Observable<void> {
     const url = `${this.apiUrl}/desactivar/${id}`;
     return this.http.put<void>(url, {});
+  }
+
+
+  exportarPdfPorEntrada(gentradasId: number): Observable<HttpResponse<any>> {
+    const url = `${this.apiUrl}/${gentradasId}/export-pdf`;
+
+    return this.http.get(url, {
+      responseType: 'arraybuffer',
+      observe: 'response',
+    });
   }
 }

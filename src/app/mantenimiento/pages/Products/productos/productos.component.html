@@ -2,10 +2,10 @@
 
 <div class="bg-blue-100 cont mx-3">
     <app-addproducts (productoRegistrado)="productoRegistrado()"></app-addproducts>
+    <app-listar-productos></app-listar-productos>
 
-
-    <div class="card  gap-3 ">
-        <div class="card-table">
+  <!--  <div class="card  gap-3 ">
+         <div class="card-table">
             <p-table [value]="products" [tableStyle]="{ 'min-width': '60rem' } " [resizableColumns]="true"
                 [paginator]="true" [rows]="5" [showCurrentPageReport]="true" scrollHeight="600px"
                 currentPageReportTemplate="Mostrar {first} a {last} de {totalRecords} registros"
@@ -37,7 +37,7 @@
                         <td>
                             <div class="flex justify-content-center">
                                 <!-- Modificación en el botón "Editar" dentro de la tabla -->
-                                <p-button label="Editar" icon="pi pi-pencil" styleClass="btn-edit" (click)="editarProducto(productos)"></p-button>
+                                <!-- <p-button label="Editar" icon="pi pi-pencil" styleClass="btn-edit" (click)="editarProducto(productos)"></p-button>
     
                                 <p-button label="Eliminar" icon="pi pi-trash" styleClass="btn-delete" (click)="eliminarProducto(productos.idproducto)"></p-button>
                             </div>
@@ -45,12 +45,12 @@
     
                     </tr>
                 </ng-template>
-            </p-table>
-        </div>
+            </p-table> -->
+        <!-- </div>  -->
     
     
         <!----------- Formulario editar------------- -->
-        <p-dialog header="Editar Productos" [(visible)]="displayEditModal" [modal]="true"
+        <!-- <p-dialog header="Editar Productos" [(visible)]="displayEditModal" [modal]="true"
             [style]="{ width: '90%', maxWidth: '450px', zIndex: 1001, margin: '20px' }" [draggable]="false"
             [resizable]="false" class="mod-prod">
             <div>
@@ -115,5 +115,6 @@
             </form>
         </p-dialog>
     
-    </div>
+    </div> -->
 </div>
+

@@ -1,179 +1,161 @@
-<div class="sidebar h-full w-full overflow-y-auto" *ngIf="isActive">
-  <!-- Logo Section -->
-  <div class="logo-section ">
-    <div class="logo flex flex-column  ">
-      <p class=" nom_logo mt-4 ">SysData</p>
-      <h4 class=" p-0 m-0 mt-1 text-center text-xs">Sistema de Facturacion Electronica</h4>
+
+<aside id="logo-sidebar"
+    class="fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform -translate-x-full bg-white border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700"
+    aria-label="Sidebar">
+    <div class="h-full px-3 pb-4 overflow-y-auto bg-white dark:bg-gray-800">
+        <ul class="space-y-2 font-medium">
+            <li>
+                <a href="#"
+                    class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white  dark:hover:bg-gray-700 group">
+                    <fa-icon [icon]="faGauge" class="text-xl text-gray-500"></fa-icon>
+                    <span class="ms-3 font-inter">Dashboard</span>
+                </a>
+            </li>
+
+
+            <li class="pt-4 mt-4 space-y-2 font-medium border-t border-gray-200 dark:border-gray-700">
+                <p class="-ml-1 subtitle py-2">Mantenimiento</p>
+
+            </li>
+            <li>
+                <a routerLink="almacenes"
+                    class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                    <fa-icon [icon]="faBoxes" class="text-xl text-gray-500"></fa-icon>
+                    <span class="flex-1 ms-3 whitespace-nowrap">Almacen</span>
+                </a>
+            </li>
+            <li>
+                <a routerLink="categoria"
+                    class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                    <fa-icon [icon]="faBoxes" class="text-xl text-gray-500"></fa-icon>
+                    <span class="flex-1 ms-3 whitespace-nowrap">Categoria</span>
+                </a>
+            </li>
+            
+            
+
+           
+
+            <li>
+                <a routerLink="addunidadmedida"   
+                    class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                    <fa-icon [icon]="faUnderline" class="text-xl text-gray-500"></fa-icon>
+                    <span class="flex-1 ms-3 whitespace-nowrap">Unidad Medida</span>
+                </a>
+            </li>
+
+            <li>
+                <a routerLink="productos"   
+                    class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                    <fa-icon [icon]="faBoxesPacking" class="text-xl text-gray-500"></fa-icon>
+                    <span class="flex-1 ms-3 whitespace-nowrap">Productos</span>
+                </a>
+            </li>
+            
+
+            <p class="ml-1 subtitle py-3">Gestion de Compras</p>
+            <li>
+                <a routerLink="proveedores"
+                    class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                    <fa-icon [icon]="faPersonCirclePlus" class="text-lg text-gray-500"></fa-icon>
+                    <span class="flex-1 ms-3 whitespace-nowrap">Agregar Proveedor</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="#"
+                    class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                    <fa-icon [icon]="faFileCirclePlus" class="text-lg text-gray-500 "></fa-icon>
+                    <span class="flex-1 ms-3 whitespace-nowrap">Registrar Compra</span>
+                </a>
+            </li>
+
+            <p class="ml-1 subtitle py-3">Gestion de Almacen</p>
+
+            <li>
+                <a routerLink="entradaproducts"
+                    class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                    <fa-icon [icon]="faPersonCirclePlus" class="text-lg text-gray-500"></fa-icon>
+                    <span class="flex-1 ms-3 whitespace-nowrap">Entrada de Productos</span>
+                </a>
+            </li>
+
+            <li>
+                <a routerLink="stock"
+                    class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                    <fa-icon [icon]="faFileCirclePlus" class="text-lg text-gray-500 "></fa-icon>
+                    <span class="flex-1 ms-3 whitespace-nowrap">Stock de Productos</span>
+                </a>
+            </li>
+
+            <p class="ml-1 subtitle py-3">Gestion de Ventas </p>
+
+            <li>
+                <button type="button"
+                    class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+                    aria-controls="dropdown-example" data-collapse-toggle="dropdown-example">
+                    <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 dark:group-hover:text-white"
+                        aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                        <path
+                            d="M17 5.923A1 1 0 0 0 16 5h-3V4a4 4 0 1 0-8 0v1H2a1 1 0 0 0-1 .923L.086 17.846A2 2 0 0 0 2.08 20h13.84a2 2 0 0 0 1.994-2.153L17 5.923ZM7 9a1 1 0 0 1-2 0V7h2v2Zm0-5a2 2 0 1 1 4 0v1H7V4Zm6 5a1 1 0 1 1-2 0V7h2v2Z" />
+                    </svg>
+                    <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Realizar Venta</span>
+                    <fa-icon [icon]="faAngleDown" class="text-xl text-gray-500"></fa-icon>
+                </button>
+                <ul id="dropdown-example" class="hidden py-2 space-y-2">
+                    <li>
+                        <a href="#"
+                            class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                            <fa-icon [icon]="faFileCirclePlus" class="text-lg text-gray-500 "></fa-icon>
+                            <span class="flex-1 ms-3 whitespace-nowrap">Guia de Remision</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#"
+                            class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                            <fa-icon [icon]="faFileCirclePlus" class="text-lg text-gray-500 "></fa-icon>
+                            <span class="flex-1 ms-3 whitespace-nowrap">Facturas</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#"
+                            class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                            <fa-icon [icon]="faFileCirclePlus" class="text-lg text-gray-500 "></fa-icon>
+                            <span class="flex-1 ms-3 whitespace-nowrap">Boletas</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#"
+                            class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                            <fa-icon [icon]="faFilePen" class="text-lg text-gray-500 "></fa-icon>
+                            <span class="flex-1 ms-3 whitespace-nowrap">Nota de Ventas</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#"
+                            class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                            <fa-icon [icon]="faFileCircleExclamation" class="text-lg text-gray-500 "></fa-icon>
+                            <span class="flex-1 ms-3 whitespace-nowrap">Nota de Credito</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#"
+                            class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                            <fa-icon [icon]="faFileCircleCheck" class="text-lg text-gray-500 "></fa-icon>
+                            <span class="flex-1 ms-3 whitespace-nowrap">Notas de Debito</span>
+                        </a>
+                    </li>
+
+
+                </ul>
+            </li>
+
+            <p class="ml-1 subtitle py-3">Usuarios </p>
+           
+            
+        </ul>
     </div>
-  </div>
-
-
-
-  <!-- Links Section -->
-  <nav class="links-section p-2 mt-3">
-    <ul>
-      <li class=" ctn_op mb-2">
-        <div class="flex items-center w-full btn">
-          <fa-icon [icon]="faGauge" class="text-lg"></fa-icon>
-          <a routerLink="dashboard" routerLinkActive="active" class="text-sm">Dashboard</a>
-        </div>
-      </li>
-      <p class="ml-2 subtitle">Mantenimiento</p>
-
-
-      <li class=" ctn_op mb-2">
-        <div class="flex items-center p-2">
-          <fa-icon [icon]="faBoxesStacked" class="text-xl"></fa-icon>
-          <a routerLink="almacenes" routerLinkActive="active">Almacen</a>
-        </div>
-      </li>
-
-      <li class=" ctn_op mb-2">
-        <div class="flex items-center p-2">
-          <fa-icon [icon]="faArchive" class="text-lg"></fa-icon>
-          <a routerLink="categoria" routerLinkActive="active">Categorias</a>
-        </div>
-      </li>
-
-      <li class=" ctn_op mb-2">
-        <div class="flex items-center p-2">
-          <fa-icon [icon]="faUnderline" class="text-xl"></fa-icon>
-          <a routerLink="addunidadmedida" routerLinkActive="active">Unidad de Medida</a>
-        </div>
-      </li>
-
-      <!-- Proveedores -->
-
-      <li class="mb-2" [class.active]="isSubmenuOpen('compras')">
-        <div class="ctn_op flex items-center w-full p-2" (click)="toggleSubmenu('compras')">
-          <fa-icon [icon]="faTruck" class="text-lg"></fa-icon>
-          <a>Compras</a>
-          <i class="pi pi-chevron-down  arrow-icon  "></i>
-        </div>
-        <!-- Submenu para "Marcas" -->
-        <ul class="submenu" *ngIf="isSubmenuOpen('compras')">
-
-          <li>
-            <div class=" flex w-full ">
-              <fa-icon [icon]="faCirclePlus" class="text-base"></fa-icon>
-
-              <a routerLink="proveedores" routerLinkActive="active">Agregar Proveedor</a>
-            </div>
-          </li>
-
-          <li>
-            <div class=" flex w-full ">
-              <fa-icon [icon]="faFilePen" class="text-base"></fa-icon>
-              <a routerLink="productos" routerLinkActive="active">Registrar Compra</a>
-            </div>
-          </li>
-        </ul>
-      </li>
-
-
-
-      <li class="mb-2" [class.active]="isSubmenuOpen('marcas')">
-        <div class="ctn_op flex items-center w-full p-2" (click)="toggleSubmenu('marcas')">
-          <fa-icon [icon]="faBoxesStacked" class="text-lg"></fa-icon>
-          <a>Gestion de Producto</a>
-          <i class="pi pi-chevron-down  arrow-icon  "></i>
-        </div>
-        <!-- Submenu para "Marcas" -->
-        <ul class="submenu" *ngIf="isSubmenuOpen('marcas')">
-
-          <li>
-            <div class=" flex w-full ">
-              <fa-icon [icon]="faBox" class="text-lg"></fa-icon>
-              <a routerLink="productos" routerLinkActive="active">Agregar Productos</a>
-            </div>
-          </li>
-
-          <li>
-            <div class=" flex w-full ">
-              <fa-icon [icon]="faBox" class="text-lg"></fa-icon>
-              <a routerLink="productos" routerLinkActive="active">Productos</a>
-            </div>
-          </li>
-
-
-
-        </ul>
-      </li>
-
-
-
-
-
-
-
-
-
-
-
-      <li class="mb-2" [class.active]="isSubmenuOpen('almacen')">
-        <div class="ctn_op flex items-center p-2" (click)="toggleSubmenu('almacen')">
-          <fa-icon [icon]="faDollyBox" class="text-xl "></fa-icon>
-          <a routerLink="categoria" routerLinkActive="active">Gestión de Almacen</a>
-          <i class="pi pi-chevron-down  arrow-icon "></i>
-        </div>
-        <!-- Submenu para "Marcas" -->
-        <ul class="submenu" *ngIf="isSubmenuOpen('almacen')">
-          <li>
-            <div class=" flex w-full ">
-              <fa-icon [icon]="faBoxesPacking" class=""></fa-icon>
-              <a routerLink="entradaproducts" routerLinkActive="active">Entrada de Productos</a>
-            </div>
-          </li>
-          <li>
-            <div class=" flex w-full ">
-              <fa-icon [icon]="faBox" class="text-xl"></fa-icon>
-              <a routerLink="moviento-almacen" routerLinkActive="active">Salida de Productos</a>
-            </div>
-          </li>
-          <li>
-            <div class=" flex w-full ">
-              <fa-icon [icon]="faPeopleCarryBox" class="text-xl"></fa-icon>
-              <a routerLink="moviento-almacen" routerLinkActive="active">Abastacimiento</a>
-            </div>
-          </li>
-          <li>
-            <div class=" flex w-full ">
-              <fa-icon [icon]="faBoxesStacked" class="text-xl"></fa-icon>
-              <a routerLink="almacenes" routerLinkActive="active">Registrar Almacen</a>
-            </div>
-          </li>
-
-
-        </ul>
-      </li>
-
-
-
-
-
-
-      <!-- <li>
-          <div class=" ctn_op flex items-center">
-            <i class="pi pi-bookmark-fill text-xl"></i>
-            <a routerLink="marcas" routerLinkActive="active">Marcas</a>
-          </div>
-        </li> -->
-
-    </ul>
-    <p class="ml-2 subtitle">Datos Empresa</p>
-
-    <li class=" ctn_op mb-2">
-      <div class="flex items-center p-2">
-        <fa-icon [icon]="faBox" class="text-xl"></fa-icon>
-        <a routerLink="empresas" routerLinkActive="active">Datos de la Empresa</a>
-      </div>
-    </li>
-  </nav>
-
-
-
-  <!-- Company Name Section -->
-  <div class="company-name-section p-4">
-    Nombre de la Empresa
-  </div>
-</div>
+</aside>

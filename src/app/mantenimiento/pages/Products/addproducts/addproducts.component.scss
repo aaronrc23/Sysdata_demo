@@ -2,6 +2,10 @@
     font-family: 'Poppins', sans-serif;
 }
 
+#barCodeCanvas {
+  display: none;
+}
+
 .custom-file-upload {
     border: 1px solid #ccc;
     display: inline-block;
@@ -16,6 +20,8 @@
 }
 
 .btn_generarCodigo {
+    margin-top: 0.625rem;
+    padding: 0.7rem;
     border: 1px solid #ccc;
     display: inline-block;
     cursor: pointer;
@@ -26,6 +32,9 @@
     color: #333;
 }
 
+p{
+  margin-bottom: 1rem;
+}
 
 .custom{
     display: flex;

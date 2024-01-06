@@ -1,0 +1,10 @@
+{
+  "hosting": {
+    "public": "dist/demofrond_sysdata",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}

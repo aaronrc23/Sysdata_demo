@@ -1,0 +1,58 @@
+<div
+    class="flex flex-col bg-white border shadow-sm rounded-xl dark:bg-slate-900 dark:border-gray-700 dark:shadow-slate-700/[.7]">
+    <div class="bg-gray-100 border-b rounded-t-xl py-3 px-4 md:py-4 md:px-5 dark:bg-slate-900 dark:border-gray-700">
+        <h1 class="mt-1 text-sm text-gray-600 dark:text-gray-500">
+            REGISTRO DE COMPRA
+        </h1>
+    </div>
+    <div class="grid gap-1 mt-2 lg:grid-cols-4 grid-cols-1">
+        <div class="p-4 md:p-4">
+            <label for="input-label" class="block text-sm font-medium mb-2 dark:text-white" id="fecha">Fecha
+                Emision</label>
+            <input id="fecha" formControlName="fecha" #tuInput required type="date" pInputText
+                class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600" />
+        </div>
+
+        <div class="p-4 md:p-4">
+            <label for="input-label" class="block text-sm font-medium mb-2 dark:text-white" id="fecha">Tipo de
+                Factura</label>
+            <select id="small" class="my-select">
+                <option selected>Selecione Tipo</option>
+                <option value="FT">Factura</option>
+                <option value="GR">Guia de Remision</option>
+                <option value="BO">Boleta</option>
+            </select>
+        </div>
+   
+
+        <div class="p-4  md:p-4">
+            <label for="input-label" class="block text-sm font-medium mb-2  dark:text-white" id="fecha">Selecciona un
+                proveedor:</label>
+            <select id="proveedor" name="proveedor" formControlName="proveedorId" class="my-select">
+                <option [value]="null" disabled selected class="h-5">Seleccione proveedor</option>
+                <option *ngFor="let proveedor of proveedores" [value]="proveedor.id_proveedores">
+                    {{ proveedor.nombre_prov }}
+                </option>
+            </select>
+        </div>
+
+        <div class="p-4 md:p-4">
+            <label for="input-label" class="block text-sm font-medium mb-2 dark:text-white" id="fecha">Selecciona un
+                proveedor:</label>
+            <select id="almacenes" name="alamcenes" formControlName="almacenId" class="my-select">
+                <option [value]="null" disabled selected class="plach">Seleccione almacen</option>
+                <option *ngFor="let alamcenes of almacenes" [value]="alamcenes.id">
+                    {{ alamcenes.nombreAlmacen}}
+                </option>
+            </select>
+        </div>
+
+
+
+
+
+    </div>
+    <div class="w-full p-4 md:p-4">
+        <app-listarproduc></app-listarproduc>
+     </div>
+</div>

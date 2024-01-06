@@ -15,7 +15,7 @@ export class ProductoStockService {
 
   constructor(private http: HttpClient) {}
   login(creds: Credentials) {
-    return this.http.post(`bbb5wpywgmczgiv0ujjj-mysql.services.clever-cloud.com/login`, creds, {
+    return this.http.post(`${environment.loginUrl}/login`, creds, {
       observe: 'response'
     }).pipe(map((response: HttpResponse<any>) => {
       const body = response.body;

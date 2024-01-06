@@ -1,139 +1,120 @@
+// p {
+//   font-family: "Inter", sans-serif;
+//   font-size: 0.8125rem;
+//   font-weight: 600;
+//   color: #333335;
+// }
 
+// .container {
+//   display: flex;
+//   padding-top: 10px;
+//   margin: 0 10px 0 10px;
+// }
 
-p {
-  font-family: "Inter", sans-serif;
-  font-size: 0.8125rem;
-  font-weight: 600;
-  color: #333335;
-}
+// .form-section {
+//   flex: 1;
+//   padding: 0.25rem;
+//   background-color: #ffffff;
+//   border-radius: 30px;
+// }
 
-.container {
-  display: flex;
-  padding-top: 10px;
-  margin: 0 10px 0 10px;
-  
-}
+// .table-section {
+//   flex: 1;
+//   padding: 20px;
+//   background-color: #ffffff;
+// }
 
+// .calendario {
+//   width: 100%;
+//   padding: 0.6rem;
+//   border-radius: 7px;
+//   border: 1px solid #ccc;
+//   font-size: 14px;
+//   font-family: "Inter", sans-serif;
+// }
 
-.form-section {
-  flex: 1;
-  padding: 1.25rem;
-  background-color: #ffffff;
-  border-radius: 30px;
-}
+// i {
+//   margin-left: 5px;
+// }
 
-.table-section {
-  flex: 1;
-  padding: 20px;
-  background-color: #ffffff; 
-}
+// select {
+//   font-family: "Poppins", sans-serif;
+//   font-size: 10px;
+// }
 
-.calendario {
-  width: 100%;
-  padding: 0.6rem;
-  border-radius: 7px;
-  border: 1px solid #ccc;
-  font-size: 14px;
-  font-family: "Inter", sans-serif;
-}
+// // Agrega tus estilos personalizados aquí
+// .my-select {
+//   width: 100%;
+//   padding: 0.4rem 0.75rem;
+//   font-size: 1rem;
+//   height: 2.5rem;
+//   color: #495057;
+//   background-color: #fff;
+//   background-clip: padding-box;
+//   border: 1px solid #ced4da;
+//   border-radius: 0.3rem;
+//   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+//   &:focus {
+//     outline: none;
+//   }
+// }
+// input {
+//   font-family: "Poppins", sans-serif;
+//   color: #333335;
+// }
+// div {
+//   padding: 0.5rem;
+//   input {
+//     width: 100%;
+//     border-radius: 15px;
+//   }
+// }
+// .ctn-informacion {
+//   display: flex;
+//   width: 100%;
+//   padding: 0;
+// }
+// .fomulario {
+//   margin: 0.7rem 0 0 0;
+//   border-radius: 12px;
+// }
 
-i{
-  margin-left: 5px;
-}
+// @media (max-width: 1150px) {
+//   .container {
+//     flex-direction: column;
+//   }
+// }
 
-select{
-  font-family: 'Poppins', sans-serif;
-  font-size: 10px;
- 
-}
+// @media (max-width: 1100px) {
+//   .ctn-informacion {
+//     flex-direction: column;
+//   }
+// }
 
-
-
-
-// Agrega tus estilos personalizados aquí
+// @media (max-width: 500px) {
+//   .ctn-informacion {
+//     flex-direction: column;
+//   }
+//   .fomulario {
+//     padding: 0px;
+//     margin: 0px;
+//     div {
+//       padding: 0.3rem 0;
+//     }
+//   }
+// }
 .my-select {
   width: 100%;
   padding: 0.4rem 0.75rem;
   font-size: 1rem;
-  height: 2.5rem;
+  height: 2.8rem;
   color: #495057;
   background-color: #fff;
   background-clip: padding-box;
   border: 1px solid #ced4da;
-  border-radius: 0.3rem;
+  border-radius: 12px;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-  &:focus{
+  &:focus {
     outline: none;
   }
-}
-input{
-  font-family: 'Poppins', sans-serif;
-  color: #333335;
-}
-div{
-  padding: 0.5rem;
-  input{
-    width: 100%;
-  }
-}	
-.ctn-informacion{
-  display: flex;
-  width: 100%;
-  padding: 0;
-}
-.fomulario{
-  margin: 0.7rem 1rem 0 1rem;
-  border-radius: 12px;
-
-}
-
-
-
-
-
- 
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-@media (max-width: 1150px) {
-  .container {
-    flex-direction: column; 
-  }
- 
-}
-
-@media (max-width: 1100px) {
-
-  .ctn-informacion{
-    flex-direction: column;
-   }  
-}
-
-@media (max-width: 500px) {
-  .ctn-informacion{
-   flex-direction: column;
-  }
-  .fomulario{
-    padding: 0px;
-    margin: 0px;
-    div{
-      padding: 0.3rem 0 ;
-    }
-  }
-
 }

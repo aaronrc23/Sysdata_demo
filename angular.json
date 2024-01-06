@@ -35,7 +35,9 @@
               "core-js/modules/es.string.starts-with.js",
               "core-js/modules/es.string.trim.js",
               "core-js/modules/web.dom-collections.iterator.js",
-              "raf","rgbcolor"
+              "raf",
+              "rgbcolor",
+              "pdfmake"
             ],
             "outputPath": "dist/demofrond_sysdata",
             "index": "src/index.html",
@@ -46,7 +48,9 @@
             "assets": ["src/favicon.ico", "src/assets"],
             "styles": ["src/styles.scss"],
             "scripts": [
-              "node_modules/preline/preline.js"
+              "node_modules/preline/preline.js",
+              "node_modules/pdfmake/build/pdfmake.js",
+              "node_modules/pdfmake/build/vfs_fonts.js"
             ]
           },
           "configurations": {
@@ -63,7 +67,8 @@
                   "maximumError": "4kb"
                 }
               ],
-              "outputHashing": "all"
+              "outputHashing": "all",
+              "allowedCommonJsDependencies": ["pdfmake"]
             },
             "development": {
               "buildOptimizer": false,
@@ -102,9 +107,7 @@
             "inlineStyleLanguage": "scss",
             "assets": ["src/favicon.ico", "src/assets"],
             "styles": ["src/styles.scss"],
-            "scripts": [
-              
-            ]
+            "scripts": []
           }
         }
       }

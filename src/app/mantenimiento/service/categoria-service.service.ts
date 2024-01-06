@@ -5,19 +5,20 @@ import { Categoria } from '../Interface/Categorias';
 import { Credentials } from '../Interface/Credentials';
 
 import { map,tap } from 'rxjs/operators';
+import { environment } from 'src/app/enviroment/environment.prod';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class CategoriaServiceService {
-  rutaGlobal = 'http://localhost:8090/api/categoria'; 
+  private apiUrl = `${environment.apiUrl}/categoria`;
   constructor(private http: HttpClient) { }
 
 
   /*-----------Listar Categorias-------------*/
   getCategorias(): Observable<Categoria[]> {
-    return this.http.get<Categoria[]>(`${this.rutaGlobal}/listar`);
+    return this.http.get<Categoria[]>(`${this.apiUrl}/listar`);
   }
 
   login(creds: Credentials) {
@@ -42,7 +43,7 @@ export class CategoriaServiceService {
   private categoriasSubject = new Subject<Categoria[]>();
   categorias$ = this.categoriasSubject.asObservable();
   registrarCategoria(categoria: Categoria): Observable<Categoria> {
-    return this.http.post<Categoria>(`${this.rutaGlobal}/registrar`, categoria).pipe( 
+    return this.http.post<Categoria>(`${this.apiUrl}/registrar`, categoria).pipe( 
       tap(() => {
       // Después de crear la categoría, actualizamos la lista de categorías
       this.getCategorias().subscribe((categorias) => {
@@ -55,12 +56,12 @@ export class CategoriaServiceService {
 
   editarCategoria(categoria: Categoria): Observable<Categoria> {
     return this.http.put<Categoria>(
-      `${this.rutaGlobal}/actualizar/${categoria.idcategoria}`,
+      `${this.apiUrl}/actualizar/${categoria.idcategoria}`,
       categoria
     );
   }
 
   eliminarCategoria(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.rutaGlobal}/delete/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/delete/${id}`);
   }
 }

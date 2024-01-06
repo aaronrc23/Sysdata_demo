@@ -1,0 +1,185 @@
+<div
+  class="flex flex-col bg-white border shadow-sm rounded-xl dark:bg-slate-900 dark:border-gray-700 dark:shadow-slate-700/[.7]">
+  <div class="bg-gray-100 border-b rounded-t-xl py-3 px-4 md:py-4 md:px-5 dark:bg-slate-900 dark:border-gray-700">
+    <h1 class="mt-1 text-sm text-gray-600 dark:text-gray-500">
+      REGISTRO DE COMPRA
+    </h1>
+  </div>
+  <div class="grid gap-1 mt-2 lg:grid-cols-4 grid-cols-1">
+    <div class="p-4 md:p-4">
+      <label class="block text-sm font-medium mb-2 dark:text-white" >Fecha
+        Emision</label>
+      <input id="fecha" name="fecha"  #tuInput required type="date" pInputText
+        class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600" />
+    </div>
+
+    <div class="p-4 md:p-4">
+      <label  class="block text-sm font-medium mb-2 dark:text-white" >Tipo de
+        Factura</label>
+      <select id="small" class="my-select">
+        <option selected>Selecione Tipo</option>
+        <option value="FT">Factura</option>
+        <option value="GR">Guia de Remision</option>
+        <option value="BO">Boleta</option>
+      </select>
+    </div>
+
+
+    <div class="p-4  md:p-4">
+      <label  class="block text-sm font-medium mb-2  dark:text-white" >Selecciona un
+        proveedor:</label>
+      <select id="proveedor" name="proveedor" [(ngModel)]="selectedProveedorId" class="my-select">
+        <option [value]="null" disabled selected class="h-5">Seleccione proveedor</option>
+        <option *ngFor="let proveedor of proveedores" [value]="proveedor.id_proveedores">
+          {{ proveedor.nombre_prov }}
+        </option>
+      </select>
+    </div>
+
+    <div class="p-4 md:p-4">
+      <label  class="block text-sm font-medium mb-2 dark:text-white" >Selecciona un
+        proveedor:</label>
+      <select id="almacenes" name="alamcenes" [(ngModel)]="selectedAlmacenId" class="my-select">
+        <option [value]="null" disabled selected class="plach">Seleccione almacen</option>
+        <option *ngFor="let alamcenes of almacenes" [value]="alamcenes.id">
+          {{ alamcenes.nombreAlmacen}}
+        </option>
+      </select>
+    </div>
+  </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<button type="button"
+  class="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+  (click)="openModal()">
+  Agregar producto
+</button>
+
+
+
+
+<div *ngIf="modalVisible"
+  class="fixed inset-0 overflow-x-hidden overflow-y-auto z-[60] flex items-center justify-center ">
+  <div class="fixed inset-0 bg-gray-800 bg-opacity-70 transition-opacity " aria-hidden="true"></div>
+  <div class="absolute top-0 w-full p-4 sm:max-w-5xl sm:w-full mx-auto">
+    <div
+      class="bg-white  dark:bg-gray-800 rounded-[0.7rem] text-left overflow-y-auto pb-2 shadow-xl transform transition-all">
+      <!-- Header del Modal -->
+      <div class="border-b title dark:border-gray-700 py-3 px-4 flex justify-between items-center">
+        <h3 class="font-bold dark:text-white">
+          Registrar Almacen
+        </h3>
+        <button type="button" (click)="closeModal()"
+          class="w-7 h-7 bg-blue-500 text-sm font-semibold rounded-full border border-transparent text-gray-800 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:hover:bg-gray-700 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
+          <span class="sr-only">Close</span>
+        </button>
+      </div>
+      <div class="grid gap-1 mt-2 lg:grid-cols-1 grid-cols-1">
+        <div class="p-4  md:p-4 ">
+          <label  class="block text-sm font-medium mb-2 dark:text-white">
+            Buscar Producto</label>
+          <input type="text" placeholder="Buscar por nombre o código de barras" [(ngModel)]="searchTerm"
+            class="border p-2 rounded w-full my-select" (input)="filterProductos()" />
+        </div>
+
+        <div class="p-4  md:p-4 ">
+
+
+          <!-- Input para mostrar detalles del producto seleccionado -->
+          <div *ngIf="filteredProductos.length > 0">
+            <h4>Detalles del Producto Seleccionado:</h4>
+            <div class="grid gap-1 mt-2 lg:grid-cols-1 grid-cols-1">
+              <div
+                class="min-h-[15rem] flex flex-col bg-white border shadow-sm rounded-xl dark:bg-slate-900 dark:border-gray-700 dark:shadow-slate-700/[.7]">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 p-4 md:p-5">
+                  <div class="mb-4 md:mb-0">
+                    <label>Nombre:</label>
+                    <textarea type="text" id="nombre" class="w-full" [(ngModel)]="filteredProductos[0].nombre"
+                      disabled></textarea>
+
+                    <label >Código de Barras:</label>
+                    <input type="text" id="codigo_barra" class="my-select w-full"
+                      [(ngModel)]="filteredProductos[0].codigo_barra" disabled>
+                  </div>
+
+                  <div class="mx-auto text-center">
+                    <label >Imagen:</label>
+                    <img [src]="filteredProductos[0].imagen" alt="Imagen del producto" class="w-48 h-48">
+                  </div>
+                </div>
+
+              </div>
+
+              <div>
+                <label >Cantidad</label>
+                <input type="number" id="cantidad" class="my-select" [(ngModel)]="cantidadSeleccionada">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Footer del Modal -->
+        <div class=" p-1 flex justify-end  headereditar border-t dark:border-gray-700">
+
+          <button type="button" (click)="agregarProducto()"
+            class="text-white mt-3 bg-blue-500 hover:bg-gradient-to-br focus:ring-4 focus:outline-nonefont-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">
+            Agregar producto
+          </button>
+
+          <button type="button" (click)="closeModal()"
+            class="text-white mt-3 bg-[#81848F] hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<table class="w-full mt-4">
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Código de Barras</th>
+      <th>Cantidad</th>
+      <th>Imagen</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let producto of productosSeleccionados; let i = index">
+      <td>{{ producto.nombre }}</td>
+      <td>{{ producto.codigo_barra }}</td>
+      <td>
+        <!-- Ajusta este campo según la propiedad de cantidad de tu producto -->
+        <input type="number" [(ngModel)]="producto.cantidad" class="my-select" />
+      </td>
+      <td>
+        <!-- Muestra la imagen del producto -->
+        <img [src]="producto.imagen" alt="Imagen del producto" class="w-24 h-24" />
+      </td>
+      <td>
+        <button type="button" (click)="eliminarProducto(i)" class="text-red-500 hover:text-red-700">Eliminar</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<button type="button"
+  class="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-teal-500 text-white hover:bg-teal-600 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+  (click)="guardarEntrada()">
+  guardarEntrada
+</button>
+
+

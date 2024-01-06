@@ -1,6 +1,6 @@
-export class Categoria{
+export interface Categoria{
 
-    idcategoria? : number
+    idcategoria : number
     nombre?: string
     activo?: boolean
 

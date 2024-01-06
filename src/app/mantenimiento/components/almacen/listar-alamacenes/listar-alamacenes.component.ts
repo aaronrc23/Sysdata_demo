@@ -90,6 +90,8 @@ export class ListarAlamacenesComponent implements OnInit {
     );
   }
 
+
+
   /*-------End Filtrar---------- */
 
   mostrarModalEdicion = false;
@@ -98,6 +100,16 @@ export class ListarAlamacenesComponent implements OnInit {
     this.mostrarModalEdicion = true;
   }
 
+
+
+
+
+
+
+
+
+
+  
   /*---------- Actualizar Categorias-----------*/
   actualizarUnidad(): void {
     // Verificar si categoriaEnEdicion está definido y si su propiedad nombre es válida antes de la actualización

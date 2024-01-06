@@ -8,12 +8,13 @@ import {
 } from '@angular/core';
 import * as JsBarcode from 'jsbarcode';
 import jsPDF from 'jspdf';
-import { Productos } from 'src/app/mantenimiento/Interface/Productos';
+import { Productos, UnidadDeMedida } from 'src/app/mantenimiento/Interface/Productos';
 import Swal from 'sweetalert2';
 import { CategoriaServiceService } from '../../../service/categoria-service.service';
 import { FormBuilder, FormGroup, NgForm } from '@angular/forms';
 import { ProductoService } from 'src/app/mantenimiento/service/producto.service';
 import { Categoria } from 'src/app/mantenimiento/Interface/Categorias';
+import { UnidaMedidaService } from 'src/app/mantenimiento/service/unida-medida.service';
 
 @Component({
   selector: 'app-addproducts',
@@ -21,24 +22,41 @@ import { Categoria } from 'src/app/mantenimiento/Interface/Categorias';
   styleUrls: ['./addproducts.component.scss'],
 })
 export class AddproductsComponent implements OnInit{
+
+  //mostrar el modal y
+  modalVisible: boolean = false;
+  mostrarCanvas = false; 
+
+  openModal() {
+    this.modalVisible = true;
+  }
+
+  closeModal() {
+    this.modalVisible = false;
+  }
+
+  
   checked: boolean = true;
   visible = false;
   position: string = 'center';
-
   showDialog(position: string) {
     this.position = position;
     this.visible = true;
   }
 
+ 
+
   /*------ Variables para el formulario ------- */
   selectProducto: Productos = {
     codigo_barra: '',
     nombre: '',
+    precio_compra: 0,
     precio_venta: 0,
     precio_pormayor: 0,
     stock: 0,
     descripcion: '',
     imagen: '',
+    unidadDeMedida:  { id_umd: 1 },
     activo: true,
     categoria: { idcategoria: 1 },
     // marca: { idmarca: 0 },
@@ -48,30 +66,34 @@ export class AddproductsComponent implements OnInit{
   products: Productos[] = [];
   displayAddModal = false;
   categorias: any[] = [];
+  unidadesMedida: any[] = [];
 
 
-  constructor(private  productService: ProductoService,private categoriaService: CategoriaServiceService,) {}
+  constructor(private  productService: ProductoService,private categoriaService: CategoriaServiceService,private unidadMedidaService: UnidaMedidaService) {}
 
   ngOnInit(): void {
     this.obtenerUnidad();
     this.getCategorias();
+    this.obtenerUnidadMedida()
     this.productService.products$.subscribe((categorias: Productos[]) => {
       this.categorias = categorias;
     });
     this.categoriaService.categorias$.subscribe((categorias: Categoria[]) => {
       this.categorias = categorias;
     });
+    this.unidadMedidaService.unidades$.subscribe((categorias: UnidadDeMedida[]) => {
+      this.categorias = categorias;
+    });
   }
 
   /*------Agregar----- */
 
-  /*---Metodos------ */
   /*-----Metodo listar----- */
   obtenerUnidad() {
     this.productService.getProducts().subscribe(
       (almacenes) => {
         this.products = almacenes;
-        console.log('Unidad obtenidas:', almacenes);
+        console.log('Productos obtenidos:', almacenes);
       },
       (error) => {
         console.error('Error al cargar las categorías:', error);
@@ -84,6 +106,19 @@ export class AddproductsComponent implements OnInit{
       this.categorias = categorias;
     });
   }
+  
+  obtenerUnidadMedida() {
+    this.unidadMedidaService.getUnidadMedida().subscribe(
+      (unidadesMedida) => {
+        this.unidadesMedida = unidadesMedida;
+        console.log('Unidad obtenidas:', unidadesMedida);
+      },
+      (error) => {
+        console.error('Error al cargar las categorías:', error);
+      }
+    );
+  }
+
 
   getProductList() {
     this.productService.getProducts().subscribe((data) => {
@@ -146,8 +181,9 @@ export class AddproductsComponent implements OnInit{
     this.productService.registrarProducto(this.selectProducto).subscribe(
       () => {
         this.mostrarExitoRegistro();
-       
         this.obtenerUnidad();
+        this.obtenerUnidadMedida();
+        this.closeModal()
       },
       (error) => {
         console.error('Error al crear la categoría:', error);
@@ -159,13 +195,15 @@ export class AddproductsComponent implements OnInit{
       this.selectProducto = {
         codigo_barra: '',
         nombre: '',
+        precio_compra: 0,
         precio_venta: 0,
         precio_pormayor: 0,
         stock: 0,
         descripcion: '',
         imagen: '',
         activo: false,
-        categoria: { idcategoria: 1 },
+        unidadDeMedida:{ id_umd: 1 },
+        categoria: { idcategoria: 1},
         // marca: { idmarca: 0 },
       };
        // Reiniciar el estado de validación del formulario

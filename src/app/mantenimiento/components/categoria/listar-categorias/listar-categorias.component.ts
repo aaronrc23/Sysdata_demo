@@ -16,7 +16,7 @@ export class ListarCategoriasComponent implements OnInit {
 
   @ViewChild('categoriasForm') categoriasForm: NgForm | undefined;
 
-  categoriaEnEdicion: Categoria = { nombre: '', activo: true }; 
+  categoriaEnEdicion: Categoria = {idcategoria: 0, nombre: '', activo: true }; 
 
   categorias: Categoria[] = [];
   /*----pagination-------- */
@@ -54,7 +54,7 @@ export class ListarCategoriasComponent implements OnInit {
 
 
   onSearchTermChange(): void {
-    this.filteredCategorias = this.filterCategorias();  // Llama al método de filtrado
+    this.filteredCategorias = this.filterCategorias(); 
   }
 
   private filterCategorias(): Categoria[] {
@@ -114,7 +114,7 @@ mostrarModalEdicion = false;
         this.categoriaService.editarCategoria(this.categoriaEnEdicion).subscribe(
           () => {
             this.mostrarExitoActualizacionEditar();
-            this.categoriaEnEdicion = { nombre: '', activo: true };  // Reinicializa la categoría en edición
+            this.categoriaEnEdicion = {idcategoria: 0,    nombre: '', activo: true };  // Reinicializa la categoría en edición
             this.obtenerCategorias();
           },
           (error) => {

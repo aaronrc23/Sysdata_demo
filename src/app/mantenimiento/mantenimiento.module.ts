@@ -52,6 +52,17 @@ import { AddAlamacenesComponent } from './components/almacen/add-alamacenes/add-
 import { ListarProductosComponent } from './components/productos/listar-productos/listar-productos.component';
 import { ListarStockComponent } from './components/stock/listar-stock/listar-stock.component';
 import { ProductoStockComponent } from './pages/producto-stock/producto-stock.component';
+import { ListarUnidadComponent } from './components/unidadmedida/listar-unidad/listar-unidad.component';
+import { AppUnidadmedComponent } from './components/unidadmedida/app-unidadmed/app-unidadmed.component';
+import { AddFacturasComponent } from './components/facturas/add-facturas/add-facturas.component';
+import { AddProveedoresComponent } from './components/proveedores/add-proveedores/add-proveedores.component';
+import { ListarProveedoresComponent } from './components/proveedores/listar-proveedores/listar-proveedores.component';
+import { AddSalidaComponent } from './components/salida-productos/add-salida/add-salida.component';
+import { ListarSalidaComponent } from './components/salida-productos/listar-salida/listar-salida.component';
+import { ListarproducComponent } from './components/salida-productos/listarproduc/listarproduc.component';
+import { AddComprasComponent } from './components/compras/add-compras/add-compras.component';
+import { ListarComprasComponent } from './components/compras/listar-compras/listar-compras.component';
+import { HistorialComprasComponent } from './components/compras/historial-compras/historial-compras.component';
 
 
 
@@ -80,7 +91,7 @@ export class FilterPipe implements PipeTransform {
 
 @NgModule({
   declarations: [
-   
+
 
     CategoriaComponent,
     ProductosComponent,
@@ -105,6 +116,18 @@ export class FilterPipe implements PipeTransform {
     ListarProductosComponent,
     ListarStockComponent,
     ProductoStockComponent,
+    ListarUnidadComponent,
+    AppUnidadmedComponent,
+    AddFacturasComponent,
+    AddProveedoresComponent,
+    ListarProveedoresComponent,
+    AddSalidaComponent,
+    ListarSalidaComponent,
+    ListarproducComponent,
+    AddComprasComponent,
+    ListarComprasComponent,
+    HistorialComprasComponent,
+    
 
   ],
   imports: [

@@ -3,13 +3,14 @@ import { Injectable } from '@angular/core';
 import { Empresas } from '../../Interface/Empresas';
 import { Observable, Subject, map, tap } from 'rxjs';
 import { Credentials } from '../../Interface/Credentials';
+import { environment } from 'src/app/enviroment/environment.prod';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EmpresasService {
 
-  private apiUrl = 'bbb5wpywgmczgiv0ujjj-mysql.services.clever-cloud.com/api/empresa';
+  private apiUrl = `${environment.apiUrl}/empresa`;
 
   constructor(private http: HttpClient) {}
 
@@ -18,7 +19,7 @@ export class EmpresasService {
   }
 
   login(creds: Credentials) {
-    return this.http.post(`bbb5wpywgmczgiv0ujjj-mysql.services.clever-cloud.com/login`, creds, {
+    return this.http.post(`${environment.loginUrl}/login`, creds, {
       observe: 'response'
     }).pipe(map((response: HttpResponse<any>) => {
       const body = response.body;

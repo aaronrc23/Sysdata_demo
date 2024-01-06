@@ -1,79 +1,221 @@
+<div class="flex justify-end">
+  <input type="text" [(ngModel)]="searchTerm" (input)="onSearchTermChange()"
+    class="py-3 m-2 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 "
+    placeholder="Buscar por nombre o código">
+</div>
 
 
 <div class="container overflow-x-auto mx-auto max-w-1000 mt-2">
-    <div class="relative container shadow-md sm:rounded-lg">
-      <table class="table w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 elemento">
-        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-          <tr class="bg-gray-200">
-          
-            <th scope="col" class="px-6 py-3">
-              <div class="flex items-center font-bold">
-                Codigo de Barra
+  <div class="relative container shadow-md sm:rounded-lg">
+    <table class="table w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 elemento">
+      <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <tr class="bg-gray-200">
+
+          <th scope="col" class="px-6 py-3">
+            <div class="flex items-center font-bold">
+              Cod. de Barra
+            </div>
+          </th>
+          <th scope="col" class="px-6 py-3">
+            <div class="flex items-center">
+              Nombre
+            </div>
+          </th>
+          <th scope="col" class="px-6 py-3">
+            <div class="flex items-center">
+              P.V
+            </div>
+          </th>
+          <th scope="col" class="px-6 py-3">
+            <div class="flex items-center">
+              P.M
+            </div>
+          </th>
+
+          <th scope="col" class="px-6 py-3">
+            <div class="flex items-center">
+              Descripcion
+            </div>
+          </th>
+          <th scope="col" class="px-6 py-3">
+            <div class="flex items-center">
+              Imagen
+            </div>
+          </th>
+          <th scope="col" class="px-6 py-3">
+            <div class="flex items-center">
+              Estado
+            </div>
+          </th>
+          <th scope="col" class="px-6 py-3">
+            <span class="flex items-center">Opciones</span>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <tr
+          *ngFor="let producto of filteredCategorias | slice:(currentPage - 1) * itemsPerPage:currentPage * itemsPerPage"
+          class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 elemento">
+
+
+          <td class="font-normal px-6 py-4" data-label="Codigo de Barra">{{ producto .codigo_barra }}</td>
+          <td class="font-normal px-6 py-4" data-label="Nombre">{{ producto .nombre }}</td>
+          <td class="font-normal px-6 py-4" data-label="P.V">{{ producto .precio_venta }}</td>
+          <td class="font-normal px-6 py-4" data-label="P.C">{{ producto .precio_pormayor}}</td>
+
+          <td class="font-normal px-6 py-4" data-label="Descripcion">{{ producto .descripcion}}</td>
+          <td class="font-normal px-6 py-4" data-label="Imagen"><img class="imagen" src="{{ producto.imagen }}"
+              width="50px"></td>
+
+          <td class="font-normal px-6 py-4" data-label="Estado">{{ producto .activo ? 'Activo' : 'Inactivo' }}</td>
+          <td class="flex justify-center space-x-2 p-4" data-label="Acciones">
+            <button (click)="abrirModalEdicion(producto)"
+              class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+              Editar
+            </button>
+            <button (click)="eliminarAlmacen(producto)" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+              Eliminar
+            </button>
+          </td>
+        </tr>
+      </tbody>
+      <!-- Paginación manual con Tailwind CSS -->
+
+    </table>
+    <div class="w-full flex justify-end p-4 dark:bg-gray-800 pagnitacion ">
+      <app-pagination [currentPage]="currentPage" [totalPages]="totalPages" [itemsPerPage]="itemsPerPage"
+        (pageChange)="onPageChange($event)"></app-pagination>
+      <div class="hs-dropdown relative inline-flex [--placement:top-left]">
+        <button id="hs-large-pagination-dropdown" type="button"
+          class="hs-dropdown-toggle py-3 px-3.5  mx-5 inline-flex items-center gap-x-1 text-sm rounded-lg border border-gray-200 text-gray-800 shadow-sm hover:bg-gray-50 focus:outline-none focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:border-gray-700 dark:text-white dark:hover:bg-gray-700 dark:focus:bg-gray-700 card-pagination">
+          {{ itemsPerPage }} por página
+          <svg class="flex-shrink-0 w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round">
+            <path d="m6 9 6 6 6-6" />
+          </svg>
+        </button>
+        <div
+          class="hs-dropdown-menu hs-dropdown-open:opacity-100 w-48 hidden z-50 transition-[margin,opacity] opacity-0 duration-300 mb-2 bg-white shadow-md rounded-lg p-2 dark:bg-gray-800 dark:border dark:border-gray-700 dark:divide-gray-700"
+          aria-labelledby="hs-large-pagination-dropdown">
+          <button *ngFor="let option of itemsPerPageOptions" type="button"
+            class="w-full flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300 dark:focus:bg-gray-700 card-pagination"
+            (click)="setItemsPerPage(option)">
+            {{ option }} por página
+          </button>
+        </div>
+      </div>
+    </div>
+
+
+
+
+  </div>
+
+
+
+
+
+
+  <div *ngIf="mostrarModalEdicion"
+    class="fixed inset-0 overflow-x-hidden overflow-y-auto z-[60] flex items-center justify-center">
+    <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
+    <div class="absolute top-0 w-full p-4 sm:max-w-lg sm:w-full mx-auto">
+      <div
+        class="bg-white  dark:bg-gray-800 rounded-[0.7rem] text-left overflow-hidden shadow-xl transform transition-all">
+        <!-- Header del Modal -->
+        <div class="border-b title dark:border-gray-700 py-3 px-4 flex justify-between items-center">
+          <h3 class="font-bold dark:text-white">
+            Editar de Categoria
+          </h3>
+          <button type="button" (click)="mostrarModalEdicion = false"
+            class="w-7 h-7 text-sm font-semibold rounded-full border border-transparent text-gray-800 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:hover:bg-gray-700 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
+            <span class="sr-only">Close</span>
+          </button>
+        </div>
+
+        <!-- Body del Modal -->
+        <div class="p-4">
+          <div class="card flex flex-col">
+            <div class="inputgroup bg-gray flex flex-col space-y-4">
+
+              <div class="card flex  flex-col ">
+                <p>Nombre Producto</p>
+                <input pInputText type="text" id="nombre"
+                  class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
+                  [(ngModel)]="edicionProducto.nombre" name="nombre" />
               </div>
-            </th>
-            <th scope="col" class="px-6 py-3">
-              <div class="flex items-center">
-                Nombre
+              <div class="card flex  flex-col ">
+                <p>Descripcion</p>
+                <textarea
+                  class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
+                  rows="3" id="descripcion" [(ngModel)]="edicionProducto.descripcion" name="descripcion"
+                  required>></textarea>
               </div>
-            </th>
-            <th scope="col" class="px-6 py-3">
-                <div class="flex items-center">
-                  Precio
+              <div class="card flex  flex-col ">
+                <label for="fileInput" class="custom-file-upload">
+                  Agregar Imagen
+                </label>
+                <input id="fileInput" name="imagen" type="file" (change)="onImageSelected($event)"
+                  style="display:none;">
+              </div>
+              <div class="flex justify-content-center">
+                <div class="image-container" [style.background]="edicionProducto.imagen ? 'none' : '#ccc'">
+                  <img [src]="edicionProducto.imagen" *ngIf="edicionProducto.imagen" alt="Imagen seleccionada">
                 </div>
-              </th>
-              <th scope="col" class="px-6 py-3">
-                <div class="flex items-center">
-                  Precio por Mayor
-                </div>
-              </th>
-              
-              <th scope="col" class="px-6 py-3">
-                <div class="flex items-center">
-                  Descripcion
-                </div>
-              </th>
-              <th scope="col" class="px-6 py-3">
-                <div class="flex items-center">
-                  Imagen
-                </div>
-              </th>
-              <th scope="col" class="px-6 py-3">
-                <div class="flex items-center">
-                  Estado
-                </div>
-              </th>
-            <th scope="col" class="px-6 py-3">
-              <span class="flex items-center">Opciones</span>
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          
-          <tr *ngFor="let producto of productos | filter:searchTerm:'nombreAlmacen' | slice:(currentPage - 1) * itemsPerPage:currentPage * itemsPerPage"
-            class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 elemento">
+              </div>
+              <div class="card flex  flex-col ">
+                <p>Precio venta</p>
+                <input type="text"
+                  class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
+                  placeholder="This is placeholder" id="precio_venta" [(ngModel)]="edicionProducto.precio_venta"
+                  name="precio_venta" required>
+              </div>
+              <div class="card flex  flex-col ">
+                <p>Precio por Mayor</p>
+                <input type="text"
+                  class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
+                  placeholder="This is placeholder" id="precio_pormayor" [(ngModel)]="edicionProducto.precio_pormayor"
+                  name="precio_pormayor" required>
+              </div>
 
+              <div class="card flex  flex-col ">
+                <p>Precio Compra</p>
+                <input type="text"
+                  class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
+                  placeholder="precio_porcompra" id="precio_porcompra" [(ngModel)]="edicionProducto.precio_compra"
+                  name="precio_porcompra" required>
+              </div>
 
-            <td class="font-normal px-6 py-4" data-label="Precio">{{ producto .codigo_barra }}</td>
-            <td class="font-normal px-6 py-4" data-label="Precio">{{ producto .nombre }}</td>
-            <td class="font-normal px-6 py-4" data-label="Precio">{{ producto .precio_venta }}</td>
-            <td class="font-normal px-6 py-4" data-label="Precio">{{ producto .precio_pormayor}}</td>
-            
-            <td class="font-normal px-6 py-4" data-label="Precio">{{ producto .descripcion}}</td>
-            <td class="font-normal px-6 py-4" data-label="Imagen"><img class="imagen" src="{{ producto.imagen }}" width="50px"></td>
+              <div>
+                <p for="categoria">Elige una Categoría</p>
+                <select name="categoria" [(ngModel)]="edicionProducto.categoria.idcategoria"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                  <option value="" disabled>{{ edicionProducto.categoria.idcategoria ? 'Categoría actual: ' +
+                    edicionProducto.categoria.idcategoria : 'Selecciona una categoría' }}</option>
+                  <option *ngFor="let categoria of categorias" [ngValue]="categoria.idcategoria">
+                    {{ categoria.idcategoria }} - {{ categoria.nombre }}
+                  </option>
+                </select>
 
-            <td class="font-normal px-6 py-4" data-label="Ventas">{{ producto .activo ? 'Activo' : 'Inactivo' }}</td>
-            <td class="flex justify-center space-x-2 p-4" data-label="Acciones">
-              <button 
-                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                Editar
-              </button>
-              <button 
-                class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
-                Eliminar
-              </button>
-            </td>
-          </tr>
-        </tbody>
-        <!-- Paginación manual con Tailwind CSS -->
-  
-      </table>
+              </div>
+              <!----------Checkbox------------>
+              <div class="contd hidden">
+                <input type="checkbox" [(ngModel)]="edicionProducto.activo" name="activo" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Footer del Modal -->
+        <div class="mt-3 p-2 flex justify-end headereditar border-t dark:border-gray-700">
+          <button type="button" (click)="actualizarUnidad()"
+            class="text-white  bg-blue-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Actualizar
+            Categoría</button>
+          <button type="button" (click)="mostrarModalEdicion = false"
+            class="text-white bg-[#81848F] hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Cerrar</button>
+        </div>
+      </div>
+    </div>
+

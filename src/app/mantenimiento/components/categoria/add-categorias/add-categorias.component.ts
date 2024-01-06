@@ -40,7 +40,7 @@ export class AddCategoriasComponent {
     });
   }
   /*---------- Crear Categorias-----------*/ 
-  nuevaCategoria: Categoria = { nombre: '', activo: true };
+  nuevaCategoria: Categoria = {idcategoria: 0, nombre: '', activo: true };
 
   @ViewChild('nombreInput') nombreInput: any;
   private registrarCategoria(): void {

@@ -63,10 +63,25 @@
             </li>
 
             <li>
-                <a href="#"
+                <a routerLink="addcompras"
                     class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                     <fa-icon [icon]="faFileCirclePlus" class="text-lg text-gray-500 "></fa-icon>
                     <span class="flex-1 ms-3 whitespace-nowrap">Registrar Compra</span>
+                </a>
+            </li>
+            
+            <li>
+                <a routerLink="listadocompra"
+                    class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                    <fa-icon [icon]="faFileCirclePlus" class="text-lg text-gray-500 "></fa-icon>
+                    <span class="flex-1 ms-3 whitespace-nowrap">Listados Compra</span>
+                </a>
+            </li>
+            <li>
+                <a routerLink="historialcompra"
+                    class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                    <fa-icon [icon]="faFileCirclePlus" class="text-lg text-gray-500 "></fa-icon>
+                    <span class="flex-1 ms-3 whitespace-nowrap">Historial Compra</span>
                 </a>
             </li>
 
@@ -77,6 +92,13 @@
                     class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                     <fa-icon [icon]="faPersonCirclePlus" class="text-lg text-gray-500"></fa-icon>
                     <span class="flex-1 ms-3 whitespace-nowrap">Entrada de Productos</span>
+                </a>
+            </li>
+            <li>
+                <a routerLink="salidaproducts"
+                    class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                    <fa-icon [icon]="faPersonCirclePlus" class="text-lg text-gray-500"></fa-icon>
+                    <span class="flex-1 ms-3 whitespace-nowrap">Salida de Productos</span>
                 </a>
             </li>
 
@@ -111,7 +133,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#"
+                        <a routerLink="facturas"
                             class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                             <fa-icon [icon]="faFileCirclePlus" class="text-lg text-gray-500 "></fa-icon>
                             <span class="flex-1 ms-3 whitespace-nowrap">Facturas</span>
@@ -154,7 +176,13 @@
             </li>
 
             <p class="ml-1 subtitle py-3">Usuarios </p>
-           
+            <li>
+                <a routerLink="empresas"
+                    class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                    <fa-icon [icon]="faFileCircleCheck" class="text-lg text-gray-500 "></fa-icon>
+                    <span class="flex-1 ms-3 whitespace-nowrap">Empresas</span>
+                </a>
+            </li>
             
         </ul>
     </div>

@@ -38,6 +38,7 @@
           <tr *ngFor="let almacen of almacen | filter:searchTerm:'nombreAlmacen' | slice:(currentPage - 1) * itemsPerPage:currentPage * itemsPerPage"
             class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 elemento">
             
+            
             <td class="font-normal px-6 py-4" data-label="Precio">{{ almacen.nombreAlmacen }}</td>
             <td class="font-normal px-6 py-4" data-label="Precio">{{ almacen.direccion }}</td>
             <td class="font-normal px-6 py-4" data-label="Precio">{{ almacen.numeroAlmacen }}</td>

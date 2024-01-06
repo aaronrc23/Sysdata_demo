@@ -18,13 +18,12 @@ export class ProveedoresService {
 
   /*-----------Listar Categorias-------------*/
   getProveedores(): Observable<Proveedores[]> {
-    console.log('Llamando a getUnidadMedida');
     return this.http.get<Proveedores[]>(`${this.apiUrl}/listar`);
   }
 
   
   login(creds: Credentials) {
-    return this.http.post(`https://sysdataapi.uc.r.appspot.com/login`, creds, {
+    return this.http.post(`${environment.loginUrl}/login`, creds, {
       observe: 'response'
     }).pipe(map((response: HttpResponse<any>) => {
       const body = response.body;
@@ -45,7 +44,7 @@ export class ProveedoresService {
   /*------------Registrar Categorias----------------*/
 
   private unidadSubject = new Subject<Proveedores[]>();
-  unidades$ = this.unidadSubject.asObservable();
+  proveedor$ = this.unidadSubject.asObservable();
   registrarProveedores(unidades: Proveedores): Observable<Proveedores> {
     return this.http.post<Proveedores>(`${this.apiUrl}/registrar`, unidades).pipe( 
       tap(() => {

@@ -1,8 +1,9 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Productos } from '../Interface/Productos';
-import { Observable, Subject, tap } from 'rxjs';
+import { EMPTY, Observable, Subject, catchError, map, tap } from 'rxjs';
 import { environment } from 'src/app/enviroment/environment.prod';
+import { Credentials } from '../Interface/Credentials';
 
 @Injectable({
   providedIn: 'root'
@@ -10,31 +11,65 @@ import { environment } from 'src/app/enviroment/environment.prod';
 export class ProductoService {
 
   private apiUrl = `${environment.apiUrl}/producto`;
- 
+  private productosSubject = new Subject<Productos[]>();
+
+  // Cambié el nombre del Subject para que sea más representativo
+  products$ = this.productosSubject.asObservable();
+
   constructor(private http: HttpClient) { }
-  /*-------Metodo para guardar los productos en la base de datos--------*/ 
+
   getProducts(): Observable<Productos[]> {
     return this.http.get<Productos[]>(`${this.apiUrl}/listar`);
   }
 
-    /*------------Registrar Categorias----------------*/
-    private categoriasSubject = new Subject<Productos[]>();
-    products$ = this.categoriasSubject.asObservable();
-    registrarProducto(categoria: Productos): Observable<Productos> {
-      return this.http.post<Productos>(`${this.apiUrl}/registrar`, categoria).pipe( 
-        tap(() => {
-        // Después de crear la categoría, actualizamos la lista de categorías
-        this.getProducts().subscribe((categorias) => {
-          this.categoriasSubject.next(categorias);
+  registrarProducto(producto: Productos): Observable<Productos> {
+    return this.http.post<Productos>(`${this.apiUrl}/registrar`, producto).pipe(
+      catchError((error: any) => {
+        console.error('Error al registrar el producto:', error);
+        return EMPTY;
+      }),
+      tap(() => {
+        // Después de crear el producto, actualizamos la lista de productos
+        this.getProducts().subscribe((productos) => {
+          // Agregamos algunos console.log para depuración
+          console.log('Productos obtenidos después de registrar:', productos);
+          this.productosSubject.next(productos);
         });
-      }));
-    }
+      })
+    );
+  }
 
-  editarProducto(producto: Productos): Observable<any> {
-    return this.http.put(`${this.apiUrl}/editar/${producto.idproducto}`, producto);
+  editarAlmacen(idproducto: number, almacen: Productos): Observable<Productos> {
+    return this.http.put<Productos>(`${this.apiUrl}/actualizar/${idproducto}`, almacen).pipe(
+      catchError((error: any) => {
+        console.error('Error al editar el producto:', error);
+        throw error; // Re-lanza el error para que el componente pueda manejarlo
+      }),
+      tap(() => {
+        // Después de editar el producto, actualizamos la lista de productos
+        this.obtenerProductos();
+      })
+    );
   }
 
   eliminarProducto(idproducto: number): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/delete/${idproducto}`);
+    return this.http.delete(`${this.apiUrl}/delete/${idproducto}`).pipe(
+      catchError((error: any) => {
+        console.error('Error al eliminar el producto:', error);
+        throw error; // Re-lanza el error para que el componente pueda manejarlo
+      }),
+      tap(() => {
+        // Después de eliminar el producto, actualizamos la lista de productos
+        this.obtenerProductos();
+      })
+    );
+  }
+
+  private obtenerProductos(): void {
+    this.getProducts().subscribe((productos) => {
+      // Agregamos algunos console.log para depuración
+      console.log('Productos obtenidos después de operación:', productos);
+      this.productosSubject.next(productos);
+    });
   }
 }

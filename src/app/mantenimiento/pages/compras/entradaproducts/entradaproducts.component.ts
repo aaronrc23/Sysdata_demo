@@ -274,6 +274,10 @@ export class EntradaproductsComponent implements OnInit {
         proveedorId: this.entradaForm.value.proveedorId,
         almacenId: this.entradaForm.value.almacenId,
         productos: this.entradaForm.value.productosSeleccionados,
+        cantidadtotal: this.entradaForm.value.cantidadtotal,
+        preciototal:0,
+        numeroserie:""
+        // cantidadtotal: 0,
       };
 
       this.entradaService.crearEntrada(entradaRequest).subscribe(

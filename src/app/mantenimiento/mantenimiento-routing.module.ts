@@ -14,6 +14,13 @@ import { EntradaproductsComponent } from './pages/compras/entradaproducts/entrad
 import { EmpresaComponent } from './pages/empresa/empresa.component';
 import { AddAlamacenesComponent } from './components/almacen/add-alamacenes/add-alamacenes.component';
 import { ProductoStockComponent } from './pages/producto-stock/producto-stock.component';
+import { AddFacturasComponent } from './components/facturas/add-facturas/add-facturas.component';
+import { AddSalidaComponent } from './components/salida-productos/add-salida/add-salida.component';
+import { ListarSalidaComponent } from './components/salida-productos/listar-salida/listar-salida.component';
+import { ListarproducComponent } from './components/salida-productos/listarproduc/listarproduc.component';
+import { AddComprasComponent } from './components/compras/add-compras/add-compras.component';
+import { ListarComprasComponent } from './components/compras/listar-compras/listar-compras.component';
+import { HistorialComprasComponent } from './components/compras/historial-compras/historial-compras.component';
 
 
 const routes: Routes = [
@@ -36,6 +43,12 @@ const routes: Routes = [
       {path: 'entradaproducts', component: EntradaproductsComponent},
       {path: 'empresas', component: EmpresaComponent},
       {path: 'stock', component: ProductoStockComponent},
+      {path: 'facturas', component: AddFacturasComponent},
+      {path: 'salidaproducts',component: ListarproducComponent},
+      {path: 'addcompras',component: AddComprasComponent},
+      {path:'listadocompra',component:ListarComprasComponent},
+      {path:'historialcompra',component:HistorialComprasComponent}
+
       // ... otras rutas del mantenimiento ...
     ],
   },

@@ -5,63 +5,43 @@
 
 
     <div class="formgrid grid w-full p-3">
-
-
         <div class="field col-12 md:col-6">
             <p-panel header="Datos de la Boleta">
-                    <div class="w-full">
-                        <label for="filtroBusqueda">Numero de Boleta:</label>
-                        <input type="text" pInputText class="p-inputtext-sm">
-                    </div>
-                    <div class="w-full">
-                        <label for="fecha">Fecha:</label>
-                        <!-- <input type="date" id="fecha" formControlName="fecha" required> -->
-                        <span class="p-float-label ">
-                            <input id="fecha" formControlName="fecha" #tuInput required type="date" pInputText
-                                class="p-inputtext-sm w-full" />
-                        </span>
-                    </div>
+                <div class="w-full">
+                    <label for="filtroBusqueda">Numero de Boleta:</label>
+                    <input type="text" pInputText class="p-inputtext-sm">
+                </div>
+                <div class="w-full">
+                    <label for="fecha">Fecha:</label>
+                    <!-- <input type="date" id="fecha" formControlName="fecha" required> -->
+                    <span class="p-float-label ">
+                        <input id="fecha" formControlName="fecha" #tuInput required type="date" pInputText
+                            class="p-inputtext-sm w-full" />
+                    </span>
+                </div>
 
-               
+                <div class="w-full">
+                    <label for="proveedor">Selecciona un proveedor:</label>
+                    <select id="proveedor" name="proveedor" formControlName="proveedorId" class="my-select">
+                        <option [value]="null" disabled selected class="h-5">Seleccione proveedor</option>
+                        <option *ngFor="let proveedor of proveedores" [value]="proveedor.id_proveedores">
+                            {{ proveedor.nombre_prov }}
+                        </option>
+                    </select>
+                </div>
 
+                
 
-         
-
-                    <div class="w-full">
-                        <label for="proveedor">Selecciona un proveedor:</label>
-                        <select id="proveedor" name="proveedor" formControlName="proveedorId" class="my-select">
-                            <option [value]="null" disabled selected class="h-5">Seleccione proveedor</option>
-                            <option *ngFor="let proveedor of proveedores" [value]="proveedor.id_proveedores">
-                                {{ proveedor.nombre_prov }}
-                            </option>
-                        </select>
-                    </div>
-
-                    <div class="w-full">
-                        <label for="almacenes">Almacen:</label>
-                        <select id="almacenes" name="alamcenes" formControlName="almacenId" class="my-select">
-                            <option [value]="null" disabled selected class="plach">Seleccione almacen</option>
-                            <option *ngFor="let alamcenes of almacen" [value]="alamcenes.id">
-                                {{ alamcenes.nombreAlmacen}}
-                            </option>
-                        </select>
-                    </div>
-             
-
+                <div class="w-full">
+                    <label for="almacenes">Almacen:</label>
+                    <select id="almacenes" name="alamcenes" formControlName="almacenId" class="my-select">
+                        <option [value]="null" disabled selected class="plach">Seleccione almacen</option>
+                        <option *ngFor="let alamcenes of almacen" [value]="alamcenes.id">
+                            {{ alamcenes.nombreAlmacen}}
+                        </option>
+                    </select>
+                </div>
             </p-panel>
-
-
-
-
-
-
-
-
-
-
-
-
-
         </div>
         <div class="field col-12 md:col-6 ">
 
@@ -70,72 +50,62 @@
 
                 <!-- Resto del contenido del formulario -->
                 <div>
-                    <label for="filtroBusqueda">Filtrar Productos:</label>
+                    <label for="filtroBusqueda">Buscar Productos:</label>
                     <input type="text" id="filtroBusqueda" pInputText formControlName="filtroBusqueda"
                         (input)="buscarProducto($event)" class="p-inputtext-sm">
                 </div>
                 <div>
                     <label for="fecha">Fecha:</label>
                     <input type="text" pInputText id="codigo_barra" formControlName="codigo_barra" #tuInput
-                         class="p-inputtext-sm w-full">
+                        class="p-inputtext-sm w-full">
                 </div>
-
-
                 <div>
                     <label for="fecha">Nombre</label>
-                    <input type="text" pInputText id="nombre" #tuInput formControlName="nombre" 
-                        class="p-inputtext-sm">
+                    <input type="text" pInputText id="nombre" #tuInput formControlName="nombre" class="p-inputtext-sm">
                 </div>
-               
-
                 <div>
                     <label for="fecha">Cantidad</label>
                     <input type="text" pInputText id="cantidad" #tuInput formControlName="cantidad"
-                         class="p-inputtext-sm">
+                        class="p-inputtext-sm">
                 </div>
-
-
-                <p-button label="Agregar Producto" class="btn flex justify-content-center" (click)="agregarProducto()"></p-button>
-                
+                <p-button label="Agregar Producto"
+                    class="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-teal-500 text-white hover:bg-teal-600 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                    (click)="agregarProducto()"></p-button>
             </p-panel>
-
-
-
-
-
-
         </div>
 
-        
+
 
 
         <div class="card overflow-x-auto w-full mx-3">
-            <p-table [value]="productosSeleccionadosArray.controls" [tableStyle]="{ 'min-width': '50rem' }" styleClass="p-datatable-gridlines">
+            <p-table [value]="productosSeleccionadosArray.controls" [tableStyle]="{ 'min-width': '50rem' }"
+                styleClass="p-datatable-gridlines">
                 <ng-template pTemplate="header">
-                  <tr>
-                    <th>ID Producto</th>
-                    <th>Nombre</th>
-                    <th>Cantidad</th>
-                    <th>Precio Venta</th>
-                    <th>Acciones</th>
-                  </tr>
+                    <tr>
+                        <th>ID Producto</th>
+                        <th>Nombre</th>
+                        <th>Cantidad</th>
+                        <th>Precio Venta</th>
+                        <th>Acciones</th>
+                    </tr>
                 </ng-template>
                 <ng-template let-producto pTemplate="body">
-                  <tr>
-                    <td>{{ producto.get('idproducto')?.value }}</td>
-                    <td>{{ producto.get('nombre')?.value }}</td>
-                    <td>{{ producto.get('cantidad')?.value }}</td>
-                    <td>{{ producto.get('precio_venta')?.value }}</td>
-                    <td>
-                      <button type="button" (click)="eliminarProducto(producto)"   class="btn-delete"><i class="pi pi-trash align-items-center mr-2"> </i>Eliminar </button>
-                    </td>
-                  </tr>
+                    <tr>
+                        <td>{{ producto.get('idproducto')?.value }}</td>
+                        <td>{{ producto.get('nombre')?.value }}</td>
+                        <td>{{ producto.get('cantidad')?.value }}</td>
+                        <td>{{ producto.get('precio_venta')?.value }}</td>
+                        <td>
+                            <button type="button" (click)="eliminarProducto(producto)" class="btn-delete"><i
+                                    class="pi pi-trash align-items-center mr-2"> </i>Eliminar </button>
+                        </td>
+                    </tr>
                 </ng-template>
-              </p-table>
+            </p-table>
         </div>
-        
-          
-<!-- 
+
+
+        <!-- 
         <table class="content-table">
             <thead >
                 <tr >
@@ -162,23 +132,21 @@
                 </ng-container>
             </tbody>
         </table> -->
-       
-
 
     </div>
-
     
-
-
-
     <div class="card flex justify-content-center">
-   
-        <p-button  type="submit" class="btn flex justify-content-center" >Crear Entrada</p-button >
+
+        <p-button type="submit"
+            class="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-teal-500 text-white hover:bg-teal-600 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">Crear
+            Entrada</p-button>
     </div>
+
 
 
 </form>
-<button (click)="exportarPdf(1)">Exportar PDF</button>
+
+<button (click)="exportarPdf(1)" class="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-teal-500 text-white hover:bg-teal-600 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">Exportar PDF</button>
 
 
 

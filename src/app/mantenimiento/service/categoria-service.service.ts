@@ -15,14 +15,14 @@ export class CategoriaServiceService {
   private apiUrl = `${environment.apiUrl}/categoria`;
   constructor(private http: HttpClient) { }
 
-
+  
   /*-----------Listar Categorias-------------*/
   getCategorias(): Observable<Categoria[]> {
     return this.http.get<Categoria[]>(`${this.apiUrl}/listar`);
   }
 
   login(creds: Credentials) {
-    return this.http.post(`http://localhost:8090/login`, creds, {
+    return this.http.post(`${environment.loginUrl}/login`, creds, {
       observe: 'response'
     }).pipe(map((response: HttpResponse<any>) => {
       const body = response.body;

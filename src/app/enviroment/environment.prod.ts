@@ -1,5 +1,5 @@
 export const environment = {
     production: true,
-    apiUrl: 'http://localhost:8090/api',
-    loginUrl: 'http://localhost:8090'
+    apiUrl: 'https://pruebasysdata-production.up.railway.app/api',
+    loginUrl: 'https://pruebasysdata-production.up.railway.app'
   };

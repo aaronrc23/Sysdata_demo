@@ -21,6 +21,8 @@ import { ListarproducComponent } from './components/salida-productos/listarprodu
 import { AddComprasComponent } from './components/compras/add-compras/add-compras.component';
 import { ListarComprasComponent } from './components/compras/listar-compras/listar-compras.component';
 import { HistorialComprasComponent } from './components/compras/historial-compras/historial-compras.component';
+import { ConsultaRucComponent } from './components/Consultas/consulta-ruc/consulta-ruc.component';
+import { AddMovimientoAlmacenComponent } from './components/MovimientoAlmacen/add-movimiento-almacen/add-movimiento-almacen.component';
 
 
 const routes: Routes = [
@@ -47,7 +49,10 @@ const routes: Routes = [
       {path: 'salidaproducts',component: ListarproducComponent},
       {path: 'addcompras',component: AddComprasComponent},
       {path:'listadocompra',component:ListarComprasComponent},
-      {path:'historialcompra',component:HistorialComprasComponent}
+      {path:'historialcompra',component:HistorialComprasComponent},
+      //Consultas
+      {path:'consultaruc',component:ConsultaRucComponent},
+      {path:'movimientoproducts',component:AddMovimientoAlmacenComponent}
 
       // ... otras rutas del mantenimiento ...
     ],

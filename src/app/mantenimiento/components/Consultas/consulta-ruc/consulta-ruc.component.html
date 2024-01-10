@@ -1,0 +1,14 @@
+<div>
+    <label for="rucInput">Ingrese RUC:</label>
+    <input type="text" id="rucInput" [(ngModel)]="rucInput" />
+    <button (click)="consultarRUC()">Consultar RUC</button>
+  </div>
+  
+  <div *ngIf="error">
+    <p>Error: {{ error }}</p>
+  </div>
+  
+  <div *ngIf="resultado">
+    <h3>Resultado:</h3>
+    <pre>{{ resultado | json }}</pre>
+  </div>

@@ -1,0 +1,8 @@
+{
+    "/api": {
+      "target": "https://dniruc.apisperu.com",
+      "secure": false,
+      "changeOrigin": true
+    }
+  }
+  

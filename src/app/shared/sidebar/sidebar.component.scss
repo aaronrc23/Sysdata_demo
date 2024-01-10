@@ -1,26 +1,33 @@
 span{
   font-size: 12.4px;
-  color: rgb(62, 62, 63);
+  color: white;
   font-family: 'Poppins', sans-serif;
-  font-weight: 600;
+  font-weight: 500;
 }
 .subtitle{
   font-size: 13px;
-  color: rgb(105, 105, 105);
+  color: white;
   font-family: 'Plus Jakarta Sans', sans-serif;
-  font-weight: 700;
+  font-weight: 600;
+}
+*, ::before, ::after {
+  /* box-sizing: border-box; */
+  border-width: 0;
+  border-style: none; /* Esto quita el estilo del borde */
+  border-color: #ffffff00;
 }
 
 a{
   border-radius: 18px;
   &:hover{
-      background: #d8dada;
+      background: #55A8FD;
       span{
-          color: rgb(97, 97, 97);
+          color: white;
       }
   }
   fa-icon{
     margin-left: 5px;
+    color: white;
   }
 }
 

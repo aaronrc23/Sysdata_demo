@@ -4,6 +4,7 @@ export interface Stock {
     producto: Producto;
     almacenes: Almacen;
     stock: number;
+    
   }
 export interface UnidadDeMedida {
     id_umd: number;
@@ -26,6 +27,7 @@ export interface Categoria {
     precio_pormayor: number;
     stock: number;
     descripcion: string;
+    almacen:String;
     imagen: string;
     activo: boolean;
     categoria: Categoria;

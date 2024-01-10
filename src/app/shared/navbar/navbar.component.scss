@@ -1,4 +1,11 @@
 .fnd{
     color: white;
-    background: radial-gradient(circle, #326488, #524174);
+    background: radial-gradient(circle, #5b448a, #22345E);
+  // background: radial-gradient(circle, #326488, #524174);
 }
+*, ::before, ::after {
+    /* box-sizing: border-box; */
+    border-width: 0;
+    border-style: none; /* Esto quita el estilo del borde */
+    border-color: #ffffff00;
+  }

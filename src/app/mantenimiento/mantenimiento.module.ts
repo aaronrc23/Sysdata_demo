@@ -63,6 +63,9 @@ import { ListarproducComponent } from './components/salida-productos/listarprodu
 import { AddComprasComponent } from './components/compras/add-compras/add-compras.component';
 import { ListarComprasComponent } from './components/compras/listar-compras/listar-compras.component';
 import { HistorialComprasComponent } from './components/compras/historial-compras/historial-compras.component';
+import { ConsultaRucComponent } from './components/Consultas/consulta-ruc/consulta-ruc.component';
+import { AddMovimientoAlmacenComponent } from './components/MovimientoAlmacen/add-movimiento-almacen/add-movimiento-almacen.component';
+import { ListarMovimientoAlmacenComponent } from './components/MovimientoAlmacen/listar-movimiento-almacen/listar-movimiento-almacen.component';
 
 
 
@@ -127,6 +130,9 @@ export class FilterPipe implements PipeTransform {
     AddComprasComponent,
     ListarComprasComponent,
     HistorialComprasComponent,
+    ConsultaRucComponent,
+    AddMovimientoAlmacenComponent,
+    ListarMovimientoAlmacenComponent,
     
 
   ],

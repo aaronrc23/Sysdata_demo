@@ -21,6 +21,7 @@ export interface DetalleCompra {
   cantidad: number;
   codigobarra: string;
   preciocompra: number;
+  abreviacion: string;
 }
 
 export interface Proveedor {

@@ -1,0 +1,166 @@
+<div
+  class="flex flex-col bg-white border shadow-sm rounded-xl dark:bg-slate-900 dark:border-gray-700 dark:shadow-slate-700/[.7]">
+  <div class="bg-gray-100 border-b rounded-t-xl py-3 px-4 md:py-4 md:px-5 dark:bg-slate-900 dark:border-gray-700">
+    <h1 class="mt-1 text-sm text-gray-600 dark:text-gray-500">
+      REGISTRO DE Movimiento de almacenes
+    </h1>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div  class="grid grid-cols-1 md:grid-cols-2 gap-2">
+      <div class="p-4 md:p-4">
+        <label class="block text-sm font-medium mb-2 dark:text-white">Fecha
+          Emision</label>
+        <input id="fecha" name="fecha" #tuInput required type="date" pInputText [(ngModel)]="movimiento.fecha"
+          class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600" />
+
+      </div>
+      <div class="form-group p-4 md:p-4">
+        <label class="block text-sm font-medium mb-2 dark:text-white" for="almacenOrigen">Almacén de Origen:</label>
+        <select id="almacenOrigen" [(ngModel)]="selectedAlmacenOrigenId" (ngModelChange)="actualizarAlmacenOrigen()"  class="my-select">
+          <option *ngFor="let almacen of almacenes" [value]="almacen.id">{{ almacen.nombreAlmacen }}</option>
+        </select>
+      </div>
+
+      <!-- Almacén de Destino -->
+      <div class="form-group p-4 md:p-4">
+        <label for="almacenDestino">Almacén de Destino:</label>
+        <select id="almacenDestino" [(ngModel)]="selectedAlmacenDestinoId" (ngModelChange)="actualizarAlmacenDestino()"  class="my-select">
+          <option *ngFor="let almacen of almacenes" [value]="almacen.id">{{ almacen.nombreAlmacen }}</option>
+        </select>
+      </div>
+
+      
+      <div class="p-4 md:p-4">
+        <label class="block text-sm font-medium mb-2 dark:text-white">Motivo de Traslado:</label>
+        <textarea id="motivoTraslado" name="motivoTraslado" [(ngModel)]="movimiento.motivoTraslado"
+          class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
+          rows="3" placeholder="Motivo de Traslado"></textarea>
+      </div>
+
+      <div class="p-4 md:p-4">
+        <label class="block text-sm font-medium mb-2 dark:text-white">Direccion de Partida:</label>
+        <textarea id="motivoTraslado" name="motivoTraslado" [(ngModel)]="movimiento.dirPartida"
+          class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
+          rows="3" ></textarea>
+      </div>
+      <div class="p-4 md:p-4">
+        <label class="block text-sm font-medium mb-2 dark:text-white">Direccion de Destino:</label>
+        <textarea id="motivoTraslado" name="motivoTraslado" [(ngModel)]="movimiento.dirLlegada"
+          class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
+          rows="3" ></textarea>
+      </div>
+    </div>
+
+
+    <div class="w-full p-4">
+      <div class="p-4 md:p-4">
+        <label class="block text-sm font-medium mb-2 dark:text-white">Buscar Producto</label>
+        <input type="text" placeholder="Buscar por nombre o código de barras" [(ngModel)]="searchTerm"
+          class="border p-2 rounded w-full my-select" (input)="filterProductos()" (change)="agregarProducto()" />
+      </div>
+
+      <div class=" overflow-x-auto  w-full ">
+        <div class="relative  shadow-md sm:rounded-lg">
+          <table class="table w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 elemento">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+              <tr class="bg-gray-200">
+
+                <th scope="col" class="px-6 py-3">
+                  <div class="flex items-center font-bold">
+                    Nombre
+                  </div>
+                </th>
+                <th scope="col" class="px-6 py-3">
+                  <div class="flex items-center">
+                    Cod.barra
+                  </div>
+                </th>
+                <th scope="col" class="px-6 py-3">
+                  <div class="flex items-center">
+                    Cantidad
+                  </div>
+                </th>
+                <th scope="col" class="px-6 py-3">
+                  <div class="flex items-center">
+                    Imagen
+                  </div>
+                </th>
+               
+                <th scope="col" class="px-6 py-3">
+                  <span class="flex items-center">Opciones</span>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <ng-container *ngIf="productosSeleccionados.length > 0; else noProducts">
+                <tr *ngFor="let producto of productosSeleccionados; let i = index"
+                  class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 elemento">
+                  <td class="font-normal px-6 py-4" data-label="Precio">{{ producto.nombre }}</td>
+                  <td class="font-normal px-6 py-4" data-label="Precio">{{ producto.codigo_barra }}</td>
+                  <td class="font-normal px-6 py-4" data-label="Precio">
+                    <!-- Ajusta este campo según la propiedad de cantidad de tu producto -->
+                    <input type="number" [(ngModel)]="producto.cantidad" class="my-select" />
+                  </td>
+                  <td class="font-normal px-6 py-4" data-label="Precio">
+                    <!-- Muestra la imagen del producto -->
+                    <img [src]="producto.imagen" alt="Imagen del producto" class="w-24 h-24" />
+                  </td>
+                  <!-- <td class="font-normal px-6 py-4" data-label="Precio">
+                  <input *ngIf="producto.preciocompra > 0" type="number" [(ngModel)]="producto.preciocompra"
+                    class="my-select" />
+
+                </td>
+                <td class="font-normal px-6 py-4" data-label="Precio">
+               
+                  {{ producto.cantidad * producto.preciocompra }}
+                </td> -->
+                  <td class="font-normal px-6 py-4" data-label="Precio">
+                    <button type="button" (click)="eliminarProducto(i)"
+                    class="px-3 py-2 text-xs font-medium text-center inline-flex items-center  bg-red-500 text-white hover:bg-red-600 disabled:opacity-50 disabled:pointer-events-none rounded-lg">Eliminar</button>
+                  </td>
+                </tr>
+              </ng-container>
+              <!-- Mensaje a mostrar cuando no hay productos -->
+              <ng-template #noProducts>
+                <tr>
+                  <td colspan="8" class="text-center py-4 bg-white">
+                    No hay productos seleccionados.
+                  </td>
+                </tr>
+              </ng-template>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="card mt-4">
+        <div
+          class=" bg-white border shadow-sm rounded-xl hover:shadow-md transition dark:bg-slate-900 dark:border-gray-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
+          <div class="p-2 md:p-5">
+            <div class="  flex flex-col  items-end">
+              <div class="flex items-center mx-3">
+                <h3
+                  class="group-hover:text-blue-600 font-semibold text-gray-800 dark:group-hover:text-gray-400 dark:text-gray-200 mx-3 txt-card">
+                  Cantidad Total :
+                </h3>
+                <p class="text-sm text-gray-500">
+                  <span id="cantidad" class="txt-card">{{ calcularCantidadTotal() }}</span>
+                </p>
+              </div>
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <button type="button"
+        class="py-3 mt-3 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-teal-500 text-white hover:bg-teal-600 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+        (click)="guardarEntrada()">
+        Registrar Movimiento
+      </button>
+    </div>
+
+
+  </div>
+
+</div>

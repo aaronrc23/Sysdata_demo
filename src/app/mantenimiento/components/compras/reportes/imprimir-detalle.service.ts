@@ -52,7 +52,7 @@ export class ImprimirDetalleService {
     const concatenatedText = stackText.map((item) => item.text);
 
     this.http
-      .get('assets/log1.jpg', { responseType: 'blob' })
+      .get('assets/logosysdata.jpg', { responseType: 'blob' })
       .subscribe((blob) => {
         const reader = new FileReader();
         reader.onloadend = () => {
@@ -168,7 +168,7 @@ export class ImprimirDetalleService {
                   widths: [95, 'auto', 'auto', 'auto', 'auto', 'auto'],
                   heights: [20, 0, 0, 0, 0, 0], // Establece la altura deseada para cada fila
                   body: [
-                    ['Codigo', 'Nombre', 'Cantd.', 'P.C', 'U.M', 'Subtotal'],
+                    ['Codigo', 'Nombre', 'Cantd.', 'P.C', 'U.M', 'Importe'],
                     ...detalles,
                   ],
                   styles: {

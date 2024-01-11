@@ -9,6 +9,8 @@ import { EntradaService } from 'src/app/mantenimiento/service/entrada.service';
 import { ProductoService } from 'src/app/mantenimiento/service/producto.service';
 import { ProveedoresService } from 'src/app/mantenimiento/service/proveedores.service';
 import Swal, { SweetAlertIcon } from 'sweetalert2';
+import {MatIconModule} from '@angular/material/icon';
+import { faPlus } from "@fortawesome/free-solid-svg-icons"
 
 @Component({
   selector: 'app-add-compras',
@@ -16,6 +18,7 @@ import Swal, { SweetAlertIcon } from 'sweetalert2';
   styleUrls: ['./add-compras.component.scss'],
 })
 export class AddComprasComponent implements OnInit {
+  faPlus = faPlus;
   modalVisible: boolean = false;
 
   openModal() {

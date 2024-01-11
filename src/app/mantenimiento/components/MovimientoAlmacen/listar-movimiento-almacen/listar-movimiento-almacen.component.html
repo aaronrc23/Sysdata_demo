@@ -1,1 +1,101 @@
-<p>listar-movimiento-almacen works!</p>
+<!-- <div class="flex space-x-4 mb-4">
+    <div>
+      <label for="almacenSelect">Seleccionar Almacén:</label>
+      <select id="almacenSelect" [(ngModel)]="selectedAlmacen" class="py-2 px-3  custom-select" (change)="filtrar()">
+        <option value="" disabled selected class="" >Seleccionar Almacén</option>
+        <option  *ngFor="let a of movimientos" [value]="a.almacenOrigen.nombreAlmacen">{{ a.almacenOrigen.nombreAlmacen }}</option>
+      </select>
+    </div>
+  
+    
+  
+    <div *ngIf="mostrarSelectorFecha">
+      <label for="fechaInput">Seleccionar Fecha:</label>
+      <input type="date" id="fechaInput" [(ngModel)]="selectedFecha" class="px-2 py-1">
+    </div>
+  
+    <button *ngIf="!mostrarSelectorFecha" (click)="activarFiltroPersonalizado()">Filtro Personalizado</button>
+    <button *ngIf="mostrarSelectorFecha" (click)="filtrar()">Aplicar Filtro</button>
+    <button (click)="limpiarFiltro()">Limpiar Filtro</button>
+  </div>
+   -->
+  
+  <div class="container overflow-x-auto   mt-2">
+    <div class="relative container shadow-md sm:rounded-lg">
+      <table class="table w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 elemento">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+          <tr class="bg-gray-200">
+            
+            <th scope="col" class="px-8 py-3">
+              <div class="flex items-center font-bold">
+                Fecha
+              </div>
+            </th>
+            <th scope="col" class="px-6 py-3">
+              <div class="flex items-center">
+                Alm. Origen
+              </div>
+            </th>
+            <th scope="col" class="px-6 py-3">
+                <div class="flex items-center">
+                 Alm. Destino
+                </div>
+              </th>
+              <th scope="col" class="px-6 py-3">
+                <div class="flex items-center">
+                  motivoTraslado
+                </div>
+              </th>
+             
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngIf="movimientos.length > 0; else noProducts">
+          <tr *ngFor="let detallecompra of movimientos | slice:(currentPage - 1) * itemsPerPage:currentPage * itemsPerPage" 
+            class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 elemento">
+            
+            <td class="font-normal px-6 py-4" data-label="Fecha">{{ detallecompra.fechaemision }}</td>
+            <td class="font-normal px-6 py-4" data-label="A.Origen">{{ detallecompra.almacenOrigen.nombreAlmacen }}</td>
+            <td class="font-normal px-6 py-4" data-label="A.Destino">{{ detallecompra.almacenDestino.nombreAlmacen}}</td>
+            <td class="font-normal px-6 py-4" data-label="M.T">{{ detallecompra.motivotraslado}}</td>
+            
+          </tr>
+  
+        </ng-container>
+        <ng-template #noProducts>
+          <tr>
+            <td colspan="8" class="text-center py-4 bg-white">
+              No hay Compras registradas.
+            </td>
+          </tr>
+        </ng-template>
+        </tbody>
+      </table>
+  
+      <div class="w-full flex justify-end p-4 dark:bg-gray-800 pagnitacion ">
+        <app-pagination [currentPage]="currentPage" [totalPages]="totalPages" [itemsPerPage]="itemsPerPage"
+          (pageChange)="onPageChange($event)"></app-pagination>
+        <div class="hs-dropdown relative inline-flex [--placement:top-left]">
+          <button id="hs-large-pagination-dropdown" type="button"
+            class="hs-dropdown-toggle py-3 px-3.5  mx-5 inline-flex items-center gap-x-1 text-sm rounded-lg border border-gray-200 text-gray-800 shadow-sm hover:bg-gray-50 focus:outline-none focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:border-gray-700 dark:text-white dark:hover:bg-gray-700 dark:focus:bg-gray-700">
+            {{ itemsPerPage }} por página
+            <svg class="flex-shrink-0 w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+              viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round">
+              <path d="m6 9 6 6 6-6" />
+            </svg>
+          </button>
+          <div
+            class="hs-dropdown-menu hs-dropdown-open:opacity-100 w-48 hidden z-50 transition-[margin,opacity] opacity-0 duration-300 mb-2 bg-white shadow-md rounded-lg p-2 dark:bg-gray-800 dark:border dark:border-gray-700 dark:divide-gray-700"
+            aria-labelledby="hs-large-pagination-dropdown">
+            <button *ngFor="let option of itemsPerPageOptions" type="button"
+              class="w-full flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300 dark:focus:bg-gray-700"
+              (click)="setItemsPerPage(option)">
+              {{ option }} por página
+            </button>
+          </div>
+        </div>
+      </div>
+  
+  
+      

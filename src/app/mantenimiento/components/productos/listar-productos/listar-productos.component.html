@@ -5,8 +5,8 @@
 </div>
 
 
-<div class="container overflow-x-auto mx-auto max-w-1000 mt-2">
-  <div class="relative container shadow-md sm:rounded-lg">
+<div class=" overflow-x-auto mx-auto max-w-1000 mt-2">
+  <div class="relative w-full mt-3 shadow-md sm:rounded-lg">
     <table class="table w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 elemento">
       <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
         <tr class="bg-gray-200">
@@ -42,11 +42,11 @@
               Imagen
             </div>
           </th>
-          <th scope="col" class="px-6 py-3">
+          <!-- <th scope="col" class="px-6 py-3">
             <div class="flex items-center">
               Estado
             </div>
-          </th>
+          </th> -->
           <th scope="col" class="px-6 py-3">
             <span class="flex items-center">Opciones</span>
           </th>
@@ -68,7 +68,7 @@
           <td class="font-normal px-6 py-4" data-label="Imagen"><img class="imagen" src="{{ producto.imagen }}"
               width="50px"></td>
 
-          <td class="font-normal px-6 py-4" data-label="Estado">{{ producto .activo ? 'Activo' : 'Inactivo' }}</td>
+          <!-- <td class="font-normal px-6 py-4" data-label="Estado">{{ producto .activo ? 'Activo' : 'Inactivo' }}</td> -->
           <td class="flex justify-center space-x-2 p-4" data-label="Acciones">
             <button (click)="abrirModalEdicion(producto)"
               class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">

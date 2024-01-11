@@ -1,23 +1,25 @@
 <!-- Botón para abrir el modal -->
 <button type="button"
-    class="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+    class="py-2 px-5 inline-flex items-center gap-x-2 text-sm rounded-md border border-transparent bg-[#5f7be0] text-white hover:bg-[#4d65bb] disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
     (click)="openModal()">
+    <fa-icon [icon]="faPlus" class="text-base "></fa-icon>
     Agregar
 </button>
 
 
 
 
+
 <div *ngIf="modalVisible"
     class="fixed inset-0 overflow-x-hidden overflow-y-auto z-[60] flex items-center justify-center">
-    <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
+    <div class="fixed inset-0 bg-gray-800 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
     <div class="absolute top-0 w-full p-4 sm:max-w-lg sm:w-full mx-auto">
         <div
             class="bg-white  dark:bg-gray-800 rounded-[0.7rem] text-left overflow-hidden shadow-xl transform transition-all">
             <!-- Header del Modal -->
-            <div class="border-b title dark:border-gray-700 py-3 px-4 flex justify-between items-center">
-                <h3 class="font-bold dark:text-white">
-                    Registrar Almacen
+            <div class="border-b bg-[#5A72CB] title dark:border-gray-700 py-3 px-4 flex justify-between items-center">
+                <h3 class="text-white dark:text-white">
+                    Registrar Almacen   
                 </h3>
                 <button type="button" (click)="openModal()"
                     class="w-7 h-7 text-sm font-semibold rounded-full border border-transparent text-gray-800 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:hover:bg-gray-700 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">

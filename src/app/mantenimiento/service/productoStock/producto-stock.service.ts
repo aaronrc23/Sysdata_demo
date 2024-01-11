@@ -39,5 +39,7 @@ export class ProductoStockService {
     return this.http.get<Stock[]>(`${this.apiUrl}/listar`);
   }
 
+
+  
   
 }

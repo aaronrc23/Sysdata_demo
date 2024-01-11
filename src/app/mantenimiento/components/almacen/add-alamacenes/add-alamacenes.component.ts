@@ -2,6 +2,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { Almacenes } from 'src/app/mantenimiento/Interface/Almacenes';
 import { AlmacenesService } from 'src/app/mantenimiento/service/almacenes.service';
 import Swal from 'sweetalert2';
+import { faPlus } from "@fortawesome/free-solid-svg-icons"
 
 @Component({
   selector: 'app-add-alamacenes',
@@ -9,6 +10,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./add-alamacenes.component.scss']
 })
 export class AddAlamacenesComponent {
+  faPlus = faPlus;
 
   modalVisible: boolean = false;
 

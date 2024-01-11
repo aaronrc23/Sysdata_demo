@@ -1,17 +1,16 @@
 {
   "hosting": {
-    "public": "dist/demofrond_sysdata",
+    "public": "dist/demofrond-sysdata",
     "ignore": [
       "firebase.json",
       "**/.*",
       "**/node_modules/**"
     ],
-    "rewrites": [
+    "rewrites":[
       {
         "source": "**",
         "destination": "/index.html"
       }
-  
-  ]
-}
+    ]
+  }
 }

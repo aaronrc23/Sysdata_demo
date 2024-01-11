@@ -10,7 +10,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './Login/helpers/auth.interceptor';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ButtonModule } from 'primeng/button';
-
+import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -26,7 +26,9 @@ import { ButtonModule } from 'primeng/button';
     LoginModule ,
     BrowserAnimationsModule,
     ButtonModule,
-    ConfirmDialogModule 
+    ConfirmDialogModule ,
+    MatIconModule
+
   ],
   providers: [
     {

@@ -1,0 +1,45 @@
+
+<div class="p-4 md:p-4">
+    <button type="button"
+    class="px-3 py-2 text-xs font-medium text-center inline-flex items-center  bg-[#008F58] text-white hover:bg-[#008F58] disabled:opacity-50 disabled:pointer-events-none rounded-lg"
+      (click)="openModal()">
+      <fa-icon [icon]="faPlus" class="text-base mr-2 "></fa-icon>
+       Agregar Movimiento
+    </button>
+  </div>
+
+  <div *ngIf="modalVisible"
+  class="fixed inset-0 overflow-x-hidden overflow-y-auto z-[80] flex items-center justify-center ">
+  <div class="fixed inset-0 bg-gray-800 bg-opacity-70 transition-opacity " aria-hidden="true"></div>
+  <div class="absolute top-0 w-full p-4 sm:max-w-7xl sm:w-full mx-auto">
+    <div
+      class="bg-white  dark:bg-gray-800 rounded-[0.7rem] text-left overflow-y-auto pb-2 shadow-xl transform transition-all">
+      <!-- Header del Modal -->
+      <div class="bg-[#395aa5]  border-b title dark:border-gray-700 py-3 px-4 flex justify-between items-center">
+        <h2 class="text-white dark:text-white">
+          Agregar Movimiento
+        </h2>
+        <button type="button" (click)="closeModal()"
+          class="w-7 h-7 text-sm font-semibold rounded-full border border-transparent text-gray-800 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:hover:bg-gray-700 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
+          <span class="sr-only">Close</span>
+        </button>
+      </div>
+      <div class="grid gap-1 mt-2 lg:grid-cols-1 grid-cols-1">
+  
+
+        <div class="p-4 w-full md:p-4 ">
+         <app-add-movimiento-almacen></app-add-movimiento-almacen>
+        </div>
+
+        <!-- Footer del Modal -->
+        <div class=" p-1 flex justify-end  headereditar border-t dark:border-gray-700">
+
+          <button type="button" (click)="closeModal()"
+            class="text-white mt-3 bg-[#81848F] hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Cerrar</button>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+</div>

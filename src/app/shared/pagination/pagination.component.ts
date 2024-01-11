@@ -15,6 +15,7 @@ export class PaginationComponent {
   @Input() itemsPerPage: number = 10; // Agrega esta línea
   @Output() pageChange = new EventEmitter<number>();
   @Output() itemsPerPageChange = new EventEmitter<number>();
+  @Output() rangeInfo: EventEmitter<string> = new EventEmitter<string>();
 
   constructor() {}
 

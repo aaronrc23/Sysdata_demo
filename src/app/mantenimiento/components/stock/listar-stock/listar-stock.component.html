@@ -1,81 +1,105 @@
+<input type="text" [(ngModel)]="searchTerm" (input)="onSearchTermChange()"
+  class="py-3 mt-4 px-4 block w-full border-gray-200 rounded-lg focus:border-blue-500 focus:ring-blue-500 "
+  placeholder="Buscar por nombre">
 
 
-<div class="container overflow-x-auto mx-auto max-w-1000 mt-2">
-    <div class="relative container shadow-md sm:rounded-lg">
-      <table class="table w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 elemento">
-        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-          <tr class="bg-gray-200">
-          
-            <th scope="col" class="px-6 py-3">
-              <div class="flex items-center font-bold">
-                Codigo de Barra
-              </div>
-            </th>
-            <th scope="col" class="px-6 py-3">
-              <div class="flex items-center">
-                Nombre
-              </div>
-            </th>
-            <th scope="col" class="px-6 py-3">
-                <div class="flex items-center">
-                  Categoria
-                </div>
-              </th>
-              <th scope="col" class="px-6 py-3">
-                <div class="flex items-center">
-                  Almacen
-                </div>
-              </th>
-              <th scope="col" class="px-6 py-3">
-                <div class="flex items-center">
-                  Stock
-                </div>
-              </th>
-              
-              <th scope="col" class="px-6 py-3">
-                <div class="flex items-center">
-                  Imagen
-                </div>
-              </th>
+<div class="overflow-x-auto mx-auto max-w-1000 mt-2">
+  <div class="relative container shadow-md sm:rounded-lg">
 
-              <th scope="col" class="px-6 py-3">
+
+    <table class="table w-full mt-3 text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 elemento">
+      <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <tr class="bg-gray-200">
+
+          <th scope="col" class="px-6 py-3">
+            <div class="flex items-center font-bold">
+              Cod de Barra
+            </div>
+          </th>
+          <th scope="col" class="px-6 py-3">
+            <div class="flex items-center">
+              Nombre
+            </div>
+          </th>
+          <th scope="col" class="px-6 py-3">
+            <div class="flex items-center">
+              Categoria
+            </div>
+          </th>
+          <th scope="col" class="px-6 py-3">
+            <div class="flex items-center">
+              Almacen
+            </div>
+          </th>
+          <th scope="col" class="px-6 py-3">
+            <div class="flex items-center">
+              Stock
+            </div>
+          </th>
+
+          <th scope="col" class="px-6 py-3">
+            <div class="flex items-center">
+              Imagen
+            </div>
+          </th>
+
+          <!-- <th scope="col" class="px-6 py-3">
                 <div class="flex items-center">
                   Opciones
                 </div>
-              </th>
-           
-          </tr>
-        </thead>
-        <tbody>
-          
-          <tr *ngFor="let stock of stock "
-            class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 elemento">
+              </th> -->
 
-            <td class="font-normal px-6 py-4" data-label="Producto">{{ stock.producto.codigo_barra }}</td>
-           
-            <td class="font-normal px-6 py-4" data-label="Producto">{{ stock.producto.nombre }}</td>
-            <td class="font-normal px-6 py-4" data-label="Precio">{{ stock.producto.categoria.nombre }}</td>
-            
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngIf="stock.length > 0; else noProducts">
+        <tr
+          *ngFor="let stock of filteredCategorias | slice:(currentPage - 1) * itemsPerPage:currentPage * itemsPerPage ;"
+          class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 elemento">
 
-            <td class="font-normal px-6 py-4" data-label="Precio">{{ stock.almacenes.nombreAlmacen }}</td>
-           
-            <td class="font-normal px-6 py-4" data-label="Precio">{{ stock .stock }}</td>
 
-            <td class="font-normal px-6 py-4" data-label="Precio">
-                <img class="imagen" src="{{ stock.producto.imagen}}" width="50px">
-                </td>
-            <td class="flex justify-center space-x-2 p-4" data-label="Acciones">
-              <button 
-                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                Editar
-              </button>
-              <button 
-                class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
-                Eliminar
-              </button>
+          <td class="font-normal px-6 py-4" data-label="Cod.Barra">{{ stock.producto.codigo_barra }}</td>
+          <td class="font-normal px-6 py-4" data-label="Nombre">{{ stock.producto.nombre }}</td>
+          <td class="font-normal px-6 py-4" data-label="Categoria">{{ stock.producto.categoria.nombre }}</td>
+          <td class="font-normal px-6 py-4" data-label="Categoria">{{ stock.almacenes.nombreAlmacen }}</td>
+          <td class="font-normal px-6 py-4" data-label="Stock">{{ stock.stock}}</td>
+          <td class="font-normal px-6 py-4" data-label="Imagen"><img class="imagen" src="{{ stock.producto.imagen }}"
+              width="50px"></td>
+
+        </tr> 
+        </ng-container>
+        <ng-template #noProducts>
+          <tr>
+            <td colspan="8" class="text-center py-4 bg-white">
+              No hay Stock Disponible.
             </td>
           </tr>
-        </tbody>
-        <!-- Paginación manual con Tailwind CSS -->
-  
-      </table>
+        </ng-template>
+      </tbody>
+      <!-- Paginación manual con Tailwind CSS -->
+
+    </table>
+
+    <div class="w-full flex justify-end p-4 dark:bg-gray-800 pagnitacion ">
+      <app-pagination [currentPage]="currentPage" [totalPages]="totalPages" [itemsPerPage]="itemsPerPage"
+        (pageChange)="onPageChange($event)"></app-pagination>
+      <div class="hs-dropdown relative inline-flex [--placement:top-left]  hide-component">
+        <button id="hs-large-pagination-dropdown" type="button"
+          class="hs-dropdown-toggle py-3 px-3.5  mx-5 inline-flex items-center gap-x-1 text-sm rounded-lg border border-gray-200 text-gray-800 shadow-sm hover:bg-gray-50 focus:outline-none focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:border-gray-700 dark:text-white dark:hover:bg-gray-700 dark:focus:bg-gray-700">
+          {{ itemsPerPage }} por página
+          
+        </button>
+        <div
+          class="hs-dropdown-menu hs-dropdown-open:opacity-100 w-48 hidden z-50 transition-[margin,opacity] opacity-0 duration-300 mb-2 bg-white shadow-md rounded-lg p-2 dark:bg-gray-800 dark:border dark:border-gray-700 dark:divide-gray-700"
+          aria-labelledby="hs-large-pagination-dropdown">
+          <button *ngFor="let option of itemsPerPageOptions" type="button"
+            class="w-full flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300 dark:focus:bg-gray-700"
+            (click)="setItemsPerPage(option)">
+            {{ option }} por página
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

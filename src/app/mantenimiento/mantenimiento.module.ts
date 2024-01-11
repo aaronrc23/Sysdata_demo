@@ -25,7 +25,7 @@ import{ ChartModule} from 'primeng/chart';
 import { DropdownModule } from 'primeng/dropdown';
 import { CascadeSelectModule } from 'primeng/cascadeselect';
 import { FileUploadModule } from 'primeng/fileupload';
-import { MovimientoAlmacenComponent } from './pages/Almacen/movimiento-almacen/movimiento-almacen.component';
+
 import { CardModule } from 'primeng/card';
 import { TreeTableModule } from 'primeng/treetable';
 import { CalendarModule } from 'primeng/calendar';
@@ -66,9 +66,15 @@ import { HistorialComprasComponent } from './components/compras/historial-compra
 import { ConsultaRucComponent } from './components/Consultas/consulta-ruc/consulta-ruc.component';
 import { AddMovimientoAlmacenComponent } from './components/MovimientoAlmacen/add-movimiento-almacen/add-movimiento-almacen.component';
 import { ListarMovimientoAlmacenComponent } from './components/MovimientoAlmacen/listar-movimiento-almacen/listar-movimiento-almacen.component';
-
-
-
+import {MatIconModule} from '@angular/material/icon';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatNativeDateModule} from '@angular/material/core';
+import {MatSelectModule} from '@angular/material/select';
+import { VerStockComponent } from './components/stock/ver-stock/ver-stock.component';
+import { MovimientoAlmacenComponent } from './pages/movimiento-almacen/movimiento-almacen.component';
+import { RegisterMovimientoComponent } from './components/MovimientoAlmacen/register-movimiento/register-movimiento.component';
 
 @Pipe({
   name: 'filter'
@@ -103,7 +109,7 @@ export class FilterPipe implements PipeTransform {
     PlantillasComponent,
     AddEditCatMarComponent,
     DashboardComponent,
-    MovimientoAlmacenComponent,
+
     AddproductsComponent,
     AddunidadmedidaComponent,
     ProveedoresComponent,
@@ -133,6 +139,9 @@ export class FilterPipe implements PipeTransform {
     ConsultaRucComponent,
     AddMovimientoAlmacenComponent,
     ListarMovimientoAlmacenComponent,
+    VerStockComponent,
+    MovimientoAlmacenComponent,
+    RegisterMovimientoComponent
     
 
   ],
@@ -160,7 +169,13 @@ export class FilterPipe implements PipeTransform {
     FontAwesomeModule,
     AutoCompleteModule,
     PanelModule,
-    ToastModule
+    ToastModule,
+    MatIconModule,
+    MatDatepickerModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatNativeDateModule,
+    MatSelectModule
 
   ]
 })

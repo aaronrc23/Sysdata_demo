@@ -41,8 +41,8 @@ export class MovimientoAlmacenService {
   getMovimientoporId(id: number): Observable<MovimientoDTO> {
     return this.http.get<MovimientoDTO>(`${this.apiUrl}/listar/${id}`);
   }
-  listarMovimiento(): Observable<MovimientoDTO[]> {
-    return this.http.get<MovimientoDTO[]>(`${this.apiUrl}/listar`);
+  listarMovimiento(): Observable<MovimientoAlmacenes[]> {
+    return this.http.get<MovimientoAlmacenes[]>(`${this.apiUrl}/listar`);
   }
 
    /*------------Registrar Categorias----------------*/

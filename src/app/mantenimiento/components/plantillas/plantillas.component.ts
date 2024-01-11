@@ -2,7 +2,7 @@ import { Component ,OnInit,OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { CommunicationService } from 'src/app/shared/service/communication.service';
 import { Router } from '@angular/router';
-import { faBars } from '@fortawesome/free-solid-svg-icons';
+import { faBars,faHome } from '@fortawesome/free-solid-svg-icons';
 
 
 @Component({
@@ -34,4 +34,11 @@ export class PlantillasComponent implements OnInit,OnDestroy {
   }
   faBars = faBars;
   
+  isSidebarOpen = true;
+
+  faHome = faHome;
+
+  toggleSidebar() {
+    this.isSidebarOpen = !this.isSidebarOpen;
+  }
 }

@@ -6,7 +6,7 @@ import { MarcasComponent } from './pages/marcas/marcas.component';
 import { AlmacenesComponent } from './pages/almacenes/almacenes.component';
 import { PlantillasComponent } from './components/plantillas/plantillas.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
-import { MovimientoAlmacenComponent } from './pages/Almacen/movimiento-almacen/movimiento-almacen.component';
+
 import { AddunidadmedidaComponent } from './pages/UnidadMedida/addunidadmedida/addunidadmedida.component';
 import { ProveedoresComponent } from './pages/proveedores/proveedores.component';
 import { AddproductsComponent } from './pages/Products/addproducts/addproducts.component';
@@ -23,6 +23,7 @@ import { ListarComprasComponent } from './components/compras/listar-compras/list
 import { HistorialComprasComponent } from './components/compras/historial-compras/historial-compras.component';
 import { ConsultaRucComponent } from './components/Consultas/consulta-ruc/consulta-ruc.component';
 import { AddMovimientoAlmacenComponent } from './components/MovimientoAlmacen/add-movimiento-almacen/add-movimiento-almacen.component';
+import { MovimientoAlmacenComponent } from './pages/movimiento-almacen/movimiento-almacen.component';
 
 
 const routes: Routes = [
@@ -52,7 +53,7 @@ const routes: Routes = [
       {path:'historialcompra',component:HistorialComprasComponent},
       //Consultas
       {path:'consultaruc',component:ConsultaRucComponent},
-      {path:'movimientoproducts',component:AddMovimientoAlmacenComponent}
+      {path:'movimientoproducts',component:MovimientoAlmacenComponent},
 
       // ... otras rutas del mantenimiento ...
     ],

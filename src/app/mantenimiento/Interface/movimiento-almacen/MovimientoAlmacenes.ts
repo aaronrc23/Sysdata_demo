@@ -12,6 +12,8 @@ export interface MovimientoAlmacenes {
 }
 
 export interface Almacenes {
+  id: number;
+  nombreAlmacen: string;
   
 }
 
